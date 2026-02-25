@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="DogCell" customModule="WalkPaws" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="201" height="230"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="201" height="230"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QZN-08-HEz" userLabel="View Background">
+                        <rect key="frame" x="0.0" y="0.0" width="201" height="230"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1cT-G3-LF0" userLabel="Image Dog">
+                                <rect key="frame" x="0.0" y="0.0" width="201" height="138"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wj7-b0-x8O" userLabel="Label Name ">
+                                <rect key="frame" x="10" y="145" width="41.333333333333336" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hV3-dT-f5K" userLabel="Label Description">
+                                <rect key="frame" x="10" y="169" width="186" height="20.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gtl-1d-Rk3" userLabel="Label Breed">
+                                <rect key="frame" x="7" y="194.33333333333334" width="189" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Gtl-1d-Rk3" firstAttribute="trailing" secondItem="hV3-dT-f5K" secondAttribute="trailing" id="4aQ-Qo-nlZ"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Gtl-1d-Rk3" secondAttribute="bottom" constant="3" id="Df6-Iy-uCN"/>
+                            <constraint firstItem="wj7-b0-x8O" firstAttribute="top" secondItem="1cT-G3-LF0" secondAttribute="bottom" constant="7" id="Jjb-c4-prj"/>
+                            <constraint firstItem="1cT-G3-LF0" firstAttribute="leading" secondItem="QZN-08-HEz" secondAttribute="leading" id="NAq-HZ-EYM"/>
+                            <constraint firstItem="hV3-dT-f5K" firstAttribute="top" secondItem="wj7-b0-x8O" secondAttribute="bottom" constant="3" id="O36-VO-uMe"/>
+                            <constraint firstItem="hV3-dT-f5K" firstAttribute="leading" secondItem="wj7-b0-x8O" secondAttribute="leading" id="UK2-tX-GOu"/>
+                            <constraint firstAttribute="trailing" secondItem="1cT-G3-LF0" secondAttribute="trailing" id="Zdl-Dc-Tkt"/>
+                            <constraint firstAttribute="trailing" secondItem="hV3-dT-f5K" secondAttribute="trailing" constant="5" id="jsk-om-wo6"/>
+                            <constraint firstItem="Gtl-1d-Rk3" firstAttribute="leading" secondItem="QZN-08-HEz" secondAttribute="leading" constant="7" id="nVs-Uu-qdw"/>
+                            <constraint firstItem="wj7-b0-x8O" firstAttribute="leading" secondItem="QZN-08-HEz" secondAttribute="leading" constant="10" id="qG6-nY-01B"/>
+                            <constraint firstItem="1cT-G3-LF0" firstAttribute="top" secondItem="QZN-08-HEz" secondAttribute="top" id="vdf-Ec-JfE"/>
+                            <constraint firstItem="Gtl-1d-Rk3" firstAttribute="top" secondItem="hV3-dT-f5K" secondAttribute="bottom" constant="5" id="yr9-OQ-E4O"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="QZN-08-HEz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Snu-uA-j16"/>
+                <constraint firstAttribute="trailing" secondItem="QZN-08-HEz" secondAttribute="trailing" id="WWo-Pu-GuL"/>
+                <constraint firstItem="QZN-08-HEz" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bVU-oD-Huy"/>
+                <constraint firstAttribute="bottom" secondItem="QZN-08-HEz" secondAttribute="bottom" id="cpB-L8-wig"/>
+                <constraint firstItem="1cT-G3-LF0" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.6" id="m2I-fv-K7v"/>
+            </constraints>
+            <size key="customSize" width="201" height="230"/>
+            <connections>
+                <outlet property="ImageDog" destination="1cT-G3-LF0" id="qVg-4g-OLJ"/>
+                <outlet property="labelBreed" destination="Gtl-1d-Rk3" id="2CW-fs-UUI"/>
+                <outlet property="labelDescription" destination="hV3-dT-f5K" id="O3d-Gf-aC1"/>
+                <outlet property="labelName" destination="wj7-b0-x8O" id="fvj-D0-m7Q"/>
+                <outlet property="viewBackground" destination="QZN-08-HEz" id="6mL-qv-Rzu"/>
+            </connections>
+            <point key="canvasLocation" x="23.664122137404579" y="171.83098591549296"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
