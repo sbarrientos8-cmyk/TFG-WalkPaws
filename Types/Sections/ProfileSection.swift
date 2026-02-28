@@ -25,7 +25,7 @@ struct ProfileSection
             title: "Mis publicaciones",
             image: "news_icn",
             goSection: {
-                return HomeController()
+                return MyNewsController()
             }
         )
 

@@ -152,6 +152,11 @@ class ProfileShelterController: UIViewController
     @IBAction func contactClicked(_ sender: Any)
     {
         let vc = ContactShelterController(nibName: "ContactShelterController", bundle: nil)
+        vc.shelter = ShelterContactInfo(
+            name: shelter?.name ?? "",
+            email: shelter?.email ?? "",
+            photoURL: shelter?.photoURL
+        )
         navigationController?.pushViewController(vc, animated: true)
     }
     

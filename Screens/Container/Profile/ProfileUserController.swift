@@ -14,7 +14,7 @@ class ProfileUserController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var imageProfile: UIImageView!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelGmail: UILabel!
-    @IBOutlet weak var labelPoints: UILabel!
+    @IBOutlet weak var labelUbication: UILabel!
     @IBOutlet weak var viewLine: UIView!
     @IBOutlet weak var buttonEdit: UIButton!
     @IBOutlet weak var tableWidgets: UITableView!
@@ -54,6 +54,7 @@ class ProfileUserController: UIViewController, UITableViewDataSource, UITableVie
         labelGmail.font = Fonts.figtreeLight(15)
         viewLine.backgroundColor = Colors.grayLight
         buttonEdit.config(text: "Editar Perfil", style: StylesButton.edit)
+        labelUbication.config(text: "", style: StylesLabel.subtitleGray)
         
         tableWidgets.dataSource = self
         tableWidgets.delegate = self
@@ -158,6 +159,11 @@ class ProfileUserController: UIViewController, UITableViewDataSource, UITableVie
 
         let section = sections[indexPath.row]
         let vc = section.goSection()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func editProfileClicked(_ sender: Any) {
+        let vc = EditProfileController(nibName: "EditProfileController", bundle: nil)
         navigationController?.pushViewController(vc, animated: true)
     }
 }

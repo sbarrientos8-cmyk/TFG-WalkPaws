@@ -66,3 +66,14 @@ struct NewsModel {
         return nil
     }
 }
+
+struct NewsInsert: Encodable
+{
+    let title: String
+    let short_text: String
+    let description: String
+    let image_url: String?
+    let author_type: String
+    let profile_id: UUID?
+    let shelter_id: UUID?
+}

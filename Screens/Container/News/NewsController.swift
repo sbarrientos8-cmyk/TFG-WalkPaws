@@ -9,6 +9,7 @@ import UIKit
 
 class NewsController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var navBar: NavBarView!
     @IBOutlet weak var tableNews: UITableView!
     @IBOutlet weak var bottomBar: BottomBar!
     
@@ -23,12 +24,21 @@ class NewsController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navBar.config(with: NavBarButtonType(
+            type: .plus,
+            action: { [weak self] in self?.goCreateNews() })
+        )
         bottomBar.selectSection(.news)
 
 
         loadNews()
         hideKeyboardWhenTappedAround()
         setupTable()
+    }
+    
+    private func goCreateNews() {
+        let vc = CreateNewsController(nibName: "CreateNewsController", bundle: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func setupTable() {
@@ -67,6 +77,7 @@ class NewsController: UIViewController, UITableViewDataSource, UITableViewDelega
 
         let item = news[indexPath.row]
         cell.selectionStyle = .none
+        cell.setTrashVisible(false)
         cell.config(with: item)
 
         return cell

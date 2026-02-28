@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct ProfileDTO: Decodable
-{
+struct ProfileDTO: Decodable {
+    let id: UUID?
     let name: String?
     let email: String?
     let avatar_url: String?

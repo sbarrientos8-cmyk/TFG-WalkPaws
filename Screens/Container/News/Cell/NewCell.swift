@@ -18,9 +18,13 @@ class NewCell: UITableViewCell {
     @IBOutlet weak var viewNew: UIView!
     @IBOutlet weak var imageNews: UIImageView!
 
+    @IBOutlet weak var buttonTrash: UIButton!
+    
+    var onTrashTapped: (() -> Void)?
+
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-
 
         labelName.config(text: "", style: StylesLabel.title1Name)
         labelTime.config(text: "", style: StylesLabel.subtitleGray)
@@ -39,6 +43,8 @@ class NewCell: UITableViewCell {
         imageProfile.image = UIImage(systemName: "person.circle")
         imageNews.image = nil
         imageNews.isHidden = false
+        buttonTrash.isHidden = true
+        onTrashTapped = nil
     }
 
     func config(with news: NewsModel) {
@@ -93,5 +99,13 @@ class NewCell: UITableViewCell {
             formatter.unitsStyle = .short
             return formatter.localizedString(for: date, relativeTo: now)
         }
+    }
+    
+    func setTrashVisible(_ visible: Bool) {
+        buttonTrash.isHidden = !visible
+    }
+    
+    @IBAction func trashClicked(_ sender: Any) {
+        onTrashTapped?()
     }
 }

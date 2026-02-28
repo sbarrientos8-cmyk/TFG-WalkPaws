@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewsController" customModule="WalkPaws" customModuleProvider="target">
             <connections>
                 <outlet property="bottomBar" destination="47o-iN-Gnl" id="dc1-4O-56b"/>
+                <outlet property="navBar" destination="EoG-zQ-gNn" id="Frr-Mx-Tmu"/>
                 <outlet property="tableNews" destination="Vel-mp-Mfe" id="inc-eN-ghy"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

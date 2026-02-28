@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Functions
 
 class ContactShelterController: UIViewController {
     
@@ -20,7 +21,7 @@ class ContactShelterController: UIViewController {
     @IBOutlet weak var fieldReason: LabelField!
     
     @IBOutlet weak var labelMessage: UILabel!
-    @IBOutlet weak var fieldMessage: LabelField!
+    @IBOutlet weak var fieldMessage: TextAreaField!
     
     @IBOutlet weak var buttonSend: UIButton!
     
@@ -41,11 +42,11 @@ class ContactShelterController: UIViewController {
         labelName.config(text: "", style: StylesLabel.titleHi)
         labelGmail.config(text: "", style: StylesLabel.subtitleGray2)
         
-        labelReason.config(text: "", style: StylesLabel.title2)
+        labelReason.config(text: "Motivo", style: StylesLabel.title2)
         fieldReason.config(image: UIImage(named: ""), placeholder: "Escribe el motivo")
         
-        labelMessage.config(text: "", style: StylesLabel.title2)
-        fieldMessage.config(image: UIImage(named: ""), placeholder: "Escribe tu mensaje...")
+        labelMessage.config(text: "Mensaje", style: StylesLabel.title2)
+        fieldMessage.config(placeholder: "Escribe tu mensaje...")
         
         buttonSend.config(text: "Enviar", style: StylesButton.primary)
 
@@ -96,32 +97,31 @@ class ContactShelterController: UIViewController {
     }
     
 
-    @IBAction func sendClicked(_ sender: Any)
-    {
+    @IBAction func sendClicked(_ sender: Any) {
         guard let shelter else { return }
 
         let reason = fieldReason.getText().trimmingCharacters(in: .whitespacesAndNewlines)
         let message = fieldMessage.getText().trimmingCharacters(in: .whitespacesAndNewlines)
 
-        buttonSend.isEnabled = false
+        let subject = "WalkPaws - \(reason)"
+        let body =
+    """
+    Nuevo mensaje para el refugio: \(shelter.name)
 
-        sendContactEmail(
-            shelterEmail: shelter.email,
-            shelterName: shelter.name,
-            userName: userName,
-            userEmail: userEmail,
-            reason: reason,
-            message: message
-        ) { [weak self] ok in
-            DispatchQueue.main.async {
-                guard let self = self else { return }
+    Usuario: \(userName)
+    Email: \(userEmail)
 
-                self.buttonSend.isEnabled = true
-            }
-        }
+    Motivo:
+    \(reason)
+
+    Mensaje:
+    \(message)
+    """
+
+        openSupportEmail(to: shelter.email, subject: subject, body: body)
     }
-    
-    private func sendContactEmail(
+
+    private func sendContactEmailNoToken(
         shelterEmail: String,
         shelterName: String,
         userName: String,
@@ -135,8 +135,10 @@ class ContactShelterController: UIViewController {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("sb_publishable_3UHnHjCDgviDJP2GfsrRHg_SxIlrW_A", forHTTPHeaderField: "apikey")
-        request.setValue("Bearer sb_publishable_3UHnHjCDgviDJP2GfsrRHg_SxIlrW_A", forHTTPHeaderField: "Authorization")
+
+        // SOLO apikey (publishable)
+        let apikey = "sb_publishable_3UHnHjCDgviDJP2GfsrRHg_SxIlrW_A"
+        request.setValue(apikey, forHTTPHeaderField: "apikey")
 
         let body: [String: Any] = [
             "toEmail": shelterEmail,
@@ -151,17 +153,17 @@ class ContactShelterController: UIViewController {
 
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
-                print("❌ sendContactEmail error:", error)
+                print("❌ sendContactEmailNoToken error:", error)
                 completion(false)
                 return
             }
 
             let status = (response as? HTTPURLResponse)?.statusCode ?? -1
-            print("🌐 sendContactEmail status:", status)
+            print("🌐 status:", status)
 
             if status != 200 {
                 if let data {
-                    print("❌ sendContactEmail body:", String(data: data, encoding: .utf8) ?? "nil")
+                    print("❌ body:", String(data: data, encoding: .utf8) ?? "nil")
                 }
                 completion(false)
                 return
@@ -170,5 +172,26 @@ class ContactShelterController: UIViewController {
             completion(true)
         }.resume()
     }
+    
+    private func openEmailComposer(to: String, subject: String, body: String) {
+        let encodedSubject = subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        let encodedBody = body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
 
+        // 1) Intentar abrir Gmail
+        if let gmailURL = URL(string: "googlegmail://co?to=\(to)&subject=\(encodedSubject)&body=\(encodedBody)"),
+           UIApplication.shared.canOpenURL(gmailURL) {
+            UIApplication.shared.open(gmailURL)
+            return
+        }
+
+        // 2) Si no hay Gmail, abrir Apple Mail
+        if let mailURL = URL(string: "mailto:\(to)?subject=\(encodedSubject)&body=\(encodedBody)") {
+            UIApplication.shared.open(mailURL)
+        }
+    }
+    
+    @IBAction func backClicked(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
 }

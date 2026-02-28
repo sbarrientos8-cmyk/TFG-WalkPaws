@@ -13,12 +13,12 @@ final class ProfileService
     func fetchMyProfile(email: String) async throws -> ProfileDTO? {
         let rows: [ProfileDTO] = try await SupabaseManager.shared.client
             .from("profiles")
-            .select("name, email, avatar_url")
+            .select("id, name, email, avatar_url")   // ✅ AÑADE id
             .eq("email", value: email)
             .limit(1)
             .execute()
             .value
-        
+
         print("EMAIL AUTH:", email)
         print("ROWS:", rows)
 

@@ -11,6 +11,7 @@ enum NavBarButtonKind
 {
     case logout
     case back
+    case plus
 }
 
 struct NavBarButtonType
@@ -26,6 +27,8 @@ struct NavBarButtonType
             return UIImage(named: "logout")
         case .back:
             return UIImage(named: "back")
+        case .plus:
+            return UIImage(named: "plus")
         }
     }
 }

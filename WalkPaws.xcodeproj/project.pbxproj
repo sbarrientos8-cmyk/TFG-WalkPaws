@@ -19,6 +19,18 @@
 		D523AB212F4F8831008FD8CE /* ContactShelterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D523AB1F2F4F8831008FD8CE /* ContactShelterController.swift */; };
 		D523AB222F4F8831008FD8CE /* ContactShelterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D523AB202F4F8831008FD8CE /* ContactShelterController.xib */; };
 		D523AB252F4F8DD5008FD8CE /* SendEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D523AB242F4F8DD1008FD8CE /* SendEmail.swift */; };
+		D523AB2F2F50ADE5008FD8CE /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = D523AB2E2F50ADE5008FD8CE /* plus.png */; };
+		D523AB332F50AEBC008FD8CE /* CreateNewsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D523AB322F50AEBC008FD8CE /* CreateNewsController.xib */; };
+		D523AB342F50AEBC008FD8CE /* CreateNewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D523AB312F50AEBC008FD8CE /* CreateNewsController.swift */; };
+		D523AB362F50B274008FD8CE /* addImage.png in Resources */ = {isa = PBXBuildFile; fileRef = D523AB352F50B274008FD8CE /* addImage.png */; };
+		D523AB3A2F50C7A0008FD8CE /* MyNewsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D523AB392F50C7A0008FD8CE /* MyNewsController.xib */; };
+		D523AB3B2F50C7A0008FD8CE /* MyNewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D523AB382F50C7A0008FD8CE /* MyNewsController.swift */; };
+		D523AB3D2F50C805008FD8CE /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = D523AB3C2F50C805008FD8CE /* trash.png */; };
+		D523AB412F50CF97008FD8CE /* EditProfileController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D523AB402F50CF97008FD8CE /* EditProfileController.xib */; };
+		D523AB422F50CF97008FD8CE /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D523AB3F2F50CF97008FD8CE /* EditProfileController.swift */; };
+		D523AB5C2F521813008FD8CE /* StartWalkController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D523AB5B2F521813008FD8CE /* StartWalkController.xib */; };
+		D523AB5D2F521813008FD8CE /* StartWalkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D523AB5A2F521813008FD8CE /* StartWalkController.swift */; };
+		D523AB5F2F5218BB008FD8CE /* backgroundWalk.png in Resources */ = {isa = PBXBuildFile; fileRef = D523AB5E2F5218BB008FD8CE /* backgroundWalk.png */; };
 		D52C36452F4A45FA00CC6AFE /* DogController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D52C36442F4A45FA00CC6AFE /* DogController.xib */; };
 		D52C36462F4A45FA00CC6AFE /* DogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52C36432F4A45FA00CC6AFE /* DogController.swift */; };
 		D52C36492F4A577D00CC6AFE /* DogDetailNormalController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D52C36482F4A577D00CC6AFE /* DogDetailNormalController.xib */; };
@@ -169,6 +181,18 @@
 		D523AB1F2F4F8831008FD8CE /* ContactShelterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactShelterController.swift; sourceTree = "<group>"; };
 		D523AB202F4F8831008FD8CE /* ContactShelterController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactShelterController.xib; sourceTree = "<group>"; };
 		D523AB242F4F8DD1008FD8CE /* SendEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendEmail.swift; sourceTree = "<group>"; };
+		D523AB2E2F50ADE5008FD8CE /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
+		D523AB312F50AEBC008FD8CE /* CreateNewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewsController.swift; sourceTree = "<group>"; };
+		D523AB322F50AEBC008FD8CE /* CreateNewsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateNewsController.xib; sourceTree = "<group>"; };
+		D523AB352F50B274008FD8CE /* addImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addImage.png; sourceTree = "<group>"; };
+		D523AB382F50C7A0008FD8CE /* MyNewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNewsController.swift; sourceTree = "<group>"; };
+		D523AB392F50C7A0008FD8CE /* MyNewsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyNewsController.xib; sourceTree = "<group>"; };
+		D523AB3C2F50C805008FD8CE /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
+		D523AB3F2F50CF97008FD8CE /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
+		D523AB402F50CF97008FD8CE /* EditProfileController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditProfileController.xib; sourceTree = "<group>"; };
+		D523AB5A2F521813008FD8CE /* StartWalkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWalkController.swift; sourceTree = "<group>"; };
+		D523AB5B2F521813008FD8CE /* StartWalkController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartWalkController.xib; sourceTree = "<group>"; };
+		D523AB5E2F5218BB008FD8CE /* backgroundWalk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundWalk.png; sourceTree = "<group>"; };
 		D52C36432F4A45FA00CC6AFE /* DogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogController.swift; sourceTree = "<group>"; };
 		D52C36442F4A45FA00CC6AFE /* DogController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DogController.xib; sourceTree = "<group>"; };
 		D52C36472F4A577D00CC6AFE /* DogDetailNormalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogDetailNormalController.swift; sourceTree = "<group>"; };
@@ -334,6 +358,7 @@
 		D519048E2F2E3F820074866F /* Container */ = {
 			isa = PBXGroup;
 			children = (
+				D523AB592F5217EC008FD8CE /* Walk */,
 				D57F88842F47AD17008507FB /* CellDog */,
 				D519048F2F2E3F9E0074866F /* Home */,
 				D5B0BC662F33CEDE00822E3F /* Profile */,
@@ -358,6 +383,7 @@
 			children = (
 				D53582112F3E5DB500C75131 /* logout.png */,
 				D519049A2F2E41800074866F /* logo_nav.png */,
+				D523AB2E2F50ADE5008FD8CE /* plus.png */,
 			);
 			path = NavBar;
 			sourceTree = "<group>";
@@ -396,6 +422,42 @@
 				D523AB242F4F8DD1008FD8CE /* SendEmail.swift */,
 			);
 			path = Email;
+			sourceTree = "<group>";
+		};
+		D523AB302F50AEA5008FD8CE /* Create News */ = {
+			isa = PBXGroup;
+			children = (
+				D523AB312F50AEBC008FD8CE /* CreateNewsController.swift */,
+				D523AB322F50AEBC008FD8CE /* CreateNewsController.xib */,
+			);
+			path = "Create News";
+			sourceTree = "<group>";
+		};
+		D523AB372F50C78C008FD8CE /* MyNews */ = {
+			isa = PBXGroup;
+			children = (
+				D523AB382F50C7A0008FD8CE /* MyNewsController.swift */,
+				D523AB392F50C7A0008FD8CE /* MyNewsController.xib */,
+			);
+			path = MyNews;
+			sourceTree = "<group>";
+		};
+		D523AB3E2F50CF7B008FD8CE /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				D523AB3F2F50CF97008FD8CE /* EditProfileController.swift */,
+				D523AB402F50CF97008FD8CE /* EditProfileController.xib */,
+			);
+			path = Edit;
+			sourceTree = "<group>";
+		};
+		D523AB592F5217EC008FD8CE /* Walk */ = {
+			isa = PBXGroup;
+			children = (
+				D523AB5A2F521813008FD8CE /* StartWalkController.swift */,
+				D523AB5B2F521813008FD8CE /* StartWalkController.xib */,
+			);
+			path = Walk;
 			sourceTree = "<group>";
 		};
 		D52C36422F4A45CF00CC6AFE /* Dog */ = {
@@ -440,6 +502,7 @@
 			isa = PBXGroup;
 			children = (
 				D542D4352F27EC0C00E537AF /* back.png */,
+				D523AB3C2F50C805008FD8CE /* trash.png */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -462,6 +525,7 @@
 		D54A36F12F4CA28D0042FCB3 /* News */ = {
 			isa = PBXGroup;
 			children = (
+				D523AB302F50AEA5008FD8CE /* Create News */,
 				D54A36FE2F4CA9FB0042FCB3 /* Cell */,
 				D54A36F22F4CA2AF0042FCB3 /* NewsController.swift */,
 				D54A36F32F4CA2AF0042FCB3 /* NewsController.xib */,
@@ -615,6 +679,7 @@
 				D551FDA22F3FA997003A3F76 /* footprint_white.png */,
 				D551FDA42F3FA9B3003A3F76 /* contact.png */,
 				D551FDA62F3FA9C1003A3F76 /* contact_white.png */,
+				D523AB352F50B274008FD8CE /* addImage.png */,
 			);
 			path = Field;
 			sourceTree = "<group>";
@@ -709,6 +774,7 @@
 				D542D4302F27EB5E00E537AF /* Button */,
 				D5879F6D2F26B0BE00E0C9C8 /* Field */,
 				D5879F6C2F26B0B400E0C9C8 /* Logo */,
+				D523AB5E2F5218BB008FD8CE /* backgroundWalk.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -822,6 +888,8 @@
 			isa = PBXGroup;
 			children = (
 				D5B0BC6B2F33D32100822E3F /* Cell */,
+				D523AB3E2F50CF7B008FD8CE /* Edit */,
+				D523AB372F50C78C008FD8CE /* MyNews */,
 				D5B0BC672F33CEF200822E3F /* ProfileUserController.swift */,
 				D5B0BC682F33CEF200822E3F /* ProfileUserController.xib */,
 			);
@@ -987,6 +1055,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D54A36F42F4CA2AF0042FCB3 /* NewsController.xib in Resources */,
+				D523AB332F50AEBC008FD8CE /* CreateNewsController.xib in Resources */,
 				D52C36492F4A577D00CC6AFE /* DogDetailNormalController.xib in Resources */,
 				D523AB182F4F7D8B008FD8CE /* contact1.png in Resources */,
 				D54A37012F4CAA130042FCB3 /* NewCell.xib in Resources */,
@@ -1000,15 +1069,19 @@
 				D551FDA72F3FA9C1003A3F76 /* contact_white.png in Resources */,
 				D519049B2F2E41800074866F /* logo_nav.png in Resources */,
 				D599026F2F2687860029FB34 /* Figtree-Light.ttf in Resources */,
+				D523AB412F50CF97008FD8CE /* EditProfileController.xib in Resources */,
 				D5AB783E2F438D7D00831D4F /* user_icn.png in Resources */,
+				D523AB3A2F50C7A0008FD8CE /* MyNewsController.xib in Resources */,
 				D52C36582F4B918000CC6AFE /* footprint_brown.png in Resources */,
 				D59902522F2400BB0029FB34 /* Assets.xcassets in Resources */,
 				D57F881B2F44BB4E008507FB /* home_icn.png in Resources */,
 				D52C365E2F4BA77100CC6AFE /* alert.png in Resources */,
 				D551FDA52F3FA9B3003A3F76 /* contact.png in Resources */,
 				D57F88882F47AD35008507FB /* DogCell.xib in Resources */,
+				D523AB3D2F50C805008FD8CE /* trash.png in Resources */,
 				D551FD9F2F3FA96C003A3F76 /* ubication_white.png in Resources */,
 				D53582292F3E7BF400C75131 /* ubication.png in Resources */,
+				D523AB2F2F50ADE5008FD8CE /* plus.png in Resources */,
 				D52C365C2F4B971700CC6AFE /* DogDetailNeedyController.xib in Resources */,
 				D52C36522F4B914E00CC6AFE /* cake.png in Resources */,
 				D523AB162F4F7CAC008FD8CE /* language.png in Resources */,
@@ -1022,6 +1095,7 @@
 				D5BDB3862F2E4B2E001E8B1B /* ShelterCell.xib in Resources */,
 				D59902542F2400BB0029FB34 /* LaunchScreen.storyboard in Resources */,
 				D523AB1A2F4F7E04008FD8CE /* footprint1.png in Resources */,
+				D523AB5C2F521813008FD8CE /* StartWalkController.xib in Resources */,
 				D5B0BC4E2F31035000822E3F /* AlertView.xib in Resources */,
 				D5BDB3812F2E491A001E8B1B /* ListShelterController.xib in Resources */,
 				D523AB132F4F6430008FD8CE /* NewsDetailController.xib in Resources */,
@@ -1036,6 +1110,7 @@
 				D5879F712F26B0CA00E0C9C8 /* user.png in Resources */,
 				D5879F652F26A11200E0C9C8 /* PlusJakartaSans-ExtraBold.ttf in Resources */,
 				D542D4362F27EC0C00E537AF /* back.png in Resources */,
+				D523AB5F2F5218BB008FD8CE /* backgroundWalk.png in Resources */,
 				D542D42D2F27E42700E537AF /* RegisterController.xib in Resources */,
 				D59902552F2400BB0029FB34 /* Main.storyboard in Resources */,
 				D599025F2F2406A80029FB34 /* logo_splash.png in Resources */,
@@ -1053,6 +1128,7 @@
 				D551FDA32F3FA997003A3F76 /* footprint_white.png in Resources */,
 				D52C36542F4B915500CC6AFE /* female.png in Resources */,
 				D57F881D2F44BB5E008507FB /* home_icn_white.png in Resources */,
+				D523AB362F50B274008FD8CE /* addImage.png in Resources */,
 				D53582122F3E5DB500C75131 /* logout.png in Resources */,
 				D551FDA12F3FA97E003A3F76 /* footprint.png in Resources */,
 				D5879F6F2F26B0C600E0C9C8 /* lock.png in Resources */,
@@ -1117,6 +1193,7 @@
 				D523AB212F4F8831008FD8CE /* ContactShelterController.swift in Sources */,
 				D59902582F2400BB0029FB34 /* ViewController.swift in Sources */,
 				D57F888D2F47AEAC008507FB /* DogDTO.swift in Sources */,
+				D523AB342F50AEBC008FD8CE /* CreateNewsController.swift in Sources */,
 				D523AB1D2F4F85F3008FD8CE /* Image.swift in Sources */,
 				D5879F742F26B37300E0C9C8 /* StyleButton.swift in Sources */,
 				D5879F762F26B37A00E0C9C8 /* StylesButton.swift in Sources */,
@@ -1133,11 +1210,14 @@
 				D57F88942F47C54F008507FB /* ImageLoader.swift in Sources */,
 				D52C365B2F4B971700CC6AFE /* DogDetailNeedyController.swift in Sources */,
 				D551FDE42F436702003A3F76 /* BottomBar.swift in Sources */,
+				D523AB422F50CF97008FD8CE /* EditProfileController.swift in Sources */,
 				D5B0BC692F33CEF200822E3F /* ProfileUserController.swift in Sources */,
 				D599027B2F26900C0029FB34 /* StyleLabel.swift in Sources */,
 				D57F88872F47AD35008507FB /* DogCell.swift in Sources */,
+				D523AB3B2F50C7A0008FD8CE /* MyNewsController.swift in Sources */,
 				D52C36462F4A45FA00CC6AFE /* DogController.swift in Sources */,
 				D59902822F2693290029FB34 /* Field.swift in Sources */,
+				D523AB5D2F521813008FD8CE /* StartWalkController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

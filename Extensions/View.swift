@@ -41,12 +41,46 @@ extension UIView {
     }
 }
 
+extension UIViewController {
+
+    func openSupportEmail(to: String, subject: String, body: String) {
+        let subjectEncoded = subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        let bodyEncoded = body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+
+        // 1) Intentar Gmail
+        if let gmailURL = URL(string: "googlegmail://co?to=\(to)&subject=\(subjectEncoded)&body=\(bodyEncoded)"),
+           UIApplication.shared.canOpenURL(gmailURL) {
+            UIApplication.shared.open(gmailURL, options: [:], completionHandler: nil)
+            return
+        }
+
+        // 2) Intentar Mail (mailto)
+        if let mailURL = URL(string: "mailto:\(to)?subject=\(subjectEncoded)&body=\(bodyEncoded)"),
+           UIApplication.shared.canOpenURL(mailURL) {
+            UIApplication.shared.open(mailURL, options: [:], completionHandler: nil)
+            return
+        }
+
+        // 3) Fallback (no hay apps de correo)
+        let alert = UIAlertController(
+            title: "No se puede abrir el correo",
+            message: "No tienes una app de correo configurada (Gmail/Mail). Instala Gmail o configura Mail en el dispositivo.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+}
+
 open class CircleImageView: UIImageView {
 
     public override func layoutSubviews() {
         super.layoutSubviews()
 
-        layer.masksToBounds = true
-        layer.cornerRadius = frame.height / 2
+        clipsToBounds = true
+        contentMode = .scaleAspectFill
+
+        let side = min(bounds.width, bounds.height)
+        layer.cornerRadius = side / 2
     }
 }

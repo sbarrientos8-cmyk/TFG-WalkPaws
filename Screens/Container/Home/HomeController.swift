@@ -201,7 +201,7 @@ class HomeController: UIViewController,
     @IBAction func newsWidgetClicked(_ sender: Any)
     {
         let vc = NewsController(nibName: "NewsController", bundle: nil)
-            navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func infoWidgetClicked(_ sender: Any)

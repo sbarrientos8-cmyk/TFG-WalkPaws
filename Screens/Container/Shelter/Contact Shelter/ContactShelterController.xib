@@ -20,7 +20,7 @@
                 <outlet property="labelReason" destination="HtT-n4-PKg" id="ach-UT-6kd"/>
                 <outlet property="labelTitleNav" destination="yJS-Aw-1sv" id="1wW-CE-8bu"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="viewInfoShelter" destination="HtT-n4-PKg" id="Xh4-7p-ChJ"/>
+                <outlet property="viewInfoShelter" destination="s2Z-zd-zxi" id="DTJ-b4-4mh"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -39,6 +39,9 @@
                             </constraints>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" image="back.png"/>
+                            <connections>
+                                <action selector="backClicked:" destination="-1" eventType="touchUpInside" id="ap4-Ja-ltB"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJS-Aw-1sv" userLabel="Label Title">
                             <rect key="frame" x="67" y="61.666666666666657" width="42" height="21"/>
@@ -65,19 +68,21 @@
                                     <rect key="frame" x="10" y="10" width="373" height="196"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JQS-FL-FnK" customClass="CircleImageView" customModule="WalkPaws" customModuleProvider="target">
-                                            <rect key="frame" x="137.33333333333334" y="5" width="98.333333333333343" height="98"/>
+                                            <rect key="frame" x="136.66666666666666" y="10" width="100" height="100"/>
                                             <constraints>
+                                                <constraint firstAttribute="height" constant="100" id="KLW-xb-LPJ"/>
                                                 <constraint firstAttribute="width" secondItem="JQS-FL-FnK" secondAttribute="height" multiplier="1:1" priority="999" id="Up1-s1-ndZ"/>
+                                                <constraint firstAttribute="width" constant="100" id="xdo-GG-AgA"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGL-zw-a3i" userLabel="Label Name">
-                                            <rect key="frame" x="10" y="115.00000000000001" width="353" height="20.333333333333329"/>
+                                            <rect key="frame" x="10" y="135.33333333333331" width="353" height="20.333333333333343"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="czB-0z-Ki4" userLabel="Label Gmail">
-                                            <rect key="frame" x="10" y="140.33333333333331" width="353" height="50.666666666666657"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="czB-0z-Ki4" userLabel="Label Gmail">
+                                            <rect key="frame" x="10" y="160.66666666666669" width="353" height="20.333333333333343"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -88,9 +93,9 @@
                                         <constraint firstItem="JQS-FL-FnK" firstAttribute="centerX" secondItem="s2Z-zd-zxi" secondAttribute="centerX" id="3H0-uM-BHF"/>
                                         <constraint firstItem="SGL-zw-a3i" firstAttribute="leading" secondItem="s2Z-zd-zxi" secondAttribute="leading" constant="10" id="Gaj-PI-QUF"/>
                                         <constraint firstItem="czB-0z-Ki4" firstAttribute="trailing" secondItem="SGL-zw-a3i" secondAttribute="trailing" id="Lap-8g-7xj"/>
-                                        <constraint firstItem="SGL-zw-a3i" firstAttribute="top" secondItem="JQS-FL-FnK" secondAttribute="bottom" constant="12" id="NxF-pI-L0N"/>
-                                        <constraint firstAttribute="bottom" secondItem="czB-0z-Ki4" secondAttribute="bottom" constant="5" id="Pqp-KE-uMB"/>
-                                        <constraint firstItem="JQS-FL-FnK" firstAttribute="top" secondItem="s2Z-zd-zxi" secondAttribute="top" constant="5" id="TdN-FG-QXX"/>
+                                        <constraint firstItem="SGL-zw-a3i" firstAttribute="top" relation="greaterThanOrEqual" secondItem="JQS-FL-FnK" secondAttribute="bottom" constant="10" id="NxF-pI-L0N"/>
+                                        <constraint firstAttribute="bottom" secondItem="czB-0z-Ki4" secondAttribute="bottom" constant="15" id="Pqp-KE-uMB"/>
+                                        <constraint firstItem="JQS-FL-FnK" firstAttribute="top" secondItem="s2Z-zd-zxi" secondAttribute="top" constant="10" id="TdN-FG-QXX"/>
                                         <constraint firstItem="czB-0z-Ki4" firstAttribute="leading" secondItem="SGL-zw-a3i" secondAttribute="leading" id="UY4-6Q-gkc"/>
                                         <constraint firstAttribute="trailing" secondItem="SGL-zw-a3i" secondAttribute="trailing" constant="10" id="h8F-3f-P4K"/>
                                         <constraint firstItem="czB-0z-Ki4" firstAttribute="top" secondItem="SGL-zw-a3i" secondAttribute="bottom" constant="5" id="j2p-Zu-PLp"/>
@@ -106,6 +111,9 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U3f-7D-TLm" userLabel="Field Reason" customClass="LabelField" customModule="WalkPaws" customModuleProvider="target">
                                     <rect key="frame" x="15" y="253.33333333333337" width="368" height="51"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="U3f-7D-TLm" secondAttribute="height" multiplier="180:25" priority="999" id="zsL-cK-Ddr"/>
+                                    </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVz-xg-h2s" userLabel="Label Message">
                                     <rect key="frame" x="15" y="324.33333333333337" width="368" height="20.333333333333314"/>
@@ -113,12 +121,18 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2oG-FH-Tc7" userLabel="Field Message" customClass="LabelField" customModule="WalkPaws" customModuleProvider="target">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2oG-FH-Tc7" userLabel="Field Message" customClass="TextAreaField" customModule="WalkPaws" customModuleProvider="target">
                                     <rect key="frame" x="15" y="359.66666666666669" width="368" height="170.33333333333331"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="2oG-FH-Tc7" secondAttribute="height" multiplier="180:25" priority="999" id="fkq-uu-Lnc"/>
+                                    </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWg-8F-puO" userLabel="Button Send">
                                     <rect key="frame" x="19.666666666666657" y="555" width="353.66666666666674" height="49.333333333333371"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="fWg-8F-puO" secondAttribute="height" multiplier="360:50" priority="999" id="z0N-1c-yfD"/>
+                                    </constraints>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <connections>
                                         <action selector="sendClicked:" destination="-1" eventType="touchUpInside" id="0ga-xb-zwZ"/>
@@ -139,15 +153,12 @@
                                 <constraint firstItem="fWg-8F-puO" firstAttribute="centerX" secondItem="6FU-GH-Qfx" secondAttribute="centerX" id="eJB-ej-S5G"/>
                                 <constraint firstItem="U3f-7D-TLm" firstAttribute="top" secondItem="HtT-n4-PKg" secondAttribute="bottom" constant="15" id="eOa-dA-qce"/>
                                 <constraint firstItem="OVz-xg-h2s" firstAttribute="leading" secondItem="HtT-n4-PKg" secondAttribute="leading" id="eQK-Bq-LrK"/>
-                                <constraint firstItem="2oG-FH-Tc7" firstAttribute="width" secondItem="2oG-FH-Tc7" secondAttribute="height" multiplier="180:25" priority="999" id="fkq-uu-Lnc"/>
                                 <constraint firstItem="U3f-7D-TLm" firstAttribute="trailing" secondItem="HtT-n4-PKg" secondAttribute="trailing" id="iLT-qy-Mh3"/>
                                 <constraint firstItem="U3f-7D-TLm" firstAttribute="leading" secondItem="HtT-n4-PKg" secondAttribute="leading" id="l55-XP-rfB"/>
                                 <constraint firstItem="OVz-xg-h2s" firstAttribute="trailing" secondItem="HtT-n4-PKg" secondAttribute="trailing" id="omc-cD-AP7"/>
                                 <constraint firstItem="s2Z-zd-zxi" firstAttribute="leading" secondItem="6FU-GH-Qfx" secondAttribute="leading" constant="10" id="vif-n1-mtp"/>
-                                <constraint firstItem="fWg-8F-puO" firstAttribute="width" secondItem="fWg-8F-puO" secondAttribute="height" multiplier="360:50" priority="999" id="z0N-1c-yfD"/>
                                 <constraint firstItem="2oG-FH-Tc7" firstAttribute="leading" secondItem="OVz-xg-h2s" secondAttribute="leading" id="zFR-5H-PFq"/>
                                 <constraint firstItem="HtT-n4-PKg" firstAttribute="leading" secondItem="6FU-GH-Qfx" secondAttribute="leading" constant="15" id="zl7-eG-nsB"/>
-                                <constraint firstItem="U3f-7D-TLm" firstAttribute="width" secondItem="U3f-7D-TLm" secondAttribute="height" multiplier="180:25" priority="999" id="zsL-cK-Ddr"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -177,7 +188,6 @@
                 <constraint firstItem="fWg-8F-puO" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.9" id="aeK-g0-Xhf"/>
                 <constraint firstAttribute="trailing" secondItem="gEI-Wb-pBC" secondAttribute="trailing" id="b71-YR-gKh"/>
                 <constraint firstItem="gEI-Wb-pBC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="imF-5x-CEF"/>
-                <constraint firstItem="JQS-FL-FnK" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.25" id="n3g-rE-1QC"/>
                 <constraint firstItem="8hR-Wh-61D" firstAttribute="top" secondItem="gEI-Wb-pBC" secondAttribute="bottom" id="qs2-nz-rX5"/>
             </constraints>
             <point key="canvasLocation" x="138" y="102"/>

@@ -12,6 +12,7 @@ enum Section {
     case shelter
     case home
     case news
+    case walk
 }
 
 struct BottomBarItem {
@@ -62,9 +63,9 @@ class BottomBar: UIView {
         items = [
             BottomBarItem(button: buttonHome, iconName: "home_icn", makeController: { HomeController() }),
             BottomBarItem(button: buttonShelter, iconName: "shelter_icn", makeController: { ListShelterController() }),
-            BottomBarItem(button: buttonWalk, iconName: "walkDog_icn", makeController: nil),
+            BottomBarItem(button: buttonWalk, iconName: "walkDog_icn", makeController: { StartWalkController()}),
             BottomBarItem(button: buttonNews, iconName: "news_icn", makeController: { NewsController() }),
-            BottomBarItem(button: buttonUser, iconName: "user_icn", makeController: { ProfileUserController() })
+            BottomBarItem(button: buttonUser, iconName: "user_icn", makeController: { ProfileUserController() }),
         ]
 
         for item in items {
@@ -161,7 +162,13 @@ class BottomBar: UIView {
             
         case .news:
             activate(button: buttonNews, baseName: "news_icn")
+            
+        case .walk:
+            activate(button: buttonWalk, baseName: "walkDog_icn")
+            
         }
+        
+        
     }
     
     
