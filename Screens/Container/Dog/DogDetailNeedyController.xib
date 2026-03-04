@@ -317,7 +317,13 @@
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXt-Vm-hzv" userLabel="Button Donate">
                                     <rect key="frame" x="19.666666666666657" y="778" width="353.66666666666674" height="60"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="yXt-Vm-hzv" secondAttribute="height" multiplier="360:50" priority="999" id="1Qd-fy-pfR"/>
+                                    </constraints>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <connections>
+                                        <action selector="donateClicked:" destination="-1" eventType="touchUpInside" id="Xr0-Sw-xrQ"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BJx-al-BtK" userLabel="Button Walk">
                                     <rect key="frame" x="19.666666666666657" y="853" width="353.66666666666674" height="49.333333333333371"/>
@@ -344,7 +350,6 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="yXt-Vm-hzv" firstAttribute="width" secondItem="yXt-Vm-hzv" secondAttribute="height" multiplier="360:50" priority="999" id="1Qd-fy-pfR"/>
                                 <constraint firstAttribute="trailing" secondItem="d1f-1L-ckH" secondAttribute="trailing" constant="20" id="25u-bH-Z7U"/>
                                 <constraint firstItem="LM0-KT-4X4" firstAttribute="top" secondItem="Qcr-Bm-Rb8" secondAttribute="bottom" constant="12" id="4R8-fL-DdN"/>
                                 <constraint firstItem="yXt-Vm-hzv" firstAttribute="leading" secondItem="BJx-al-BtK" secondAttribute="leading" id="5Kd-pR-suS"/>

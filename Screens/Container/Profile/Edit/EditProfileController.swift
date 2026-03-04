@@ -11,6 +11,7 @@ import PhotosUI
 
 final class EditProfileController: UIViewController {
     
+    @IBOutlet weak var labelTitleNav: UILabel!
     @IBOutlet weak var imageProfile: CircleImageView!
     @IBOutlet weak var buttonSetImage: UIButton!
 
@@ -21,7 +22,6 @@ final class EditProfileController: UIViewController {
     @IBOutlet weak var fieldGmail: LabelField!
 
     @IBOutlet weak var labelPassword: UILabel!
-    @IBOutlet weak var labelChangePassword: UILabel!
     @IBOutlet weak var fieldPassword: LabelField!
 
     @IBOutlet weak var buttonEdit: UIButton!
@@ -29,10 +29,33 @@ final class EditProfileController: UIViewController {
     private var currentProfile: ProfileDTO?
     private var selectedAvatarData: Data? = nil
     private let avatarBucket = "users"
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        labelTitleNav.config(text: "Editar Imagen", style: StylesLabel.titleNav)
+        
+        buttonSetImage.config(text: "Cambiar Imagen", style: StylesButton.secondaryGreen)
+        
+        labelName.config(text: "Nombre:", style: StylesLabel.subtitle)
+        fieldName.config(image: UIImage(named: ""), placeholder: "Nuevo nombre")
+        
+        labelGmail.config(text: "Gmail:", style: StylesLabel.subtitle)
+        fieldGmail.config(image: UIImage(named: ""), placeholder: "Nuevo gmail")
+        
+        labelPassword.config(text: "Contraseña:", style: StylesLabel.subtitle)
+        fieldPassword.config(image: UIImage(named: ""), placeholder: "Nueva contraseña")
+        
+        buttonEdit.config(text: "Guardar cambios", style: StylesButton.primary)
+        
         loadProfile()
+        hideKeyboardWhenTappedAround()
     }
 
     // MARK: - Load
@@ -172,6 +195,12 @@ final class EditProfileController: UIViewController {
             }
         }
     }
+    
+    @IBAction func backClicked(_ sender: Any)
+    {
+        navigationController?.popViewController(animated: true)
+    }
+    
     
 }
 

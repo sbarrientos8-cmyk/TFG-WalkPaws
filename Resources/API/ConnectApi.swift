@@ -155,3 +155,22 @@ func fetchNews(completion: @escaping ([NewsModel]) -> Void) {
 
     }.resume()
 }
+
+
+func fetchMyPoints() async throws -> Int {
+    let session = try await SupabaseManager.shared.client.auth.session
+    let userId = session.user.id
+
+    struct PointsDTO: Decodable { let points: Int }
+
+    let dto: PointsDTO = try await SupabaseManager.shared.client
+        .from("profiles")
+        .select("points")
+        .eq("id", value: userId.uuidString)
+        .single()
+        .execute()
+        .value
+
+    return dto.points
+}
+

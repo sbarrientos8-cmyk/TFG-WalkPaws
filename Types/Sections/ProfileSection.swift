@@ -17,7 +17,7 @@ struct ProfileSection
             title: "Mis paseos",
             image: "footprint1",
             goSection: {
-                return HomeController()
+                return MyWalksController()
             }
         )
 

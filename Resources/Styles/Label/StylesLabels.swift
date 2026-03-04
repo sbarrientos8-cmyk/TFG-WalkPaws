@@ -21,6 +21,7 @@ class StylesLabel
     static let descriptionWhite = StyleLabel(font: Fonts.plusJakartaSansLight(17), color: Colors.white)
     
     static let subtitle = StyleLabel(font: Fonts.figtreeMedium(17), color: Colors.main)
+    static let titleBlack = StyleLabel(font: Fonts.plusJakartaSansExtraBold(17), color: Colors.black)
     static let subtitleBlack = StyleLabel(font: Fonts.figtreeMedium(17), color: Colors.black)
     static let subtitleGreen = StyleLabel(font: Fonts.figtreeLight(14), color: Colors.main)
     static let subtitleGray = StyleLabel(font: Fonts.figtreeLight(14), color: Colors.gray)

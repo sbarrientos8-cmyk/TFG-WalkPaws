@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Helpers
 
 class DogDetailNeedyController: UIViewController {
 
@@ -48,6 +49,12 @@ class DogDetailNeedyController: UIViewController {
     @IBOutlet weak var buttonWalk: UIButton!
 
     var dog: DogModel!
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,7 +104,33 @@ class DogDetailNeedyController: UIViewController {
         imageDog.layer.cornerRadius = 12
         imageDog.clipsToBounds = true
         
+        hideKeyboardWhenTappedAround()
         fillUI()
+    }
+    
+    private func reloadDogAndRefreshUI() async {
+        guard let dogUUID = UUID(uuidString: dog.id) else { return }
+
+        do {
+            // OJO: ajusta el select a las columnas de tu DogRowDTO
+            let dto: DogRowDTO = try await SupabaseManager.shared.client
+                .from("dogs")
+                .select("*")
+                .eq("id", value: dogUUID.uuidString)
+                .single()
+                .execute()
+                .value
+
+            let updated = DogModel(dto: dto)
+
+            await MainActor.run {
+                self.dog = updated
+                self.fillUI()
+            }
+
+        } catch {
+            print("❌ reloadDogAndRefreshUI error:", error)
+        }
     }
 
     private func fillUI() {
@@ -164,5 +197,72 @@ class DogDetailNeedyController: UIViewController {
     
     @IBAction func backClicked(_ sender: Any) {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func donateClicked(_ sender: Any) {
+        Task { [weak self] in
+            guard let self else { return }
+
+            do {
+                let totalPoints = try await fetchMyPoints()
+
+                await MainActor.run {
+                    let alert = UIAlertController(
+                        title: "Donar puntos",
+                        message: "Tienes \(totalPoints) puntos disponibles.\n\n100 puntos = 10€",
+                        preferredStyle: .alert
+                    )
+
+                    alert.addTextField { tf in
+                        tf.placeholder = "Puntos a donar"
+                        tf.keyboardType = .numberPad
+                    }
+
+                    alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
+
+                    alert.addAction(UIAlertAction(title: "Donar", style: .default, handler: { [weak self] _ in
+                        guard let self else { return }
+
+                        guard let text = alert.textFields?.first?.text,
+                              let points = Int(text),
+                              points > 0 else { return }
+
+                        if points > totalPoints {
+                            // no alcanza
+                            let err = UIAlertController(
+                                title: "No tienes suficientes puntos",
+                                message: "Tienes \(totalPoints) puntos y estás intentando donar \(points).",
+                                preferredStyle: .alert
+                            )
+                            err.addAction(UIAlertAction(title: "OK", style: .default))
+                            self.present(err, animated: true)
+                            return
+                        }
+
+                        guard let dogUUID = UUID(uuidString: self.dog.id) else { return }
+                        let params = DonateParams(p_dog_id: dogUUID.uuidString, p_points: points)
+
+                        Task {
+                            do {
+                                _ = try await SupabaseManager.shared.client
+                                    .rpc("donate_points", params: params)
+                                    .execute()
+
+                                // Si quieres refrescar UI del perro, aquí llamarías a tu recarga.
+                                // await self.reloadDogAndRefreshUI()
+
+                            } catch {
+                                print("❌ donate rpc error:", error)
+                            }
+                        }
+                    }))
+
+                    self.present(alert, animated: true)
+                }
+
+            } catch {
+                print("❌ fetchMyPoints error:", error)
+            }
+        }
     }
 }

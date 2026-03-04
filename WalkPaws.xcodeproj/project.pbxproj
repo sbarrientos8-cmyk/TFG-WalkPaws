@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D517545F2F545E6C005424AD /* WalkingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D517545E2F545E6C005424AD /* WalkingController.xib */; };
+		D51754602F545E6C005424AD /* WalkingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D517545D2F545E6C005424AD /* WalkingController.swift */; };
+		D51754622F54CD05005424AD /* WalkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51754612F54CD05005424AD /* WalkModel.swift */; };
+		D51754662F54DC08005424AD /* MyWalksController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D51754652F54DC08005424AD /* MyWalksController.xib */; };
+		D51754672F54DC08005424AD /* MyWalksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51754642F54DC08005424AD /* MyWalksController.swift */; };
+		D51754692F54DD34005424AD /* WalkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51754682F54DD34005424AD /* WalkService.swift */; };
+		D517546D2F54DD67005424AD /* MyWalkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D517546C2F54DD67005424AD /* MyWalkCell.xib */; };
+		D517546E2F54DD67005424AD /* MyWalkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D517546B2F54DD67005424AD /* MyWalkCell.swift */; };
 		D519049B2F2E41800074866F /* logo_nav.png in Resources */ = {isa = PBXBuildFile; fileRef = D519049A2F2E41800074866F /* logo_nav.png */; };
 		D51904A12F2E44BA0074866F /* NavBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D51904A02F2E44BA0074866F /* NavBarView.xib */; };
 		D51904A22F2E44BA0074866F /* NavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D519049F2F2E44BA0074866F /* NavBarView.swift */; };
@@ -30,7 +38,7 @@
 		D523AB422F50CF97008FD8CE /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D523AB3F2F50CF97008FD8CE /* EditProfileController.swift */; };
 		D523AB5C2F521813008FD8CE /* StartWalkController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D523AB5B2F521813008FD8CE /* StartWalkController.xib */; };
 		D523AB5D2F521813008FD8CE /* StartWalkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D523AB5A2F521813008FD8CE /* StartWalkController.swift */; };
-		D523AB5F2F5218BB008FD8CE /* backgroundWalk.png in Resources */ = {isa = PBXBuildFile; fileRef = D523AB5E2F5218BB008FD8CE /* backgroundWalk.png */; };
+		D523AB5F2F5218BB008FD8CE /* backgroundWalk1.png in Resources */ = {isa = PBXBuildFile; fileRef = D523AB5E2F5218BB008FD8CE /* backgroundWalk1.png */; };
 		D52C36452F4A45FA00CC6AFE /* DogController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D52C36442F4A45FA00CC6AFE /* DogController.xib */; };
 		D52C36462F4A45FA00CC6AFE /* DogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52C36432F4A45FA00CC6AFE /* DogController.swift */; };
 		D52C36492F4A577D00CC6AFE /* DogDetailNormalController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D52C36482F4A577D00CC6AFE /* DogDetailNormalController.xib */; };
@@ -149,6 +157,9 @@
 		D5BDB38D2F2E4F2C001E8B1B /* ShelterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BDB38C2F2E4F2A001E8B1B /* ShelterService.swift */; };
 		D5BDB38F2F2E72FD001E8B1B /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = D5BDB38E2F2E72FD001E8B1B /* search.png */; };
 		D5BDB3922F2E743D001E8B1B /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BDB3912F2E743B001E8B1B /* SearchField.swift */; };
+		D5D734D92F55F91C00984BC1 /* backgroundWalk.png in Resources */ = {isa = PBXBuildFile; fileRef = D5D734D82F55F91C00984BC1 /* backgroundWalk.png */; };
+		D5D734DB2F56054500984BC1 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = D5D734DA2F56054500984BC1 /* location.png */; };
+		D5F8F3112F58B89900223C5E /* DonateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F8F3102F58B89900223C5E /* DonateModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +180,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D517545D2F545E6C005424AD /* WalkingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkingController.swift; sourceTree = "<group>"; };
+		D517545E2F545E6C005424AD /* WalkingController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalkingController.xib; sourceTree = "<group>"; };
+		D51754612F54CD05005424AD /* WalkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkModel.swift; sourceTree = "<group>"; };
+		D51754642F54DC08005424AD /* MyWalksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWalksController.swift; sourceTree = "<group>"; };
+		D51754652F54DC08005424AD /* MyWalksController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyWalksController.xib; sourceTree = "<group>"; };
+		D51754682F54DD34005424AD /* WalkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkService.swift; sourceTree = "<group>"; };
+		D517546B2F54DD67005424AD /* MyWalkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWalkCell.swift; sourceTree = "<group>"; };
+		D517546C2F54DD67005424AD /* MyWalkCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyWalkCell.xib; sourceTree = "<group>"; };
 		D519049A2F2E41800074866F /* logo_nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_nav.png; sourceTree = "<group>"; };
 		D519049F2F2E44BA0074866F /* NavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarView.swift; sourceTree = "<group>"; };
 		D51904A02F2E44BA0074866F /* NavBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NavBarView.xib; sourceTree = "<group>"; };
@@ -192,7 +211,7 @@
 		D523AB402F50CF97008FD8CE /* EditProfileController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditProfileController.xib; sourceTree = "<group>"; };
 		D523AB5A2F521813008FD8CE /* StartWalkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWalkController.swift; sourceTree = "<group>"; };
 		D523AB5B2F521813008FD8CE /* StartWalkController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartWalkController.xib; sourceTree = "<group>"; };
-		D523AB5E2F5218BB008FD8CE /* backgroundWalk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundWalk.png; sourceTree = "<group>"; };
+		D523AB5E2F5218BB008FD8CE /* backgroundWalk1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundWalk1.png; sourceTree = "<group>"; };
 		D52C36432F4A45FA00CC6AFE /* DogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogController.swift; sourceTree = "<group>"; };
 		D52C36442F4A45FA00CC6AFE /* DogController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DogController.xib; sourceTree = "<group>"; };
 		D52C36472F4A577D00CC6AFE /* DogDetailNormalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogDetailNormalController.swift; sourceTree = "<group>"; };
@@ -313,6 +332,9 @@
 		D5BDB38C2F2E4F2A001E8B1B /* ShelterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelterService.swift; sourceTree = "<group>"; };
 		D5BDB38E2F2E72FD001E8B1B /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		D5BDB3912F2E743B001E8B1B /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
+		D5D734D82F55F91C00984BC1 /* backgroundWalk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundWalk.png; sourceTree = "<group>"; };
+		D5D734DA2F56054500984BC1 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
+		D5F8F3102F58B89900223C5E /* DonateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -355,6 +377,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D51754632F54DBF1005424AD /* My Walks */ = {
+			isa = PBXGroup;
+			children = (
+				D517546A2F54DD4D005424AD /* Cell */,
+				D51754642F54DC08005424AD /* MyWalksController.swift */,
+				D51754652F54DC08005424AD /* MyWalksController.xib */,
+				D51754682F54DD34005424AD /* WalkService.swift */,
+			);
+			path = "My Walks";
+			sourceTree = "<group>";
+		};
+		D517546A2F54DD4D005424AD /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D517546B2F54DD67005424AD /* MyWalkCell.swift */,
+				D517546C2F54DD67005424AD /* MyWalkCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		D519048E2F2E3F820074866F /* Container */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,6 +433,7 @@
 		D519049D2F2E44950074866F /* Shelter */ = {
 			isa = PBXGroup;
 			children = (
+				D51754632F54DBF1005424AD /* My Walks */,
 				D523AB1E2F4F8815008FD8CE /* Contact Shelter */,
 				D551FD992F3F9B4A003A3F76 /* Profile Shelter */,
 				D5B0BC652F33CEAD00822E3F /* List Shelter */,
@@ -456,6 +499,8 @@
 			children = (
 				D523AB5A2F521813008FD8CE /* StartWalkController.swift */,
 				D523AB5B2F521813008FD8CE /* StartWalkController.xib */,
+				D517545D2F545E6C005424AD /* WalkingController.swift */,
+				D517545E2F545E6C005424AD /* WalkingController.xib */,
 			);
 			path = Walk;
 			sourceTree = "<group>";
@@ -501,6 +546,7 @@
 		D542D4302F27EB5E00E537AF /* Button */ = {
 			isa = PBXGroup;
 			children = (
+				D5D734DA2F56054500984BC1 /* location.png */,
 				D542D4352F27EC0C00E537AF /* back.png */,
 				D523AB3C2F50C805008FD8CE /* trash.png */,
 			);
@@ -621,11 +667,13 @@
 		D57F88892F47AE55008507FB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D5F8F30F2F58B88B00223C5E /* Donate */,
 				D54A36F92F4CA8350042FCB3 /* News */,
 				D54A36F82F4CA8270042FCB3 /* Shelter */,
 				D54A36F72F4CA81D0042FCB3 /* Dog */,
 				D54A36F62F4CA80C0042FCB3 /* Profile */,
 				D5B0BC492F30FB6A00822E3F /* AlertModel.swift */,
+				D51754612F54CD05005424AD /* WalkModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -774,7 +822,8 @@
 				D542D4302F27EB5E00E537AF /* Button */,
 				D5879F6D2F26B0BE00E0C9C8 /* Field */,
 				D5879F6C2F26B0B400E0C9C8 /* Logo */,
-				D523AB5E2F5218BB008FD8CE /* backgroundWalk.png */,
+				D5D734D82F55F91C00984BC1 /* backgroundWalk.png */,
+				D523AB5E2F5218BB008FD8CE /* backgroundWalk1.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -931,6 +980,14 @@
 			path = Alert;
 			sourceTree = "<group>";
 		};
+		D5F8F30F2F58B88B00223C5E /* Donate */ = {
+			isa = PBXGroup;
+			children = (
+				D5F8F3102F58B89900223C5E /* DonateModel.swift */,
+			);
+			path = Donate;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1065,6 +1122,7 @@
 				D5AB78392F438D6B00831D4F /* news_icn_white.png in Resources */,
 				D5AB783A2F438D6B00831D4F /* walkDog_icn.png in Resources */,
 				D542D4402F2903E500E537AF /* logo_forgetPassword.png in Resources */,
+				D517545F2F545E6C005424AD /* WalkingController.xib in Resources */,
 				D51904A12F2E44BA0074866F /* NavBarView.xib in Resources */,
 				D551FDA72F3FA9C1003A3F76 /* contact_white.png in Resources */,
 				D519049B2F2E41800074866F /* logo_nav.png in Resources */,
@@ -1086,6 +1144,7 @@
 				D52C36522F4B914E00CC6AFE /* cake.png in Resources */,
 				D523AB162F4F7CAC008FD8CE /* language.png in Resources */,
 				D542D4462F2919F500E537AF /* code.png in Resources */,
+				D51754662F54DC08005424AD /* MyWalksController.xib in Resources */,
 				D57F88602F463E0E008507FB /* image_go_walk.png in Resources */,
 				D5AB78412F438D9000831D4F /* shelter_icn_white.png in Resources */,
 				D5AB78422F438D9000831D4F /* shelter_icn.png in Resources */,
@@ -1108,21 +1167,24 @@
 				D59902732F2687B50029FB34 /* Figtree-Regular.ttf in Resources */,
 				D551FD9C2F3F9B84003A3F76 /* ProfileShelterController.xib in Resources */,
 				D5879F712F26B0CA00E0C9C8 /* user.png in Resources */,
+				D517546D2F54DD67005424AD /* MyWalkCell.xib in Resources */,
 				D5879F652F26A11200E0C9C8 /* PlusJakartaSans-ExtraBold.ttf in Resources */,
 				D542D4362F27EC0C00E537AF /* back.png in Resources */,
-				D523AB5F2F5218BB008FD8CE /* backgroundWalk.png in Resources */,
+				D523AB5F2F5218BB008FD8CE /* backgroundWalk1.png in Resources */,
 				D542D42D2F27E42700E537AF /* RegisterController.xib in Resources */,
 				D59902552F2400BB0029FB34 /* Main.storyboard in Resources */,
 				D599025F2F2406A80029FB34 /* logo_splash.png in Resources */,
 				D57F88222F44CDF3008507FB /* HomeController.xib in Resources */,
 				D542D4442F290A0100E537AF /* ModifyPasswordIntroController.xib in Resources */,
 				D5AB783C2F438D7900831D4F /* user_icn_white.png in Resources */,
+				D5D734D92F55F91C00984BC1 /* backgroundWalk.png in Resources */,
 				D5B0BC6A2F33CEF200822E3F /* ProfileUserController.xib in Resources */,
 				D59902622F2407BF0029FB34 /* LoginController.xib in Resources */,
 				D523AB222F4F8831008FD8CE /* ContactShelterController.xib in Resources */,
 				D551FDE32F436702003A3F76 /* BottomBar.xib in Resources */,
 				D5B0BC642F33B94600822E3F /* icn_ok.png in Resources */,
 				D52C36562F4B915B00CC6AFE /* male.png in Resources */,
+				D5D734DB2F56054500984BC1 /* location.png in Resources */,
 				D5BDB38F2F2E72FD001E8B1B /* search.png in Resources */,
 				D52C36602F4BA9E200CC6AFE /* heart.png in Resources */,
 				D551FDA32F3FA997003A3F76 /* footprint_white.png in Resources */,
@@ -1159,6 +1221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D517546E2F54DD67005424AD /* MyWalkCell.swift in Sources */,
 				D54A36F52F4CA2AF0042FCB3 /* NewsController.swift in Sources */,
 				D5BDB3872F2E4B2E001E8B1B /* ShelterCell.swift in Sources */,
 				D54A36FB2F4CA8420042FCB3 /* NewModel.swift in Sources */,
@@ -1171,6 +1234,7 @@
 				D59902792F268CD60029FB34 /* StylesLabels.swift in Sources */,
 				D535821F2F3E6B2E00C75131 /* ProfileService.swift in Sources */,
 				D542D4542F2A6F8300E537AF /* SupabaseManager.swift in Sources */,
+				D51754672F54DC08005424AD /* MyWalksController.swift in Sources */,
 				D59902772F26891B0029FB34 /* Colors.swift in Sources */,
 				D523AB142F4F6430008FD8CE /* NewsDetailController.swift in Sources */,
 				D5BDB38D2F2E4F2C001E8B1B /* ShelterService.swift in Sources */,
@@ -1178,6 +1242,7 @@
 				D5BDB3892F2E4DDC001E8B1B /* ShelterModel.swift in Sources */,
 				D53582162F3E600000C75131 /* NavBarButtonType.swift in Sources */,
 				D5B0BC4D2F31035000822E3F /* AlertView.swift in Sources */,
+				D51754602F545E6C005424AD /* WalkingController.swift in Sources */,
 				D5AB78472F4395E600831D4F /* BottomBarItem.swift in Sources */,
 				D523AB252F4F8DD5008FD8CE /* SendEmail.swift in Sources */,
 				D59902562F2400BB0029FB34 /* AppDelegate.swift in Sources */,
@@ -1189,6 +1254,7 @@
 				D542D43D2F29004B00E537AF /* ForgetPasswordController.swift in Sources */,
 				D5BDB38B2F2E4EF0001E8B1B /* ShelterDTO.swift in Sources */,
 				D53582242F3E6DD800C75131 /* SectionProfileCell.swift in Sources */,
+				D51754622F54CD05005424AD /* WalkModel.swift in Sources */,
 				D5B0BC4A2F30FB6D00822E3F /* AlertModel.swift in Sources */,
 				D523AB212F4F8831008FD8CE /* ContactShelterController.swift in Sources */,
 				D59902582F2400BB0029FB34 /* ViewController.swift in Sources */,
@@ -1197,6 +1263,7 @@
 				D523AB1D2F4F85F3008FD8CE /* Image.swift in Sources */,
 				D5879F742F26B37300E0C9C8 /* StyleButton.swift in Sources */,
 				D5879F762F26B37A00E0C9C8 /* StylesButton.swift in Sources */,
+				D51754692F54DD34005424AD /* WalkService.swift in Sources */,
 				D52C364A2F4A577D00CC6AFE /* DogDetailNormalController.swift in Sources */,
 				D5879F782F26B38400E0C9C8 /* Button.swift in Sources */,
 				D599027D2F2690750029FB34 /* Fonts.swift in Sources */,
@@ -1204,6 +1271,7 @@
 				D59902802F2692E20029FB34 /* Label.swift in Sources */,
 				D57F88212F44CDF3008507FB /* HomeController.swift in Sources */,
 				D57F888B2F47AE98008507FB /* DogModel.swift in Sources */,
+				D5F8F3112F58B89900223C5E /* DonateModel.swift in Sources */,
 				D54A37022F4CAA130042FCB3 /* NewCell.swift in Sources */,
 				D5BDB3922F2E743D001E8B1B /* SearchField.swift in Sources */,
 				D551FDAD2F40A307003A3F76 /* View.swift in Sources */,

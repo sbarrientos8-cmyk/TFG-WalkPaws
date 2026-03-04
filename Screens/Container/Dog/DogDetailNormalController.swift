@@ -120,4 +120,6 @@ class DogDetailNormalController: UIViewController {
     @IBAction func backClicked(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
+    
+    
 }

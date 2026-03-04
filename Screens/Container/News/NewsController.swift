@@ -28,6 +28,7 @@ class NewsController: UIViewController, UITableViewDataSource, UITableViewDelega
             type: .plus,
             action: { [weak self] in self?.goCreateNews() })
         )
+        tableNews.showsVerticalScrollIndicator = false
         bottomBar.selectSection(.news)
 
 

@@ -19,6 +19,7 @@ class MyNewsController: UIViewController, UITableViewDataSource, UITableViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         labelTitleNav.config(text: "Mis Publicaciones", style: StylesLabel.titleNav)
+        tableNews.showsVerticalScrollIndicator = false
 
         setupTable()
         loadMyNews()

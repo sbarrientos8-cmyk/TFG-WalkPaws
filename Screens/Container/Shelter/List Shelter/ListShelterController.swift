@@ -34,6 +34,8 @@ class ListShelterController: UIViewController, UITableViewDataSource, UITableVie
         tableView.layer.shadowOpacity = 0.08
         tableView.layer.shadowOffset = CGSize(width: 0, height: 6)
         tableView.layer.shadowRadius = 12
+        tableView.showsVerticalScrollIndicator = false
+        tableView.showsHorizontalScrollIndicator = false
         
         bottomBar.selectSection(.shelter)
 

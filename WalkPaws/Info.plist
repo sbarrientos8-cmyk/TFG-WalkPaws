@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Necesitamos tu ubicación para registrar el recorrido del paseo y calcular la distancia recorrida.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Necesitamos acceso continuo a tu ubicación para registrar correctamente el paseo.</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string></string>

@@ -16,6 +16,7 @@ class Colors
     static let greenDark = color(46, 59, 49)
     static let greenField = color(98, 108, 97)
     static let greenLight = color(124, 146, 125)
+    static let greenLight2 = color(154, 207, 138)
     static let greenBottom = color(109, 154, 86)
     static let white = color(255, 255, 255)
     static let borderField = color(220, 222, 210)
@@ -29,6 +30,9 @@ class Colors
     static let flesh = color(244, 222, 199)
     
     static let brown = color(118, 93, 63)
+    static let brownLight = color(214, 194, 166)
+    
+    static let yellow = color(241, 243, 165)
     
     static func color(_ red: Int, _ green: Int, _ blue: Int) -> UIColor
     {

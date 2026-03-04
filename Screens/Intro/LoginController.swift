@@ -28,7 +28,7 @@ class LoginController: UIViewController
         labelTitle.config(text: "Iniciar Sesión", style: StylesLabel.title)
         
         fieldEmail.setText("sofybr29@gmail.com")
-        fieldPassword.setText("holahola")
+        fieldPassword.setText("holahola1")
         
         fieldEmail.config(image: UIImage(named: "email"), placeholder: "Correo electrónico")
         fieldPassword.config(image: UIImage(named: "lock"), placeholder: "Contraseña", isSecure: true)
