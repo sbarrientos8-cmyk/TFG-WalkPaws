@@ -12,12 +12,14 @@ struct ProfileModel {
     let name: String
     let email: String
     let avatarURL: String?
+    let points: Int?
 
     init(dto: ProfileDTO) {
         self.id = dto.id
         self.name = dto.name ?? "Usuario"
         self.email = dto.email ?? ""
         self.avatarURL = dto.avatar_url
+        self.points = dto.points ?? 0
     }
 }
 

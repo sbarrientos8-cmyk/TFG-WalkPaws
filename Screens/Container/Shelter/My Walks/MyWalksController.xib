@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyWalksController" customModule="WalkPaws" customModuleProvider="target">
             <connections>
+                <outlet property="emptyView" destination="vkt-NE-hem" id="7do-Te-ua5"/>
                 <outlet property="labelTitleNav" destination="Lgg-j1-pOh" id="zck-lD-tdQ"/>
                 <outlet property="tableView" destination="DbG-Ma-RjU" id="dhh-3o-TZO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -49,6 +50,10 @@
                         <constraint firstItem="bcT-ht-ANy" firstAttribute="leading" secondItem="Afp-gV-XgC" secondAttribute="leading" constant="15" id="kjP-f1-81m"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vkt-NE-hem" customClass="EmptyView" customModule="WalkPaws" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="102.33333333333331" width="393" height="749.66666666666674"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="DbG-Ma-RjU">
                     <rect key="frame" x="10" y="102.33333333333331" width="373" height="749.66666666666674"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -66,9 +71,13 @@
                 <constraint firstAttribute="trailing" secondItem="Afp-gV-XgC" secondAttribute="trailing" id="C1f-2T-5dU"/>
                 <constraint firstItem="DbG-Ma-RjU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="Iqg-Td-5PZ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="DbG-Ma-RjU" secondAttribute="trailing" constant="10" id="J5h-fT-ee0"/>
+                <constraint firstAttribute="trailing" secondItem="vkt-NE-hem" secondAttribute="trailing" id="Udg-qo-Eg0"/>
+                <constraint firstItem="vkt-NE-hem" firstAttribute="top" secondItem="Afp-gV-XgC" secondAttribute="bottom" id="YEU-t5-xDf"/>
+                <constraint firstItem="vkt-NE-hem" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="bvR-ac-GU0"/>
                 <constraint firstItem="DbG-Ma-RjU" firstAttribute="top" secondItem="Afp-gV-XgC" secondAttribute="bottom" id="fxV-gn-Fbe"/>
                 <constraint firstItem="Afp-gV-XgC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hDv-hd-ooT"/>
                 <constraint firstItem="Afp-gV-XgC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="klb-aY-3LO"/>
+                <constraint firstAttribute="bottom" secondItem="vkt-NE-hem" secondAttribute="bottom" id="ouN-Q1-D63"/>
             </constraints>
             <point key="canvasLocation" x="139.69465648854961" y="153.52112676056339"/>
         </view>

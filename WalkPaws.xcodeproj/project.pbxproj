@@ -160,6 +160,16 @@
 		D5D734D92F55F91C00984BC1 /* backgroundWalk.png in Resources */ = {isa = PBXBuildFile; fileRef = D5D734D82F55F91C00984BC1 /* backgroundWalk.png */; };
 		D5D734DB2F56054500984BC1 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = D5D734DA2F56054500984BC1 /* location.png */; };
 		D5F8F3112F58B89900223C5E /* DonateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F8F3102F58B89900223C5E /* DonateModel.swift */; };
+		D5F8F3142F58DD0900223C5E /* RouterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F8F3132F58DD0900223C5E /* RouterController.swift */; };
+		D5F8F3162F58E11800223C5E /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = D5F8F3152F58E11800223C5E /* Auth */; };
+		D5F8F31A2F599DCA00223C5E /* DonateController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5F8F3192F599DCA00223C5E /* DonateController.xib */; };
+		D5F8F31B2F599DCA00223C5E /* DonateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F8F3182F599DCA00223C5E /* DonateController.swift */; };
+		D5F8F31D2F5A013500223C5E /* points_award.png in Resources */ = {isa = PBXBuildFile; fileRef = D5F8F31C2F5A013500223C5E /* points_award.png */; };
+		D5F8F3212F5A082700223C5E /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5F8F3202F5A082700223C5E /* EmptyView.xib */; };
+		D5F8F3222F5A082700223C5E /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F8F31F2F5A082700223C5E /* EmptyView.swift */; };
+		D5F8F3242F5A15ED00223C5E /* footprint_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = D5F8F3232F5A15ED00223C5E /* footprint_empty.png */; };
+		D5F8F3272F5A167E00223C5E /* new_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = D5F8F3262F5A167E00223C5E /* new_empty.png */; };
+		D5F8F3292F5A1A3B00223C5E /* walking_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = D5F8F3282F5A1A3B00223C5E /* walking_empty.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -335,6 +345,15 @@
 		D5D734D82F55F91C00984BC1 /* backgroundWalk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundWalk.png; sourceTree = "<group>"; };
 		D5D734DA2F56054500984BC1 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
 		D5F8F3102F58B89900223C5E /* DonateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateModel.swift; sourceTree = "<group>"; };
+		D5F8F3132F58DD0900223C5E /* RouterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterController.swift; sourceTree = "<group>"; };
+		D5F8F3182F599DCA00223C5E /* DonateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateController.swift; sourceTree = "<group>"; };
+		D5F8F3192F599DCA00223C5E /* DonateController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DonateController.xib; sourceTree = "<group>"; };
+		D5F8F31C2F5A013500223C5E /* points_award.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = points_award.png; sourceTree = "<group>"; };
+		D5F8F31F2F5A082700223C5E /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		D5F8F3202F5A082700223C5E /* EmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyView.xib; sourceTree = "<group>"; };
+		D5F8F3232F5A15ED00223C5E /* footprint_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = footprint_empty.png; sourceTree = "<group>"; };
+		D5F8F3262F5A167E00223C5E /* new_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new_empty.png; sourceTree = "<group>"; };
+		D5F8F3282F5A1A3B00223C5E /* walking_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = walking_empty.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -357,6 +376,7 @@
 			files = (
 				D57F88962F47C657008507FB /* SDWebImage in Frameworks */,
 				D542D4572F2A700B00E537AF /* Supabase in Frameworks */,
+				D5F8F3162F58E11800223C5E /* Auth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,6 +528,7 @@
 		D52C36422F4A45CF00CC6AFE /* Dog */ = {
 			isa = PBXGroup;
 			children = (
+				D5F8F3172F599DAF00223C5E /* Donate */,
 				D52C36432F4A45FA00CC6AFE /* DogController.swift */,
 				D52C36442F4A45FA00CC6AFE /* DogController.xib */,
 				D52C36472F4A577D00CC6AFE /* DogDetailNormalController.swift */,
@@ -770,6 +791,8 @@
 		D59902462F2400930029FB34 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				D5F8F31E2F5A07E900223C5E /* EmptyView */,
+				D5F8F3122F58DCF600223C5E /* Router */,
 				D551FDE02F4366DC003A3F76 /* Bottom */,
 				D5BDB3932F2E7D8F001E8B1B /* Alert */,
 				D5BDB3902F2E7433001E8B1B /* Search */,
@@ -813,6 +836,7 @@
 		D599025B2F2402EA0029FB34 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D5F8F3252F5A15F100223C5E /* Empty */,
 				D57F888E2F47AF3B008507FB /* Dog */,
 				D57F886A2F465230008507FB /* map_walk.png */,
 				D57F885F2F463E0E008507FB /* image_go_walk.png */,
@@ -824,6 +848,7 @@
 				D5879F6C2F26B0B400E0C9C8 /* Logo */,
 				D5D734D82F55F91C00984BC1 /* backgroundWalk.png */,
 				D523AB5E2F5218BB008FD8CE /* backgroundWalk1.png */,
+				D5F8F31C2F5A013500223C5E /* points_award.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -988,6 +1013,42 @@
 			path = Donate;
 			sourceTree = "<group>";
 		};
+		D5F8F3122F58DCF600223C5E /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				D5F8F3132F58DD0900223C5E /* RouterController.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		D5F8F3172F599DAF00223C5E /* Donate */ = {
+			isa = PBXGroup;
+			children = (
+				D5F8F3182F599DCA00223C5E /* DonateController.swift */,
+				D5F8F3192F599DCA00223C5E /* DonateController.xib */,
+			);
+			path = Donate;
+			sourceTree = "<group>";
+		};
+		D5F8F31E2F5A07E900223C5E /* EmptyView */ = {
+			isa = PBXGroup;
+			children = (
+				D5F8F31F2F5A082700223C5E /* EmptyView.swift */,
+				D5F8F3202F5A082700223C5E /* EmptyView.xib */,
+			);
+			path = EmptyView;
+			sourceTree = "<group>";
+		};
+		D5F8F3252F5A15F100223C5E /* Empty */ = {
+			isa = PBXGroup;
+			children = (
+				D5F8F3282F5A1A3B00223C5E /* walking_empty.png */,
+				D5F8F3232F5A15ED00223C5E /* footprint_empty.png */,
+				D5F8F3262F5A167E00223C5E /* new_empty.png */,
+			);
+			path = Empty;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1007,6 +1068,7 @@
 			packageProductDependencies = (
 				D542D4562F2A700B00E537AF /* Supabase */,
 				D57F88952F47C657008507FB /* SDWebImage */,
+				D5F8F3152F58E11800223C5E /* Auth */,
 			);
 			productName = WalkPaws;
 			productReference = D59902122F2400840029FB34 /* WalkPaws.app */;
@@ -1137,6 +1199,7 @@
 				D551FDA52F3FA9B3003A3F76 /* contact.png in Resources */,
 				D57F88882F47AD35008507FB /* DogCell.xib in Resources */,
 				D523AB3D2F50C805008FD8CE /* trash.png in Resources */,
+				D5F8F3272F5A167E00223C5E /* new_empty.png in Resources */,
 				D551FD9F2F3FA96C003A3F76 /* ubication_white.png in Resources */,
 				D53582292F3E7BF400C75131 /* ubication.png in Resources */,
 				D523AB2F2F50ADE5008FD8CE /* plus.png in Resources */,
@@ -1144,6 +1207,7 @@
 				D52C36522F4B914E00CC6AFE /* cake.png in Resources */,
 				D523AB162F4F7CAC008FD8CE /* language.png in Resources */,
 				D542D4462F2919F500E537AF /* code.png in Resources */,
+				D5F8F3242F5A15ED00223C5E /* footprint_empty.png in Resources */,
 				D51754662F54DC08005424AD /* MyWalksController.xib in Resources */,
 				D57F88602F463E0E008507FB /* image_go_walk.png in Resources */,
 				D5AB78412F438D9000831D4F /* shelter_icn_white.png in Resources */,
@@ -1173,6 +1237,8 @@
 				D523AB5F2F5218BB008FD8CE /* backgroundWalk1.png in Resources */,
 				D542D42D2F27E42700E537AF /* RegisterController.xib in Resources */,
 				D59902552F2400BB0029FB34 /* Main.storyboard in Resources */,
+				D5F8F3212F5A082700223C5E /* EmptyView.xib in Resources */,
+				D5F8F31D2F5A013500223C5E /* points_award.png in Resources */,
 				D599025F2F2406A80029FB34 /* logo_splash.png in Resources */,
 				D57F88222F44CDF3008507FB /* HomeController.xib in Resources */,
 				D542D4442F290A0100E537AF /* ModifyPasswordIntroController.xib in Resources */,
@@ -1183,6 +1249,7 @@
 				D523AB222F4F8831008FD8CE /* ContactShelterController.xib in Resources */,
 				D551FDE32F436702003A3F76 /* BottomBar.xib in Resources */,
 				D5B0BC642F33B94600822E3F /* icn_ok.png in Resources */,
+				D5F8F31A2F599DCA00223C5E /* DonateController.xib in Resources */,
 				D52C36562F4B915B00CC6AFE /* male.png in Resources */,
 				D5D734DB2F56054500984BC1 /* location.png in Resources */,
 				D5BDB38F2F2E72FD001E8B1B /* search.png in Resources */,
@@ -1196,6 +1263,7 @@
 				D5879F6F2F26B0C600E0C9C8 /* lock.png in Resources */,
 				D542D43A2F27F71100E537AF /* logo.png in Resources */,
 				D551FDA92F3FAA75003A3F76 /* phone.png in Resources */,
+				D5F8F3292F5A1A3B00223C5E /* walking_empty.png in Resources */,
 				D542D42F2F27E9BC00E537AF /* email.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1245,6 +1313,7 @@
 				D51754602F545E6C005424AD /* WalkingController.swift in Sources */,
 				D5AB78472F4395E600831D4F /* BottomBarItem.swift in Sources */,
 				D523AB252F4F8DD5008FD8CE /* SendEmail.swift in Sources */,
+				D5F8F3222F5A082700223C5E /* EmptyView.swift in Sources */,
 				D59902562F2400BB0029FB34 /* AppDelegate.swift in Sources */,
 				D5879F6B2F26AD4200E0C9C8 /* StyleField.swift in Sources */,
 				D542D42C2F27E42700E537AF /* RegisterController.swift in Sources */,
@@ -1265,12 +1334,14 @@
 				D5879F762F26B37A00E0C9C8 /* StylesButton.swift in Sources */,
 				D51754692F54DD34005424AD /* WalkService.swift in Sources */,
 				D52C364A2F4A577D00CC6AFE /* DogDetailNormalController.swift in Sources */,
+				D5F8F3142F58DD0900223C5E /* RouterController.swift in Sources */,
 				D5879F782F26B38400E0C9C8 /* Button.swift in Sources */,
 				D599027D2F2690750029FB34 /* Fonts.swift in Sources */,
 				D57F88832F47A7D2008507FB /* ConnectApi.swift in Sources */,
 				D59902802F2692E20029FB34 /* Label.swift in Sources */,
 				D57F88212F44CDF3008507FB /* HomeController.swift in Sources */,
 				D57F888B2F47AE98008507FB /* DogModel.swift in Sources */,
+				D5F8F31B2F599DCA00223C5E /* DonateController.swift in Sources */,
 				D5F8F3112F58B89900223C5E /* DonateModel.swift in Sources */,
 				D54A37022F4CAA130042FCB3 /* NewCell.swift in Sources */,
 				D5BDB3922F2E743D001E8B1B /* SearchField.swift in Sources */,
@@ -1655,6 +1726,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D57F88912F47C4EE008507FB /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		D5F8F3152F58E11800223C5E /* Auth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D542D4512F2A6F5900E537AF /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Auth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -145,6 +145,9 @@ class DogDetailNeedyController: UIViewController {
 
         labelBreed.text = "\(dog.breed)"
         labelAge.text = "\(ageText)"
+        
+        buttonWalk.isHidden = !dog.isWalkable
+        buttonWalk.isEnabled = dog.isWalkable
 
         let sexText = dog.sexDisplayText // te lo pongo abajo
         labelSex.text = "\(sexText)"
@@ -200,68 +203,81 @@ class DogDetailNeedyController: UIViewController {
     }
     
     @IBAction func donateClicked(_ sender: Any) {
+        let vc = DonateController(nibName: "DonateController", bundle: nil)
+        
+        // ✅ pásale el perro para saber a quién donar
+        vc.dogId = dog.id
+        
+        // ✅ cuando termine, refrescamos el perro y el progreso
+        vc.onDonationSuccess = { [weak self] in
+            guard let self else { return }
+            Task { await self.reloadDogAndRefreshUI() }
+        }
+
+        vc.modalPresentationStyle = .pageSheet
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.prefersGrabberVisible = true
+            sheet.preferredCornerRadius = 24
+            sheet.largestUndimmedDetentIdentifier = .medium
+        }
+
+        present(vc, animated: true)
+    }
+    
+    @IBAction func walkClicked(_ sender: Any)
+    {
+        guard dog.isWalkable else { return }
+
+        guard let dogUUID = UUID(uuidString: dog.id),
+              let shelterIdStr = dog.shelterId,
+              let shelterUUID = UUID(uuidString: shelterIdStr) else {
+            print("❌ IDs inválidos")
+            return
+        }
+
         Task { [weak self] in
             guard let self else { return }
 
             do {
-                let totalPoints = try await fetchMyPoints()
+                // 1) Traer nombre del refugio por shelter_id
+                struct ShelterNameDTO: Decodable { let name: String }
 
+                let shelter: ShelterNameDTO = try await SupabaseManager.shared.client
+                    .from("shelters")
+                    .select("name")
+                    .eq("id", value: shelterUUID.uuidString)
+                    .single()
+                    .execute()
+                    .value
+
+                let shelterName = shelter.name
+
+                // 2) Abrir WalkingController ya con todo
                 await MainActor.run {
-                    let alert = UIAlertController(
-                        title: "Donar puntos",
-                        message: "Tienes \(totalPoints) puntos disponibles.\n\n100 puntos = 10€",
-                        preferredStyle: .alert
-                    )
+                    let vc = WalkingController(nibName: "WalkingController", bundle: nil)
+                    // si no tienes xib: let vc = WalkingController()
 
-                    alert.addTextField { tf in
-                        tf.placeholder = "Puntos a donar"
-                        tf.keyboardType = .numberPad
-                    }
+                    vc.selectedDogId = dogUUID
+                    vc.selectedShelterId = shelterUUID
+                    vc.selectedDogName = self.dog.name
+                    vc.selectedShelterName = shelterName
 
-                    alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
-
-                    alert.addAction(UIAlertAction(title: "Donar", style: .default, handler: { [weak self] _ in
-                        guard let self else { return }
-
-                        guard let text = alert.textFields?.first?.text,
-                              let points = Int(text),
-                              points > 0 else { return }
-
-                        if points > totalPoints {
-                            // no alcanza
-                            let err = UIAlertController(
-                                title: "No tienes suficientes puntos",
-                                message: "Tienes \(totalPoints) puntos y estás intentando donar \(points).",
-                                preferredStyle: .alert
-                            )
-                            err.addAction(UIAlertAction(title: "OK", style: .default))
-                            self.present(err, animated: true)
-                            return
-                        }
-
-                        guard let dogUUID = UUID(uuidString: self.dog.id) else { return }
-                        let params = DonateParams(p_dog_id: dogUUID.uuidString, p_points: points)
-
-                        Task {
-                            do {
-                                _ = try await SupabaseManager.shared.client
-                                    .rpc("donate_points", params: params)
-                                    .execute()
-
-                                // Si quieres refrescar UI del perro, aquí llamarías a tu recarga.
-                                // await self.reloadDogAndRefreshUI()
-
-                            } catch {
-                                print("❌ donate rpc error:", error)
-                            }
-                        }
-                    }))
-
-                    self.present(alert, animated: true)
+                    self.navigationController?.pushViewController(vc, animated: true)
                 }
 
             } catch {
-                print("❌ fetchMyPoints error:", error)
+                print("❌ fetch shelter name error:", error)
+
+                // fallback: abrir igual sin nombre
+                await MainActor.run {
+                    let vc = WalkingController(nibName: "WalkingController", bundle: nil)
+                    vc.selectedDogId = dogUUID
+                    vc.selectedShelterId = shelterUUID
+                    vc.selectedDogName = self.dog.name
+                    vc.selectedShelterName = "Refugio"
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
             }
         }
     }

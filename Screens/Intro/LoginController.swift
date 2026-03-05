@@ -24,7 +24,7 @@ class LoginController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
+        
         labelTitle.config(text: "Iniciar Sesión", style: StylesLabel.title)
         
         fieldEmail.setText("sofybr29@gmail.com")
@@ -53,7 +53,7 @@ class LoginController: UIViewController
         
     }
     
-    @IBAction func loginClicked(_ sender: Any)
+    /*@IBAction func loginClicked(_ sender: Any)
     {
         let email = fieldEmail.getText()
         let password = fieldPassword.getText()
@@ -70,6 +70,27 @@ class LoginController: UIViewController
             } catch
             {
                 await MainActor.run { print("ERROR AL LOGIN") }
+            }
+        }
+    }*/
+    @IBAction func loginClicked(_ sender: Any) {
+        let email = fieldEmail.getText()
+        let password = fieldPassword.getText()
+
+        Task {
+            do {
+                try await SupabaseManager.shared.client.auth.signIn(email: email, password: password)
+                print("Before:", self.navigationController?.viewControllers.count as Any)
+
+                await MainActor.run {
+                    let home = HomeController(nibName: "HomeController", bundle: nil)
+                    self.navigationController?.setViewControllers([home], animated: true)
+                }
+
+                print("After:", self.navigationController?.viewControllers.count as Any)
+
+            } catch {
+                await MainActor.run { print("ERROR AL LOGIN:", error) }
             }
         }
     }

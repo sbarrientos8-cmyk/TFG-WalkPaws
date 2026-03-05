@@ -11,6 +11,7 @@ class MyWalksController: UIViewController, UITableViewDataSource, UITableViewDel
 {
     @IBOutlet weak var labelTitleNav: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var emptyView: EmptyView!
     
     private let service = WalksService()
     private var walks: [WalkListRowDTO] = []
@@ -35,8 +36,26 @@ class MyWalksController: UIViewController, UITableViewDataSource, UITableViewDel
         
         tableView.register(UINib(nibName: "MyWalkCell", bundle: nil), forCellReuseIdentifier: "MyWalkCell")
 
+        emptyView.backgroundColor = Colors.background
+        emptyView.isHidden = true
+        
         hideKeyboardWhenTappedAround()
         loadMyWalks()
+    }
+    
+    private func updateEmptyState() {
+        let isEmpty = walks.isEmpty
+
+        emptyView.isHidden = !isEmpty
+        tableView.isHidden = isEmpty
+
+        if isEmpty {
+            emptyView.config(
+                image: UIImage(named: "walking_empty"), // o tu imagen "empty_walks"
+                title: "Aún no hay paseos",
+                description: "Haz tu primer paseo y lo verás aquí."
+            )
+        }
     }
 
     private func loadMyWalks() {
@@ -52,6 +71,7 @@ class MyWalksController: UIViewController, UITableViewDataSource, UITableViewDel
                 await MainActor.run {
                     self.walks = rows
                     self.tableView.reloadData()
+                    self.updateEmptyState()
                     print("✅ Mis paseos cargados:", rows.count)
                 }
 

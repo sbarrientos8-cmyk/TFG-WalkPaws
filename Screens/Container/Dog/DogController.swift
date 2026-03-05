@@ -19,6 +19,8 @@ class DogController: UIViewController,
     @IBOutlet weak var buttonNeedy: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
 
+    @IBOutlet weak var viewEmpty: EmptyView!
+    
     var shelterId: UUID!
 
     private var allDogs: [DogModel] = []
@@ -33,7 +35,6 @@ class DogController: UIViewController,
         searchField.onTextChange { [weak self] text in
             self?.applyFilter(text)
         }
-        viewButtons.layer.cornerRadius = 20
 
         // Collection setup
         collectionView.dataSource = self
@@ -41,11 +42,14 @@ class DogController: UIViewController,
 
         let nib = UINib(nibName: "DogCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: "DogCell")
-
-        // Estado inicial (Normal)
-        setSelectedTab(isNeedy: false)
+        
+        viewButtons.applyCardStyle(cornerRadius: 20)
+        
+        viewEmpty.backgroundColor = Colors.background
 
         loadDogs()
+        showingNeedy = false
+        updateTabStyles()
     }
 
     private func loadDogs() {
@@ -58,6 +62,29 @@ class DogController: UIViewController,
             }
         }
     }
+    
+    private func updateEmptyState() {
+        let isEmpty = filteredDogs.isEmpty
+
+        viewEmpty.isHidden = !isEmpty
+        collectionView.isHidden = isEmpty
+
+        if isEmpty {
+            if showingNeedy {
+                viewEmpty.config(
+                    image: UIImage(named: "footprint_empty"),
+                    title: "No hay perros que necesiten apoyo",
+                    description: "Ahora mismo no hay perros con necesidades especiales en este refugio."
+                )
+            }else {
+                viewEmpty.config(
+                    image: UIImage(named: "footprint_empty"),
+                    title: "No hay perros que necesiten apoyo",
+                    description: "Ahora mismo no hay perros con necesidades especiales en este refugio."
+                )
+            }
+        }
+    }
 
     private func applyFilter() {
         if showingNeedy {
@@ -65,25 +92,45 @@ class DogController: UIViewController,
         } else {
             filteredDogs = allDogs.filter { $0.isDisabled == false }
         }
+        
         collectionView.reloadData()
+        updateEmptyState()
+    }
+    
+    private func updateTabStyles() {
+        if showingNeedy {
+            // Needy seleccionado
+            buttonNeedy.config(text: buttonNeedy.title(for: .normal) ?? "Necesitan apoyo",
+                               style: StylesButton.secondaryGreen2)
+
+            // Normal NO seleccionado
+            buttonNormal.config(text: buttonNormal.title(for: .normal) ?? "Normales",
+                                style: StylesButton.secondaryWhite2)
+        } else {
+            // Normal seleccionado
+            buttonNormal.config(text: buttonNormal.title(for: .normal) ?? "Normales",
+                                style: StylesButton.secondaryGreen2)
+
+            // Needy NO seleccionado
+            buttonNeedy.config(text: buttonNeedy.title(for: .normal) ?? "Necesitan apoyo",
+                               style: StylesButton.secondaryWhite2)
+        }
     }
 
     // MARK: - Buttons
-
     @IBAction func dogNormalClicked(_ sender: Any) {
         showingNeedy = false
-        setSelectedTab(isNeedy: false)
-        applyFilter()
+        updateTabStyles()
+        applyFilter(searchField.getText()) // o applyFilter()
     }
 
     @IBAction func dogNeedyClicked(_ sender: Any) {
         showingNeedy = true
-        setSelectedTab(isNeedy: true)
-        applyFilter()
+        updateTabStyles()
+        applyFilter(searchField.getText()) // o applyFilter()
     }
-
+    
     private func setSelectedTab(isNeedy: Bool) {
-        // Ajusta esto a tu diseño (colores/estilos)
         if isNeedy {
             buttonNeedy.isSelected = true
             buttonNormal.isSelected = false
@@ -124,6 +171,7 @@ class DogController: UIViewController,
             $0.city.lowercased().contains(lowercasedText)
         }
 
+        updateEmptyState()
         collectionView.reloadData()
     }
 

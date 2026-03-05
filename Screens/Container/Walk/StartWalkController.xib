@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StartWalkController" customModule="WalkPaws" customModuleProvider="target">
             <connections>
+                <outlet property="bottomBar" destination="vUr-l4-mSM" id="JZZ-DP-lcG"/>
                 <outlet property="buttonWalk" destination="Ncu-46-B0I" id="yRW-ho-fL6"/>
                 <outlet property="fieldDog" destination="OdM-QS-zJr" id="iot-lV-2RE"/>
                 <outlet property="fieldShelter" destination="qag-Z4-hRb" id="dPu-89-GDw"/>
@@ -34,53 +35,53 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hoE-Z6-oKg" userLabel="View Margin Top">
-                    <rect key="frame" x="0.0" y="102.33333333333333" width="393" height="136.33333333333337"/>
+                    <rect key="frame" x="0.0" y="102.33333333333331" width="393" height="110.66666666666669"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mVU-cb-Hrn" userLabel="View Form">
-                    <rect key="frame" x="39.333333333333343" y="238.66666666666666" width="314.33333333333326" height="340.66666666666674"/>
+                    <rect key="frame" x="39.333333333333343" y="213.00000000000003" width="314.33333333333326" height="313.66666666666674"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="20" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOa-0b-fft" userLabel="Label Title">
-                            <rect key="frame" x="10" y="15" width="294.33333333333331" height="69.333333333333329"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOa-0b-fft" userLabel="Label Title">
+                            <rect key="frame" x="10" y="14.999999999999998" width="294.33333333333331" height="20.333333333333329"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gUB-Dd-aR5" userLabel="View Line">
-                            <rect key="frame" x="0.0" y="94.333333333333343" width="314.33333333333331" height="1"/>
+                            <rect key="frame" x="0.0" y="55.333333333333314" width="314.33333333333331" height="1"/>
                             <color key="backgroundColor" systemColor="systemGray3Color"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="8ZC-8A-sUY"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qa9-ys-byC" userLabel="Label Shelter">
-                            <rect key="frame" x="15" y="105.33333333333334" width="289.33333333333331" height="21"/>
+                            <rect key="frame" x="15" y="66.333333333333314" width="289.33333333333331" height="20.333333333333329"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qag-Z4-hRb" userLabel="Field Shelter" customClass="DropdownFieldView" customModule="WalkPaws" customModuleProvider="target">
-                            <rect key="frame" x="15" y="133.33333333333334" width="289.33333333333331" height="40.333333333333343"/>
+                            <rect key="frame" x="15" y="93.666666666666686" width="289.33333333333331" height="40.333333333333343"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="qag-Z4-hRb" secondAttribute="height" multiplier="180:25" priority="999" id="KKF-HG-cxS"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zu6-ur-nNm" userLabel="Label Dog">
-                            <rect key="frame" x="15" y="185.66666666666666" width="289.33333333333331" height="20.333333333333343"/>
+                            <rect key="frame" x="15" y="146" width="289.33333333333331" height="20.333333333333343"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OdM-QS-zJr" userLabel="Field Dog" customClass="DropdownFieldView" customModule="WalkPaws" customModuleProvider="target">
-                            <rect key="frame" x="15" y="213.00000000000003" width="289.33333333333331" height="40"/>
+                            <rect key="frame" x="15" y="173.33333333333331" width="289.33333333333331" height="40"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="OdM-QS-zJr" secondAttribute="height" multiplier="180:25" priority="999" id="Paj-DB-sf4"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ncu-46-B0I" userLabel="Button Walk">
-                            <rect key="frame" x="15.666666666666657" y="278" width="283" height="42.666666666666686"/>
+                            <rect key="frame" x="15.666666666666657" y="238.33333333333334" width="283" height="55.333333333333343"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="Ncu-46-B0I" secondAttribute="height" multiplier="360:50" priority="999" id="ymG-fH-855"/>
                             </constraints>
@@ -107,7 +108,7 @@
                         <constraint firstItem="zu6-ur-nNm" firstAttribute="top" secondItem="qag-Z4-hRb" secondAttribute="bottom" constant="12" id="YLd-uq-3Jn"/>
                         <constraint firstItem="qag-Z4-hRb" firstAttribute="trailing" secondItem="qa9-ys-byC" secondAttribute="trailing" id="Z0o-6n-zeb"/>
                         <constraint firstItem="lOa-0b-fft" firstAttribute="top" secondItem="mVU-cb-Hrn" secondAttribute="top" constant="15" id="ZkU-TT-EAO"/>
-                        <constraint firstItem="gUB-Dd-aR5" firstAttribute="top" secondItem="lOa-0b-fft" secondAttribute="bottom" constant="10" id="cJz-ft-74C"/>
+                        <constraint firstItem="gUB-Dd-aR5" firstAttribute="top" secondItem="lOa-0b-fft" secondAttribute="bottom" constant="20" id="cJz-ft-74C"/>
                         <constraint firstAttribute="trailing" secondItem="gUB-Dd-aR5" secondAttribute="trailing" id="dDQ-rQ-Lkz"/>
                         <constraint firstItem="OdM-QS-zJr" firstAttribute="top" secondItem="zu6-ur-nNm" secondAttribute="bottom" constant="7" id="f1V-WM-tyU"/>
                         <constraint firstItem="OdM-QS-zJr" firstAttribute="leading" secondItem="zu6-ur-nNm" secondAttribute="leading" id="hmo-qF-Zet"/>
@@ -128,12 +129,11 @@
                 <constraint firstItem="vUr-l4-mSM" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.1" id="3fp-ZV-xTv"/>
                 <constraint firstItem="hoE-Z6-oKg" firstAttribute="top" secondItem="3lW-Kf-FfO" secondAttribute="bottom" id="8Uu-Fo-P2D"/>
                 <constraint firstAttribute="trailing" secondItem="vUr-l4-mSM" secondAttribute="trailing" id="8bU-J7-Zuw"/>
-                <constraint firstItem="Ncu-46-B0I" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.05" id="GGT-04-77n"/>
+                <constraint firstItem="Ncu-46-B0I" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.065" id="GGT-04-77n"/>
                 <constraint firstAttribute="bottom" secondItem="vUr-l4-mSM" secondAttribute="bottom" id="IcK-Ip-Kcv"/>
                 <constraint firstItem="3lW-Kf-FfO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="KkW-NO-tMH"/>
-                <constraint firstItem="mVU-cb-Hrn" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.4" id="URZ-zN-IFD"/>
                 <constraint firstItem="mVU-cb-Hrn" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="W0t-rV-CAs"/>
-                <constraint firstItem="hoE-Z6-oKg" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.16" id="XBN-v7-HLu"/>
+                <constraint firstItem="hoE-Z6-oKg" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.13" id="XBN-v7-HLu"/>
                 <constraint firstItem="mVU-cb-Hrn" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="aWh-Vr-e1c"/>
                 <constraint firstItem="3lW-Kf-FfO" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.12" id="aX5-0v-aTJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hoE-Z6-oKg" secondAttribute="trailing" id="fGV-DK-1Zc"/>

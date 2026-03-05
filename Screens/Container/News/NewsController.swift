@@ -13,6 +13,7 @@ class NewsController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var tableNews: UITableView!
     @IBOutlet weak var bottomBar: BottomBar!
     
+    @IBOutlet weak var viewEmpty: EmptyView!
     
     private var news: [NewsModel] = []
 
@@ -31,7 +32,9 @@ class NewsController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableNews.showsVerticalScrollIndicator = false
         bottomBar.selectSection(.news)
 
-
+        viewEmpty.backgroundColor = Colors.background
+        viewEmpty.isHidden = true
+        
         loadNews()
         hideKeyboardWhenTappedAround()
         setupTable()
@@ -55,14 +58,30 @@ class NewsController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableNews.backgroundColor = .clear
     }
     
-    private func loadNews() {
+    private func loadNews() {        
         fetchNews { [weak self] models in
             DispatchQueue.main.async {
                 self?.news = models
                 self?.tableNews.reloadData()
+                self?.updateEmptyState()
             }
         }
     }
+    
+    private func updateEmptyState() {
+            let isEmpty = news.isEmpty
+
+            viewEmpty.isHidden = !isEmpty
+            tableNews.isHidden = isEmpty
+
+            if isEmpty {
+                viewEmpty.config(
+                    image: UIImage(named: "new_empty"),
+                    title: "No hay publicaciones",
+                    description: "Cuando haya noticias aparecerán aquí."
+                )
+            }
+        }
 
         
     // MARK: - TABLE VIEW

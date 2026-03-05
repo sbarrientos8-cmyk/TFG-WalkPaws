@@ -19,7 +19,8 @@ class StartWalkController: UIViewController {
     @IBOutlet weak var fieldShelter: DropdownFieldView!
     @IBOutlet weak var fieldDog: DropdownFieldView!
     @IBOutlet weak var buttonWalk: UIButton!
-
+    @IBOutlet weak var bottomBar: BottomBar!
+    
     private var dogs: [String] = []
     private var allDogs: [DogModel] = []
 
@@ -97,6 +98,8 @@ class StartWalkController: UIViewController {
             self.selectedDogId = self.dogsForSelectedShelter.first(where: { $0.name == dogName })?.id
             print("🐶 Seleccionado:", dogName)
         }
+        
+        bottomBar.selectSection(.walk)
 
         loadSheltersWithDogs()
         hideKeyboardWhenTappedAround()

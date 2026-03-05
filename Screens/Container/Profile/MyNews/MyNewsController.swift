@@ -12,7 +12,8 @@ class MyNewsController: UIViewController, UITableViewDataSource, UITableViewDele
 
     @IBOutlet weak var labelTitleNav: UILabel!
     @IBOutlet weak var tableNews: UITableView!
-
+    @IBOutlet weak var emptyView: EmptyView!
+    
     private var news: [NewsModel] = []
     private let profileService = ProfileService()
 
@@ -21,6 +22,9 @@ class MyNewsController: UIViewController, UITableViewDataSource, UITableViewDele
         labelTitleNav.config(text: "Mis Publicaciones", style: StylesLabel.titleNav)
         tableNews.showsVerticalScrollIndicator = false
 
+        emptyView.backgroundColor = Colors.background
+        emptyView.isHidden = true
+        
         setupTable()
         loadMyNews()
     }
@@ -35,6 +39,21 @@ class MyNewsController: UIViewController, UITableViewDataSource, UITableViewDele
         tableNews.rowHeight = UITableView.automaticDimension
         tableNews.estimatedRowHeight = 140
         tableNews.backgroundColor = .clear
+    }
+    
+    private func updateEmptyState() {
+        let isEmpty = news.isEmpty
+
+        emptyView.isHidden = !isEmpty
+        tableNews.isHidden = isEmpty
+
+        if isEmpty {
+            emptyView.config(
+                image: UIImage(named: "new_empty"),
+                title: "No tienes publicaciones",
+                description: "Cuando crees una publicación aparecerá aquí."
+            )
+        }
     }
 
     private func loadMyNews() {
@@ -65,6 +84,7 @@ class MyNewsController: UIViewController, UITableViewDataSource, UITableViewDele
 
                 await MainActor.run {
                     self.news = models
+                    self.updateEmptyState()
                     self.tableNews.reloadData()
                 }
 
@@ -141,6 +161,7 @@ class MyNewsController: UIViewController, UITableViewDataSource, UITableViewDele
 
                 await MainActor.run {
                     self.news.remove(at: indexPath.row)
+                    self.updateEmptyState()
                     self.tableNews.deleteRows(at: [indexPath], with: .automatic)
                 }
 

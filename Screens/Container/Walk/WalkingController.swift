@@ -53,6 +53,12 @@ final class WalkingController: UIViewController {
     // MARK: - Timer
     private var timer: Timer?
     private var elapsedSeconds: Int = 0
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -79,7 +85,7 @@ final class WalkingController: UIViewController {
         setupMap()
         setupLocation()
         startTimer()
-        
+        hideKeyboardWhenTappedAround()
 
         Task { [weak self] in
             guard let self else { return }

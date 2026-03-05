@@ -52,8 +52,26 @@ struct StylesButton {
         borderWidth: nil
     )
     
+    static let secondaryGreen2 = StyleButton(
+        font: Fonts.figtreeMedium(17),
+        titleColor: Colors.white,
+        backgroundColor: Colors.greenLight,
+        cornerRadius: 7,
+        borderColor: nil,
+        borderWidth: nil
+    )
+    
     static let secondaryWhite = StyleButton(
         font: Fonts.figtreeMedium(13),
+        titleColor: Colors.greenLight,
+        backgroundColor: Colors.white,
+        cornerRadius: 7,
+        borderColor: nil,
+        borderWidth: nil
+    )
+    
+    static let secondaryWhite2 = StyleButton(
+        font: Fonts.figtreeMedium(17),
         titleColor: Colors.greenLight,
         backgroundColor: Colors.white,
         cornerRadius: 7,

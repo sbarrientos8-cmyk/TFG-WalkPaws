@@ -14,7 +14,7 @@ class ProfileUserController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var imageProfile: UIImageView!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelGmail: UILabel!
-    @IBOutlet weak var labelUbication: UILabel!
+    @IBOutlet weak var labelPoints: UILabel!
     @IBOutlet weak var viewLine: UIView!
     @IBOutlet weak var buttonEdit: UIButton!
     @IBOutlet weak var tableWidgets: UITableView!
@@ -54,7 +54,7 @@ class ProfileUserController: UIViewController, UITableViewDataSource, UITableVie
         labelGmail.font = Fonts.figtreeLight(15)
         viewLine.backgroundColor = Colors.grayLight
         buttonEdit.config(text: "Editar Perfil", style: StylesButton.edit)
-        labelUbication.config(text: "", style: StylesLabel.subtitleGray)
+        labelPoints.config(text: "", style: StylesLabel.subtitleGray)
         
         tableWidgets.dataSource = self
         tableWidgets.delegate = self
@@ -101,6 +101,7 @@ class ProfileUserController: UIViewController, UITableViewDataSource, UITableVie
                 await MainActor.run {
                     self.labelName.text = profile.name
                     self.labelGmail.text = profile.email.isEmpty ? email : profile.email
+                    self.labelPoints.text = "\(profile.points ?? 0) puntos"
                 }
                 
 
@@ -129,7 +130,20 @@ class ProfileUserController: UIViewController, UITableViewDataSource, UITableVie
     }
 
     private func logout() {
-        print("Logout tapped")
+        print("✅ logout tapped")
+        Task { [weak self] in
+            guard let self else { return }
+            do {
+                try await SupabaseManager.shared.client.auth.signOut()
+
+                await MainActor.run {
+                    let login = LoginController(nibName: "LoginController", bundle: nil)
+                    self.navigationController?.setViewControllers([login], animated: true)
+                }
+            } catch {
+                print("❌ logout error:", error)
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat

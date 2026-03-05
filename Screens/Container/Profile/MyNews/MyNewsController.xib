@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyNewsController" customModule="WalkPaws" customModuleProvider="target">
             <connections>
+                <outlet property="emptyView" destination="Jcz-IJ-Y3t" id="V7x-3u-6z2"/>
                 <outlet property="labelTitleNav" destination="zuP-yT-Dt5" id="V4j-fg-t1F"/>
                 <outlet property="tableNews" destination="BJV-yb-4JE" id="bhp-vh-Bh0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -50,6 +51,10 @@
                         <constraint firstItem="nn3-Gf-6Qg" firstAttribute="leading" secondItem="HJe-KQ-uHa" secondAttribute="leading" constant="15" id="utd-vc-uJ9"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jcz-IJ-Y3t" customClass="EmptyView" customModule="WalkPaws" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="102.33333333333331" width="393" height="749.66666666666674"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="BJV-yb-4JE">
                     <rect key="frame" x="0.0" y="102.33333333333331" width="393" height="749.66666666666674"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -60,10 +65,14 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="BJV-yb-4JE" secondAttribute="trailing" id="9Q4-cC-zNi"/>
+                <constraint firstAttribute="trailing" secondItem="Jcz-IJ-Y3t" secondAttribute="trailing" id="9TP-X9-7xg"/>
                 <constraint firstItem="HJe-KQ-uHa" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.12" id="Kng-cl-aew"/>
                 <constraint firstItem="HJe-KQ-uHa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="NeF-Li-DoG"/>
                 <constraint firstItem="BJV-yb-4JE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Qjb-x4-0FN"/>
+                <constraint firstAttribute="bottom" secondItem="Jcz-IJ-Y3t" secondAttribute="bottom" id="TGY-C0-dpc"/>
                 <constraint firstItem="HJe-KQ-uHa" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="btt-g1-md9"/>
+                <constraint firstItem="Jcz-IJ-Y3t" firstAttribute="top" secondItem="HJe-KQ-uHa" secondAttribute="bottom" id="cM9-QS-R2v"/>
+                <constraint firstItem="Jcz-IJ-Y3t" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="fL4-ey-72k"/>
                 <constraint firstAttribute="bottom" secondItem="BJV-yb-4JE" secondAttribute="bottom" id="nJa-Pt-xYW"/>
                 <constraint firstAttribute="trailing" secondItem="HJe-KQ-uHa" secondAttribute="trailing" id="sly-4b-MOD"/>
                 <constraint firstItem="BJV-yb-4JE" firstAttribute="top" secondItem="HJe-KQ-uHa" secondAttribute="bottom" id="yhN-6z-Tbc"/>

@@ -12,4 +12,5 @@ struct ProfileDTO: Decodable {
     let name: String?
     let email: String?
     let avatar_url: String?
+    let points: Int?
 }

@@ -37,6 +37,13 @@ class DogDetailNormalController: UIViewController {
     @IBOutlet weak var buttonWalk: UIButton!
 
     var dog: DogModel!
+    var shelterName: String = ""
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +78,7 @@ class DogDetailNormalController: UIViewController {
         imageDog.clipsToBounds = true
 
         fillUI()
+        hideKeyboardWhenTappedAround()
     }
 
     private func fillUI() {
@@ -85,6 +93,9 @@ class DogDetailNormalController: UIViewController {
 
         labelBreed.text = "\(dog.breed)"
         labelAge.text = "\(ageText)"
+        
+        buttonWalk.isHidden = !dog.isWalkable
+        buttonWalk.isEnabled = dog.isWalkable
 
         let sexText = dog.sexDisplayText // te lo pongo abajo
         labelSex.text = "\(sexText)"
@@ -121,5 +132,61 @@ class DogDetailNormalController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func walkClicked(_ sender: Any)
+    {
+        guard dog.isWalkable else { return }
+
+        guard let dogUUID = UUID(uuidString: dog.id),
+              let shelterIdStr = dog.shelterId,
+              let shelterUUID = UUID(uuidString: shelterIdStr) else {
+            print("❌ IDs inválidos")
+            return
+        }
+
+        Task { [weak self] in
+            guard let self else { return }
+
+            do {
+                // 1) Traer nombre del refugio por shelter_id
+                struct ShelterNameDTO: Decodable { let name: String }
+
+                let shelter: ShelterNameDTO = try await SupabaseManager.shared.client
+                    .from("shelters")
+                    .select("name")
+                    .eq("id", value: shelterUUID.uuidString)
+                    .single()
+                    .execute()
+                    .value
+
+                let shelterName = shelter.name
+
+                // 2) Abrir WalkingController ya con todo
+                await MainActor.run {
+                    let vc = WalkingController(nibName: "WalkingController", bundle: nil)
+                    // si no tienes xib: let vc = WalkingController()
+
+                    vc.selectedDogId = dogUUID
+                    vc.selectedShelterId = shelterUUID
+                    vc.selectedDogName = self.dog.name
+                    vc.selectedShelterName = shelterName
+
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+
+            } catch {
+                print("❌ fetch shelter name error:", error)
+
+                // fallback: abrir igual sin nombre
+                await MainActor.run {
+                    let vc = WalkingController(nibName: "WalkingController", bundle: nil)
+                    vc.selectedDogId = dogUUID
+                    vc.selectedShelterId = shelterUUID
+                    vc.selectedDogName = self.dog.name
+                    vc.selectedShelterName = "Refugio"
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        }
+    }
     
 }

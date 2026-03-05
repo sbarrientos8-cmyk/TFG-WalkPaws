@@ -248,6 +248,9 @@
                                         <constraint firstAttribute="width" secondItem="1aF-Tn-qej" secondAttribute="height" multiplier="360:50" id="v5S-WF-Aw5"/>
                                     </constraints>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <connections>
+                                        <action selector="walkClicked:" destination="-1" eventType="touchUpInside" id="N4g-BO-cXr"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

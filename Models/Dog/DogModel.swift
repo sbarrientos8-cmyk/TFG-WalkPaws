@@ -20,6 +20,7 @@ struct DogModel {
     let isDisabled: Bool
     let sex: String?
     let story: String?
+    let isWalkable: Bool
 
     let donationGoalEur: Double?
     let donationRaisedEur: Double
@@ -37,6 +38,8 @@ struct DogModel {
         self.isDisabled = dto.is_disabled
         self.sex = dto.sex
         self.story = dto.story
+        self.isWalkable = dto.isWalkable
+        
 
         self.donationGoalEur = dto.donation_goal_eur
         self.donationRaisedEur = dto.donation_raised_eur ?? 0

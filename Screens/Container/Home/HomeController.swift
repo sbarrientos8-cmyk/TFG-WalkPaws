@@ -49,7 +49,8 @@ class HomeController: UIViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("✅ HomeController DID APPEAR")
+        
         imageTopWalk.layer.cornerRadius = 15
         labelHi.config(text: "Hola,", style: StylesLabel.titleHi)
         labelName.config(text: "Usuario 👋🏼", style: StylesLabel.titleName)

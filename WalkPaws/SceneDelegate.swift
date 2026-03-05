@@ -17,10 +17,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        let loginVC = LoginController(nibName: "LoginController", bundle: nil)
-        let nav = UINavigationController(rootViewController: loginVC)
+        let routerVC = RouterController()
+        routerVC.view.backgroundColor = .systemBackground  // ✅
+
+        let nav = UINavigationController(rootViewController: routerVC)
+        nav.view.backgroundColor = .systemBackground       // ✅
 
         window = UIWindow(windowScene: windowScene)
+        window?.backgroundColor = .systemBackground        // ✅ MUY IMPORTANTE
         window?.rootViewController = nav
         window?.makeKeyAndVisible()
     }

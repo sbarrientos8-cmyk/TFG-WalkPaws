@@ -15,7 +15,7 @@
                 <outlet property="imageProfile" destination="0GL-tM-HbK" id="etf-Uv-VR4"/>
                 <outlet property="labelGmail" destination="Bdf-dF-Gzs" id="ff0-Vo-ayd"/>
                 <outlet property="labelName" destination="fXD-Jc-FaI" id="tpn-xp-g6k"/>
-                <outlet property="labelUbication" destination="5Bs-0P-jzh" id="Qnb-pq-AKS"/>
+                <outlet property="labelPoints" destination="5Bs-0P-jzh" id="Blk-vO-xyH"/>
                 <outlet property="navBar" destination="uf4-XC-dIj" id="nEc-Cw-Kqa"/>
                 <outlet property="tableWidgets" destination="Mr4-py-7sI" id="Kz7-9I-WHi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -60,7 +60,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ubication.png" translatesAutoresizingMaskIntoConstraints="NO" id="Xyd-pr-Lfk">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="points_award.png" translatesAutoresizingMaskIntoConstraints="NO" id="Xyd-pr-Lfk">
                                     <rect key="frame" x="98.666666666666671" y="77.000000000000014" width="20" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="20" id="IWY-si-Lif"/>
@@ -68,7 +68,7 @@
                                         <constraint firstAttribute="width" secondItem="Xyd-pr-Lfk" secondAttribute="height" multiplier="1:1" priority="999" id="tLi-Tp-2Q2"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Bs-0P-jzh" userLabel="Label Ubication">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Bs-0P-jzh" userLabel="Label Points">
                                     <rect key="frame" x="123.66666666666664" y="77.000000000000014" width="214.33333333333337" height="20"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
@@ -168,7 +168,7 @@
         </view>
     </objects>
     <resources>
-        <image name="ubication.png" width="48" height="48"/>
+        <image name="points_award.png" width="48" height="48"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
