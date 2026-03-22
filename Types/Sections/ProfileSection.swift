@@ -37,11 +37,20 @@ struct ProfileSection
             }
         )
 
-        static let contact = ProfileSection(
-            title: "Contactar con nosotros",
-            image: "contact1",
-            goSection: {
-                return HomeController()
-            }
-        )
+    static let contact = ProfileSection(
+        title: "Contactar con nosotros",
+        image: "contact1",
+        goSection: {
+            let vc = ContactShelterController(nibName: "ContactShelterController", bundle: nil)
+
+            // “refugio” fijo = WalkPaws
+            vc.shelter = ShelterContactInfo(
+                name: "WalkPaws",
+                email: "walkpaws@gmail.com",
+                photoURL: nil // usaremos logo local
+            )
+
+            return vc
+        }
+    )
 }

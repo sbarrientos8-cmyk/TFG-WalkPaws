@@ -32,6 +32,12 @@ class ContactShelterController: UIViewController {
     private var userName: String = "Usuario"
     private var userEmail: String = ""
     
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -61,6 +67,11 @@ class ContactShelterController: UIViewController {
 
         labelName.text = shelter.name
         labelGmail.text = shelter.email
+        
+        if shelter.email.lowercased() == "walkpaws@gmail.com" {
+            imageShelter.image = UIImage(named: "logo") // logo.png en Assets
+            return
+        }
 
         if let urlString = shelter.photoURL, let url = URL(string: urlString) {
             imageShelter.sd_setImage(

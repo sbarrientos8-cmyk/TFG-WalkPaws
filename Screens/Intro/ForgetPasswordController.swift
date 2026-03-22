@@ -27,11 +27,11 @@ class ForgetPasswordController: UIViewController
     {
         super.viewDidLoad()
 
-        labelTitle.config(text: "Recuperar Contraseña", style: StylesLabel.title)
-        fieldEmail.config(image: UIImage(named: "email"), placeholder: "Correo electrónico")
-        buttonSendCode.config(text: "Enviar Código", style: StylesButton.primary)
+        labelTitle.config(text: String(localized: "recover_password"), style: StylesLabel.title)
+        fieldEmail.config(image: UIImage(named: "email"), placeholder: String(localized: "email"))
+        buttonSendCode.config(text: String(localized: "send_code"), style: StylesButton.primary)
         buttonSendCode.applyShadow()
-        labelDescription.config(text: "Te enviaremos un código para restablecer tu contraseña", style: StylesLabel.subtitle)
+        labelDescription.config(text: String(localized: "we_will_send_code_to_reset_password"), style: StylesLabel.subtitle)
         
         hideKeyboardWhenTappedAround()
     }
@@ -39,7 +39,7 @@ class ForgetPasswordController: UIViewController
     private func showAlert(_ title: String, _ message: String)
     {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: String(localized: "ok"), style: .default))
         present(alert, animated: true)
     }
 
@@ -54,13 +54,13 @@ class ForgetPasswordController: UIViewController
             .lowercased()
 
         guard !email.isEmpty else {
-            showAlert("Falta el email", "Introduce tu correo.")
+            showAlert(String(localized: "missing_email"), String(localized: "enter_your_email"))
             return
         }
 
         // (Opcional) valida formato rápido
         guard email.contains("@"), email.contains(".") else {
-            showAlert("Email inválido", "Introduce un correo válido.")
+            showAlert(String(localized: "invalid_email"), String(localized: "enter_valid_email"))
             return
         }
 
@@ -83,7 +83,10 @@ class ForgetPasswordController: UIViewController
             } catch {
                 await MainActor.run {
                     self.buttonSendCode.isEnabled = true
-                    self.showAlert("Error", "No se pudo enviar el código. Intenta de nuevo.\n\(error.localizedDescription)")
+                    self.showAlert(
+                        String(localized: "error"),
+                        "\(String(localized: "could_not_send_code_try_again"))\n\(error.localizedDescription)"
+                    )
                 }
             }
         }

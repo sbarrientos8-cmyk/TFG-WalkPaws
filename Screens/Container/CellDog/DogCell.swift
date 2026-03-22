@@ -55,9 +55,12 @@ class DogCell: UICollectionViewCell {
         switch subtitle {
         case .age:
             if let age = dog.age {
-                labelDescription.text = "\(age) años"
+                labelDescription.text = String(
+                    format: String(localized: "dog_age_years"),
+                    String(age)
+                )
             } else {
-                labelDescription.text = "Edad desconocida"
+                labelDescription.text = String(localized: "unknown_age")
             }
 
         case .city:

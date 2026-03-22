@@ -52,13 +52,13 @@ class HomeController: UIViewController,
         print("✅ HomeController DID APPEAR")
         
         imageTopWalk.layer.cornerRadius = 15
-        labelHi.config(text: "Hola,", style: StylesLabel.titleHi)
-        labelName.config(text: "Usuario 👋🏼", style: StylesLabel.titleName)
+        labelHi.config(text: String(localized: "hello"), style: StylesLabel.titleHi)
+        labelName.config(text: "\(String(localized: "user")) 👋🏼", style: StylesLabel.titleName)
         viewImage.applyCardStyle()
         
-        labelQuestion.config(text: "¿Listo para\npasear?", style: StylesLabel.titleWhite)
-        labelDescription.config(text: "Haz feliz a un perro\nrefugiado", style: StylesLabel.descriptionWhite)
-        buttonWalk.config(text: "Pasear", style: StylesButton.primary)
+        labelQuestion.config(text: String(localized: "ready_to_walk"), style: StylesLabel.titleWhite)
+        labelDescription.config(text: String(localized: "make_a_shelter_dog_happy"), style: StylesLabel.descriptionWhite)
+        buttonWalk.config(text: String(localized: "walk"), style: StylesButton.primary)
         
         viewSHelter.layer.cornerRadius = 12
         viewSHelter.applyCardStyle()
@@ -67,20 +67,20 @@ class HomeController: UIViewController,
         viewInfo.layer.cornerRadius = 12
         viewInfo.applyCardStyle()
         
-        labelShelter.config(text: "Ver refugios", style: StylesLabel.descriptionGreen)
-        labelNews.config(text: "Ver noticias", style: StylesLabel.descriptionGreen)
-        labelInfo.config(text: "Sobre WalkPaws", style: StylesLabel.descriptionGreen)
+        labelShelter.config(text: String(localized: "view_shelters"), style: StylesLabel.descriptionGreen)
+        labelNews.config(text: String(localized: "view_news"), style: StylesLabel.descriptionGreen)
+        labelInfo.config(text: String(localized: "contact_walkpaws"), style: StylesLabel.descriptionGreen)
         
         imageMap.layer.cornerRadius = 20
         viewMap.layer.cornerRadius = 20
         
         viewMap.applyCardStyle()
-        labelTitleMap.config(text: "Encuentra refugios", style: StylesLabel.titleMap)
-        labelDescriptionMap.config(text: "Explora refugios de perros en tu area", style: StylesLabel.description)
-        buttonShelter.config(text: "Ver refugios", style: StylesButton.primary2)
+        labelTitleMap.config(text: String(localized: "find_shelters"), style: StylesLabel.titleMap)
+        labelDescriptionMap.config(text: String(localized: "explore_dog_shelters_in_your_area"), style: StylesLabel.description)
+        buttonShelter.config(text: String(localized: "view_shelters"), style: StylesButton.primary2)
         
-        labelTitleDogs.config(text: "Perros disponibles para pasear", style: StylesLabel.titleHi)
-        labelDescriptionDogs.config(text: "Hay perros que necesitan tu compañía!", style: StylesLabel.subtitleGray)
+        labelTitleDogs.config(text: String(localized: "dogs_available_for_walks"), style: StylesLabel.titleHi)
+        labelDescriptionDogs.config(text: String(localized: "dogs_need_your_company"), style: StylesLabel.subtitleGray)
         labelDescriptionDogs.font = labelDescriptionDogs.font.withSize(17)
         
         collectionDogs.dataSource = self
@@ -118,13 +118,13 @@ class HomeController: UIViewController,
                 let email = session.user.email ?? ""
                     if email.isEmpty {
                         await MainActor.run {
-                        self.labelName.config(text: "Usuario 👋🏼", style: StylesLabel.titleName)
+                            self.labelName.config(text: "\(String(localized: "user")) 👋🏼", style: StylesLabel.titleName)
                     }
                     return
                 }
 
                 let dto = try await profileService.fetchMyProfile(email: email)
-                let fullName = dto?.name ?? "Usuario"
+                let fullName = dto?.name ?? String(localized: "user")
                 let firstName = fullName.components(separatedBy: " ").first ?? fullName
 
                 self.labelName.config(text: "\(firstName) 👋🏼", style: StylesLabel.titleName)
@@ -132,7 +132,7 @@ class HomeController: UIViewController,
             } catch {
                 print("❌ loadMyProfileName error:", error)
                 await MainActor.run {
-                    self.labelName.config(text: "Usuario 👋🏼", style: StylesLabel.titleName)
+                    self.labelName.config(text: "\(String(localized: "user")) 👋🏼", style: StylesLabel.titleName)
                 }
             }
         }
@@ -196,7 +196,7 @@ class HomeController: UIViewController,
     @IBAction func shelterMapClicked(_ sender: Any)
     {
         let vc = ListShelterController(nibName: "ListShelterController", bundle: nil)
-            navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func newsWidgetClicked(_ sender: Any)

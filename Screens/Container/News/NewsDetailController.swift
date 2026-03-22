@@ -31,7 +31,6 @@ class NewsDetailController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationBar.backgroundColor = Colors.greenField.withAlphaComponent(0.1)
         labelTitleNav.config(text: "Detalle de la Publicación", style: StylesLabel.titleNav)
 
         labelName.config(text: "", style: StylesLabel.title2Name)
@@ -78,7 +77,8 @@ class NewsDetailController: UIViewController {
                 options: [.continueInBackground, .retryFailed, .scaleDownLargeImages]
             )
         } else {
-            viewImage.isHidden = true
+            viewImage.removeVertical()
+            imageView.removeVertical()
         }
     }
 

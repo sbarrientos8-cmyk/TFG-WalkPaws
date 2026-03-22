@@ -186,9 +186,37 @@ class BottomBar: UIView {
     }
     
     @IBAction func goWalk(_ sender: Any) {
+        guard let parent = self.parentViewController else { return }
+        guard let nav = parent.navigationController else { return }
+
+        // ✅ 1) Si WalkingController ya está en el stack, vuelve a él
+        if let walkingVC = nav.viewControllers.first(where: { $0 is WalkingController }) {
+            selectSection(.walk)
+            nav.popToViewController(walkingVC, animated: false)
+            return
+        }
+
+        // ✅ 2) Si hay paseo activo guardado, crea WalkingController configurado
+        if WalkSession.shared.isActive,
+           let shelterId = WalkSession.shared.shelterId,
+           let dogId = WalkSession.shared.dogId {
+
+            selectSection(.walk)
+
+            let vc = WalkingController(nibName: nil, bundle: nil)
+            vc.selectedShelterId = shelterId
+            vc.selectedDogId = dogId
+            vc.selectedShelterName = WalkSession.shared.shelterName
+            vc.selectedDogName = WalkSession.shared.dogName
+
+            nav.pushViewController(vc, animated: false)
+            return
+        }
+
+        // ✅ 3) Si no hay paseo activo -> StartWalkController
         if let item = items.first(where: { $0.button == buttonWalk }) {
-                navigate(to: item, sectionToSelect: nil)
-            }
+            navigate(to: item, sectionToSelect: .walk)
+        }
     }
     
     @IBAction func goNews(_ sender: Any) {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class DogDetailNormalController: UIViewController {
 
@@ -38,6 +39,10 @@ class DogDetailNormalController: UIViewController {
 
     var dog: DogModel!
     var shelterName: String = ""
+    
+    private let locationManager = CLLocationManager()
+    private var lastLocation: CLLocation?
+    private let maxDistanceMeters: Double = 1000
     
     override func viewWillAppear(_ animated: Bool)
     {
@@ -79,6 +84,20 @@ class DogDetailNormalController: UIViewController {
 
         fillUI()
         hideKeyboardWhenTappedAround()
+        setupLocation()
+    }
+    
+    private func setupLocation() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
 
     private func fillUI() {
@@ -132,8 +151,8 @@ class DogDetailNormalController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func walkClicked(_ sender: Any)
-    {
+    @IBAction func walkClicked(_ sender: Any) {
+
         guard dog.isWalkable else { return }
 
         guard let dogUUID = UUID(uuidString: dog.id),
@@ -143,50 +162,119 @@ class DogDetailNormalController: UIViewController {
             return
         }
 
+        // ✅ BLOQUEO: si ya hay paseo activo, no permitir otro
+        if WalkSession.shared.isActive {
+            let alert = UIAlertController(
+                title: "Ya tienes un paseo en curso",
+                message: "No puedes empezar otro paseo hasta que termines el actual.",
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+            return
+        }
+
         Task { [weak self] in
             guard let self else { return }
 
-            do {
-                // 1) Traer nombre del refugio por shelter_id
-                struct ShelterNameDTO: Decodable { let name: String }
+            // 1) Necesitamos ubicación usuario
+            guard let userLoc = self.lastLocation else {
+                await MainActor.run {
+                    self.showAlert(
+                        title: "Ubicación no disponible",
+                        message: "Activa la ubicación para empezar el paseo."
+                    )
+                }
+                return
+            }
 
-                let shelter: ShelterNameDTO = try await SupabaseManager.shared.client
+            do {
+                // 2) Traer coordenadas del refugio
+                struct ShelterCoordDTO: Decodable {
+                    let latitude: Double?
+                    let longitude: Double?
+                    let name: String?
+                }
+
+                let shelter: ShelterCoordDTO = try await SupabaseManager.shared.client
                     .from("shelters")
-                    .select("name")
+                    .select("latitude, longitude, name")
                     .eq("id", value: shelterUUID.uuidString)
                     .single()
                     .execute()
                     .value
 
-                let shelterName = shelter.name
+                guard let lat = shelter.latitude, let lon = shelter.longitude else {
+                    await MainActor.run {
+                        self.showAlert(
+                            title: "Refugio sin ubicación",
+                            message: "Este refugio no tiene coordenadas guardadas."
+                        )
+                    }
+                    return
+                }
 
-                // 2) Abrir WalkingController ya con todo
+                // 3) Calcular distancia
+                let shelterLoc = CLLocation(latitude: lat, longitude: lon)
+                let distance = userLoc.distance(from: shelterLoc)
+
+                // 4) Si está lejos, no dejar empezar
+                if distance > self.maxDistanceMeters {
+                    let km = distance / 1000.0
+                    await MainActor.run {
+                        self.showAlert(
+                            title: "No estás cerca del refugio",
+                            message: String(format: "Estás a %.2f km. Acércate un poco más (≈ 1 km) para empezar el paseo.", km)
+                        )
+                    }
+                    return
+                }
+
+                // 5) OK -> abrir WalkingController + activar sesión
+                let shelterName = shelter.name ?? "Refugio"
+
                 await MainActor.run {
-                    let vc = WalkingController(nibName: "WalkingController", bundle: nil)
-                    // si no tienes xib: let vc = WalkingController()
+                    WalkSession.shared.start(
+                        dogId: dogUUID,
+                        shelterId: shelterUUID,
+                        dogName: self.dog.name,
+                        shelterName: shelterName
+                    )
 
+                    let vc = WalkingController(nibName: "WalkingController", bundle: nil)
                     vc.selectedDogId = dogUUID
                     vc.selectedShelterId = shelterUUID
                     vc.selectedDogName = self.dog.name
                     vc.selectedShelterName = shelterName
-
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
 
             } catch {
-                print("❌ fetch shelter name error:", error)
-
-                // fallback: abrir igual sin nombre
+                print("❌ check distance / fetch shelter error:", error)
                 await MainActor.run {
-                    let vc = WalkingController(nibName: "WalkingController", bundle: nil)
-                    vc.selectedDogId = dogUUID
-                    vc.selectedShelterId = shelterUUID
-                    vc.selectedDogName = self.dog.name
-                    vc.selectedShelterName = "Refugio"
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    self.showAlert(title: "Error", message: "No se pudo comprobar la ubicación del refugio.")
                 }
             }
         }
     }
     
+}
+
+extension DogDetailNormalController: CLLocationManagerDelegate {
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedWhenInUse, .authorizedAlways:
+            manager.startUpdatingLocation()
+        default:
+            break
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        lastLocation = locations.last
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("❌ Location error:", error)
+    }
 }

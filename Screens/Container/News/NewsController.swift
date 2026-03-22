@@ -21,6 +21,7 @@ class NewsController: UIViewController, UITableViewDataSource, UITableViewDelega
     {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
+        loadNews()
     }
     override func viewDidLoad() {
         super.viewDidLoad()

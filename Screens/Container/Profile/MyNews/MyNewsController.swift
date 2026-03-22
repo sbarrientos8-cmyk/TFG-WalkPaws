@@ -19,7 +19,7 @@ class MyNewsController: UIViewController, UITableViewDataSource, UITableViewDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        labelTitleNav.config(text: "Mis Publicaciones", style: StylesLabel.titleNav)
+        labelTitleNav.config(text: String(localized: "my_posts"), style: StylesLabel.titleNav)
         tableNews.showsVerticalScrollIndicator = false
 
         emptyView.backgroundColor = Colors.background
@@ -50,8 +50,8 @@ class MyNewsController: UIViewController, UITableViewDataSource, UITableViewDele
         if isEmpty {
             emptyView.config(
                 image: UIImage(named: "new_empty"),
-                title: "No tienes publicaciones",
-                description: "Cuando crees una publicación aparecerá aquí."
+                title: String(localized: "no_posts_yet"),
+                description: String(localized: "posts_will_appear_here")
             )
         }
     }
@@ -127,12 +127,12 @@ class MyNewsController: UIViewController, UITableViewDataSource, UITableViewDele
         let item = news[indexPath.row]
 
         let alert = UIAlertController(
-            title: "Eliminar publicación",
-            message: "¿Seguro que quieres eliminar esta publicación?",
+            title: String(localized: "delete_post"),
+            message: String(localized: "confirm_delete_post"),
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Eliminar", style: .destructive) { [weak self] _ in
+        alert.addAction(UIAlertAction(title: String(localized: "cancel"), style: .cancel))
+        alert.addAction(UIAlertAction(title: String(localized: "delete"), style: .destructive) { [weak self] _ in
             self?.deleteNews(item, at: indexPath)
         })
 

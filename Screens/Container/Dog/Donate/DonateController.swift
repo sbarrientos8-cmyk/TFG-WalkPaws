@@ -12,6 +12,7 @@ class DonateController: UIViewController
 
     var dogId: String = "" // UUID string del perro
     var onDonationSuccess: (() -> Void)?
+    var maxDonationEur: Double = 0   // lo setea DogDetailNeedyController
 
     @IBOutlet weak var labelTitle: UILabel!
 
@@ -45,7 +46,22 @@ class DonateController: UIViewController
                 let points = try await fetchMyPoints()
                 let euros = Double(points) / 10.0
 
-                let text = "Tienes \(points) puntos que equivale a \(String(format: "%.2f", euros))€"
+                // ✅ lo que falta por donar en euros (lo pasas desde DogDetailNeedyController)
+                let restEur = max(0, self.maxDonationEur)
+
+                // ✅ puntos necesarios para completar (redondeo hacia arriba)
+                let pointsToComplete = Int(ceil(restEur * 10.0))
+
+                var extraLine = ""
+                if restEur > 0 {
+                    if points >= pointsToComplete {
+                        extraLine = "\nSi quieres completar la donación, dona \(pointsToComplete) puntos."
+                    } else {
+                        extraLine = "\nPara completar la donación te faltan \(pointsToComplete - points) puntos."
+                    }
+                }
+
+                let text = "Tienes \(points) puntos (≈ \(String(format: "%.2f", euros))€)." + extraLine
 
                 await MainActor.run {
                     self.labelDescription1.config(text: text, style: StylesLabel.description)
@@ -176,7 +192,12 @@ class DonateController: UIViewController
         }
 
         guard let eur = parseEur(moneyText), eur > 0 else {
-            showError("El importe debe ser un número válido mayor que 0. Ejemplo: 10 o 10,50")
+            showError("El importe debe ser un número válido mayor que 0.")
+            return nil
+        }
+
+        if maxDonationEur > 0, eur > maxDonationEur + 0.0001 {
+            showError("No puedes donar más de \(String(format: "%.2f", maxDonationEur))€.")
             return nil
         }
 
@@ -239,6 +260,16 @@ class DonateController: UIViewController
         guard let points = Int(raw), points > 0 else {
             showError("Los puntos deben ser un número mayor que 0.")
             return nil
+        }
+
+        // ✅ Límite por lo que falta donar
+        // 10 puntos = 1€
+        if maxDonationEur > 0 {
+            let maxPoints = Int(ceil(maxDonationEur * 10.0))   // redondeo hacia arriba
+            if points > maxPoints {
+                showError("No puedes donar más de \(maxPoints) puntos.")
+                return nil
+            }
         }
 
         return points

@@ -28,9 +28,9 @@ final class WalkingController: UIViewController {
     @IBOutlet weak var labelKm: UILabel!
 
     @IBOutlet weak var viewCenter: CircleImageView!
-    @IBOutlet weak var buttonCenter: UIButton!
     @IBOutlet weak var buttonFinished: UIButton!
 
+    @IBOutlet weak var viewBottom: BottomBar!
     @IBOutlet weak var mapView: MKMapView!
 
     // MARK: - Datos que llegan
@@ -44,11 +44,13 @@ final class WalkingController: UIViewController {
     var selectedDogName: String = ""
 
     // MARK: - Location + tracking
+    private var shelterLocation: CLLocation?
     private let locationManager = CLLocationManager()
     private var routeCoordinates: [CLLocationCoordinate2D] = []
     private var lastLocation: CLLocation?
     private var totalDistanceMeters: Double = 0
-    private let minDistanceToSaveMeters: Double = 30
+    private let minDistanceToSaveMeters: Double = 20
+    private let maxDistanceToFinishMeters: Double = 1000
 
     // MARK: - Timer
     private var timer: Timer?
@@ -67,17 +69,19 @@ final class WalkingController: UIViewController {
         viewContent.applyCardStyle()
         viewContent.alpha = 0.75
         
-        labelShelterT.config(text: "Refugio: ", style: StylesLabel.titleBlack)
+        labelShelterT.config(text: "\(String(localized: "shelter")): ", style: StylesLabel.titleBlack)
+
         labelShelterD.config(text: "", style: StylesLabel.subtitleBlack)
         
-        labelDogT.config(text: "Perro: ", style: StylesLabel.titleBlack)
+        labelDogT.config(text: "\(String(localized: "dog")): ", style: StylesLabel.titleBlack)
+
         labelDogD.config(text: "", style: StylesLabel.subtitleBlack)
         
         labelTime.config(text: "", style: StylesLabel.titleBlack)
         labelKm.config(text: "", style: StylesLabel.titleBlack)
         
         viewCenter.alpha = 0.75
-        buttonFinished.config(text: "Terminar Paseo", style: StylesButton.primary)
+        buttonFinished.config(text: String(localized: "finish_walk"), style: StylesButton.primary)
 
         startedAt = Date()
 
@@ -91,11 +95,45 @@ final class WalkingController: UIViewController {
             guard let self else { return }
             await self.loadDogImageIfPossible()
         }
+        
+        Task { [weak self] in
+            guard let self else { return }
+            await self.loadShelterLocation()
+        }
+    }
+    
+    private func loadShelterLocation() async {
+        guard let shelterId = selectedShelterId else { return }
+
+        struct ShelterCoordDTO: Decodable {
+            let latitude: Double?
+            let longitude: Double?
+        }
+
+        do {
+            let dto: ShelterCoordDTO = try await SupabaseManager.shared.client
+                .from("shelters")
+                .select("latitude, longitude")
+                .eq("id", value: shelterId.uuidString)
+                .single()
+                .execute()
+                .value
+
+            guard let lat = dto.latitude, let lon = dto.longitude else { return }
+
+            await MainActor.run {
+                self.shelterLocation = CLLocation(latitude: lat, longitude: lon)
+            }
+        } catch {
+            print("❌ loadShelterLocation error:", error)
+        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        stopTracking()
+        if isMovingFromParent || isBeingDismissed {
+            stopTracking()
+        }
     }
 
     // MARK: - UI (solo asignar textos)
@@ -240,49 +278,93 @@ final class WalkingController: UIViewController {
     }
 
     @IBAction func finishedClicked(_ sender: Any) {
-        stopTracking()
 
         let km = totalDistanceMeters / 1000.0
         let formattedDistance = String(format: "%.2f km", km)
 
-        // ✅ No guardar si no hay “paseo real”
+        let maxDistanceToFinishMeters: Double = 1000
+
+        // 1) Si NO llega al mínimo (0.3km = 300m) -> NO se guarda y aquí sí terminas el tracking
         if totalDistanceMeters < minDistanceToSaveMeters {
+            stopTracking()
+
             let alert = UIAlertController(
-                title: "Paseo demasiado corto",
-                message: "No se guardará el paseo porque no has recorrido distancia suficiente.\n\nDistancia: \(formattedDistance)",
+                title: String(localized: "walk_too_short"),
+                message: String(
+                    format: String(localized: "walk_not_saved_min_distance"),
+                    formattedDistance
+                ),
                 preferredStyle: .alert
             )
-            alert.addAction(UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            alert.addAction(UIAlertAction(title: String(localized: "ok"), style: .default) { [weak self] _ in
+                WalkSession.shared.end()
                 self?.navigationController?.popViewController(animated: true)
             })
             present(alert, animated: true)
             return
         }
 
+        // 2) Necesitamos coords para validar “cerca del refugio”
+        guard let shelterLoc = shelterLocation, let userLoc = lastLocation else {
+            let alert = UIAlertController(
+                title: String(localized: "could_not_check_location"),
+                message: String(localized: "could_not_finish_location_not_verified"),
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: String(localized: "ok"), style: .default))
+            present(alert, animated: true)
+            return
+        }
+
+        // 3) Si está a más de 1km -> alerta pero NO paras (sigue contando)
+        let distanceToShelter = userLoc.distance(from: shelterLoc) // metros
+        if distanceToShelter > maxDistanceToFinishMeters {
+            let kmAway = distanceToShelter / 1000.0
+            let alert = UIAlertController(
+                title: String(localized: "still_far_from_shelter"),
+                message: String(format: String(localized: "must_be_closer_to_finish_walk"), kmAway),
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: String(localized: "ok"), style: .default))
+            present(alert, animated: true)
+
+            // ✅ IMPORTANTE: NO stopTracking() aquí
+            return
+        }
+
+        // 4) Ya cumple -> mostramos resumen (yo NO pararía aquí todavía, lo paro al Guardar)
         let minutes = elapsedSeconds / 60
         let seconds = elapsedSeconds % 60
         let formattedTime = String(format: "%02d:%02d", minutes, seconds)
 
-        let message = """
-        Refugio: \(selectedShelterName)
-        Perro: \(selectedDogName)
+        let message = String(
+            format: String(localized: "walk_summary_message"),
+            selectedShelterName,
+            selectedDogName,
+            formattedTime,
+            formattedDistance,
+            routeCoordinates.count
+        )
 
-        ⏱ Tiempo: \(formattedTime)
-        📏 Distancia: \(formattedDistance)
-        🧭 Puntos registrados: \(routeCoordinates.count)
-        """
+        let alert = UIAlertController(
+            title: String(localized: "walk_summary"),
+            message: message,
+            preferredStyle: .alert
+        )
 
-        let alert = UIAlertController(title: "Resumen del paseo", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Guardar", style: .default) { [weak self] _ in
+        alert.addAction(UIAlertAction(title: String(localized: "save"), style: .default) { [weak self] _ in
             guard let self else { return }
+            self.stopTracking()
             Task {
                 await self.saveWalkToSupabase()
+                WalkSession.shared.end()
                 await MainActor.run {
                     self.navigationController?.popViewController(animated: true)
                 }
             }
         })
-        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
+
+        alert.addAction(UIAlertAction(title: String(localized: "cancel"), style: .cancel))
         present(alert, animated: true)
     }
 

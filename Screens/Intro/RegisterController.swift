@@ -29,14 +29,14 @@ class RegisterController: UIViewController
     {
         super.viewDidLoad()
 
-        labelTitle.config(text: "Registrarse", style: StylesLabel.title)
+        labelTitle.config(text: String(localized: "sign_up"), style: StylesLabel.title)
         
-        fieldEmail.config(image: UIImage(named: "email"), placeholder: "Correo electrónico")
-        fieldName.config(image: UIImage(named: "user"), placeholder: "Nombre completo")
-        fieldPassword.config(image: UIImage(named: "lock"), placeholder: "Contraseña")
-        fieldPasswordConfirm.config(image: UIImage(named: "lock"), placeholder: "Confirmar Contraseña")
+        fieldEmail.config(image: UIImage(named: "email"), placeholder: String(localized: "email"))
+        fieldName.config(image: UIImage(named: "user"), placeholder: String(localized: "full_name"))
+        fieldPassword.config(image: UIImage(named: "lock"), placeholder: String(localized: "password"))
+        fieldPasswordConfirm.config(image: UIImage(named: "lock"), placeholder: String(localized: "confirm_password"))
         
-        buttonRegister.config(text: "Registrarse", style: StylesButton.primary)
+        buttonRegister.config(text: String(localized: "sign_up"), style: StylesButton.primary)
         buttonRegister.applyShadow()
         
         hideKeyboardWhenTappedAround()
@@ -45,7 +45,7 @@ class RegisterController: UIViewController
     func showAlert(title: String, message: String, onOk: (() -> Void)? = nil)
     {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in onOk?() })
+        alert.addAction(UIAlertAction(title: String(localized: "ok"), style: .default) { _ in onOk?() })
         present(alert, animated: true)
     }
     
@@ -64,35 +64,51 @@ class RegisterController: UIViewController
 
         guard !email.isEmpty, !name.isEmpty, !password.isEmpty, !confirm.isEmpty else
         {
-            showAlert(title: "Error", message: "Rellena todos los campos.")
+            showAlert(title: String(localized: "error"), message: String(localized: "fill_all_fields"))
             return
         }
 
         guard password == confirm else
         {
-            showAlert(title: "Error", message: "Las contraseñas no coinciden.")
+            showAlert(title: String(localized: "error"), message: String(localized: "passwords_do_not_match"))
             return
         }
 
         guard password.count >= 6 else
         {
-            showAlert(title: "Error", message: "La contraseña debe tener al menos 6 caracteres.")
+            showAlert(title: String(localized: "error"), message: String(localized: "password_min_6_characters"))
             return
         }
 
         Task {
             do {
-                try await SupabaseManager.shared.client.auth.signUp(email: email, password: password, data: [ "name": .string(name)])
+                let authResponse = try await SupabaseManager.shared.client.auth
+                    .signUp(email: email, password: password, data: ["name": .string(name)])
 
-                await MainActor.run
-                {
-                    // TODO ir al HomeController
+                // ✅ id NO es optional
+                let userId = authResponse.user.id
+
+                let row = ProfileInsert(
+                    id: userId.uuidString,
+                    name: name,
+                    email: email,
+                    points: 0,
+                    avatar_url: nil
+                )
+
+                _ = try await SupabaseManager.shared.client
+                    .from("profiles")
+                    .upsert(row)
+                    .execute()
+
+                await MainActor.run {
+                    let home = HomeController(nibName: "HomeController", bundle: nil)
+                    self.navigationController?.setViewControllers([home], animated: true)
                 }
 
             } catch {
-                await MainActor.run
-                {
-                    self.showAlert(title: "Error", message: error.localizedDescription)
+                await MainActor.run {
+                    self.showAlert(title: String(localized: "error"), message: error.localizedDescription)
                 }
             }
         }

@@ -69,3 +69,35 @@ struct WalkListRowDTO: Decodable {
     let shelter_city: String?
     let shelter_country: String?
 }
+
+
+final class WalkSession {
+
+    static let shared = WalkSession()
+    private init() {}
+
+    private(set) var isActive: Bool = false
+    private(set) var dogId: UUID?
+    private(set) var shelterId: UUID?
+    private(set) var dogName: String = ""
+    private(set) var shelterName: String = ""
+    private(set) var startedAt: Date?
+
+    func start(dogId: UUID, shelterId: UUID, dogName: String, shelterName: String) {
+        self.isActive = true
+        self.dogId = dogId
+        self.shelterId = shelterId
+        self.dogName = dogName
+        self.shelterName = shelterName
+        self.startedAt = Date()
+    }
+
+    func end() {
+        self.isActive = false
+        self.dogId = nil
+        self.shelterId = nil
+        self.dogName = ""
+        self.shelterName = ""
+        self.startedAt = nil
+    }
+}

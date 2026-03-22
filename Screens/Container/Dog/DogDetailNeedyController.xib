@@ -20,6 +20,7 @@
                 <outlet property="labelCollected" destination="wEm-cT-tnf" id="ruN-9K-R4O"/>
                 <outlet property="labelDescriptionD" destination="QWg-P0-m0m" id="CQH-FZ-GKi"/>
                 <outlet property="labelDescriptionT" destination="IlU-Hl-bpN" id="wPi-cw-woO"/>
+                <outlet property="labelDonateComplete" destination="97K-O4-i3F" id="J8n-Yh-Dep"/>
                 <outlet property="labelName" destination="d1f-1L-ckH" id="K04-P5-dEV"/>
                 <outlet property="labelNeeds" destination="8JC-aA-FTK" id="8X1-xx-LKj"/>
                 <outlet property="labelRest" destination="ZRi-qK-aHX" id="4Qt-Jp-BjG"/>
@@ -34,6 +35,7 @@
                 <outlet property="viewBreed" destination="Lng-gk-eyb" id="qiJ-rc-mkt"/>
                 <outlet property="viewCollect" destination="LM0-KT-4X4" id="lvI-PD-9oO"/>
                 <outlet property="viewDescription" destination="usc-F5-IiX" id="k7r-dd-Ejo"/>
+                <outlet property="viewDonateComplete" destination="cVc-6n-j3D" id="Sgh-fe-Y0n"/>
                 <outlet property="viewNeedy" destination="qlD-mE-hnu" id="xP3-bt-MRB"/>
                 <outlet property="viewSex" destination="dcQ-kg-xT3" id="wxB-61-v6X"/>
                 <outlet property="viewStory" destination="xUf-QE-4f6" id="HE3-60-JPC"/>
@@ -86,6 +88,24 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRf-ed-rCj" userLabel="View Image">
                                     <rect key="frame" x="10" y="5" width="373" height="337.33333333333331"/>
                                     <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cVc-6n-j3D" userLabel="View Donate Complete">
+                                            <rect key="frame" x="88.333333333333329" y="14.999999999999998" width="196.33333333333337" height="30.333333333333329"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97K-O4-i3F" userLabel="Label Donate Complete">
+                                                    <rect key="frame" x="5" y="5" width="186.33333333333334" height="20.333333333333332"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstItem="97K-O4-i3F" firstAttribute="leading" secondItem="cVc-6n-j3D" secondAttribute="leading" constant="5" id="48k-fU-PkO"/>
+                                                <constraint firstAttribute="bottom" secondItem="97K-O4-i3F" secondAttribute="bottom" constant="5" id="HpY-MO-Sba"/>
+                                                <constraint firstAttribute="trailing" secondItem="97K-O4-i3F" secondAttribute="trailing" constant="5" id="fPC-jB-KUa"/>
+                                                <constraint firstItem="97K-O4-i3F" firstAttribute="top" secondItem="cVc-6n-j3D" secondAttribute="top" constant="5" id="oeU-pC-BuJ"/>
+                                            </constraints>
+                                        </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qlD-mE-hnu" userLabel="View Needy">
                                             <rect key="frame" x="181" y="273.66666666666669" width="177" height="48.666666666666686"/>
                                             <subviews>
@@ -117,7 +137,9 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="qlD-mE-hnu" secondAttribute="trailing" constant="15" id="XUl-eX-RFB"/>
+                                        <constraint firstItem="cVc-6n-j3D" firstAttribute="centerX" secondItem="YRf-ed-rCj" secondAttribute="centerX" id="gQb-3t-qrY"/>
                                         <constraint firstAttribute="bottom" secondItem="qlD-mE-hnu" secondAttribute="bottom" constant="15" id="utC-KC-5oZ"/>
+                                        <constraint firstItem="cVc-6n-j3D" firstAttribute="top" secondItem="YRf-ed-rCj" secondAttribute="top" constant="15" id="wEt-pN-gp4"/>
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1f-1L-ckH" userLabel="Label Name">
@@ -427,6 +449,7 @@
                 <constraint firstItem="daM-6Q-JHD" firstAttribute="top" secondItem="xp1-Qd-Kgv" secondAttribute="bottom" id="ggz-oI-KNX"/>
                 <constraint firstAttribute="trailing" secondItem="xp1-Qd-Kgv" secondAttribute="trailing" id="jEV-ct-yc3"/>
                 <constraint firstItem="daM-6Q-JHD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="of6-t5-mbf"/>
+                <constraint firstItem="cVc-6n-j3D" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.5" id="uIu-Al-Zzd"/>
                 <constraint firstItem="xp1-Qd-Kgv" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.12" id="uha-s0-oLH"/>
             </constraints>
             <point key="canvasLocation" x="-63.358778625954194" y="77.464788732394368"/>

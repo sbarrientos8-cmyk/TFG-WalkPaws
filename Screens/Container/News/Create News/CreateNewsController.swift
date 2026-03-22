@@ -88,87 +88,89 @@ class CreateNewsController: UIViewController {
     }
     
     @IBAction func postClicked(_ sender: Any) {
-        print("HOLA")
-        let shortText = fieldTitle.getText().trimmingCharacters(in: .whitespacesAndNewlines)
-                let description = fieldDescription.getText().trimmingCharacters(in: .whitespacesAndNewlines)
 
-                guard !shortText.isEmpty else {
+        let title = fieldTitle.getText().trimmingCharacters(in: .whitespacesAndNewlines)
+        let description = fieldDescription.getText().trimmingCharacters(in: .whitespacesAndNewlines)
+
+        // ✅ Validación
+        if title.isEmpty || description.isEmpty {
+            showAlert(title: "Faltan datos", message: "Debes escribir al menos un título y una descripción.")
+            return
+        }
+
+        buttonPost.isEnabled = false
+
+        Task { [weak self] in
+            guard let self else { return }
+
+            do {
+                // 1) Sesión
+                let session = try await SupabaseManager.shared.client.auth.session
+                let email = session.user.email ?? ""
+                if email.isEmpty {
+                    await MainActor.run {
+                        self.buttonPost.isEnabled = true
+                        self.showAlert(title: "Error", message: "No se pudo obtener tu sesión. Vuelve a iniciar sesión.")
+                    }
                     return
                 }
 
-                guard !description.isEmpty else {
+                // 2) Profile
+                guard let dto = try await profileService.fetchMyProfile(email: email),
+                      let profileId = dto.id else {
+                    await MainActor.run {
+                        self.buttonPost.isEnabled = true
+                        self.showAlert(title: "Error", message: "No se pudo obtener tu perfil.")
+                    }
                     return
                 }
 
-                buttonPost.isEnabled = false
+                // 3) Imagen (opcional)
+                var imageUrl: String? = nil
+                if let data = self.selectedImageData {
+                    imageUrl = try await self.uploadNewsImage(data: data)
+                }
 
-                Task { [weak self] in
-                    guard let self else { return }
+                // 4) Insert
+                let row = NewsInsert(
+                    title: title,
+                    short_text: title,
+                    description: description,
+                    image_url: imageUrl,
+                    author_type: "user",
+                    profile_id: profileId,
+                    shelter_id: nil
+                )
 
-                    do {
-                        // 1) Email usuario logueado
-                        let session = try await SupabaseManager.shared.client.auth.session
-                        let email = session.user.email ?? ""
-                        if email.isEmpty {
-                            await MainActor.run {
-                                self.buttonPost.isEnabled = true
-                            }
-                            return
-                        }
+                _ = try await SupabaseManager.shared.client
+                    .from("news")
+                    .insert(row)
+                    .execute()
 
-                        // 2) Sacar profile_id
-                        guard let dto = try await profileService.fetchMyProfile(email: email) else {
-                            await MainActor.run {
-                                self.buttonPost.isEnabled = true
-                            }
-                            return
-                        }
+                // ✅ Éxito -> alerta -> volver a NewsController
+                await MainActor.run {
+                    self.buttonPost.isEnabled = true
 
-                        // ⚠️ Necesitas el ID del perfil. Si tu ProfileDTO no lo trae, añade `id` al select.
-                        // En ProfileService: select("id, name, email, avatar_url")
-                        // Y en ProfileDTO: let id: UUID?
-                        guard let profileId = dto.id else {
-                            await MainActor.run { self.buttonPost.isEnabled = true }
-                            print("❌ dto.id es nil (no viene en el select)")
-                            return
-                        
-                        }
-
-                        // 3) Subir imagen (opcional)
-                        var imageUrl: String? = nil
-                        if let data = self.selectedImageData {
-                            imageUrl = try await self.uploadNewsImage(data: data)
-                        }
-
-                        // 4) Insert en news
-                        let row = NewsInsert(
-                            title: shortText,        // (por ahora igual)
-                            short_text: shortText,   // ✅ el “título” es short_text
-                            description: description,
-                            image_url: imageUrl,
-                            author_type: "user",
-                            profile_id: profileId,
-                            shelter_id: nil
-                        )
-
-                        _ = try await SupabaseManager.shared.client
-                            .from("news")
-                            .insert(row)
-                            .execute()
-
-                        await MainActor.run {
-                            self.buttonPost.isEnabled = true
-                            
-                        }
-
-                    } catch {
-                        print("❌ post news error:", error)
-                        await MainActor.run {
-                            self.buttonPost.isEnabled = true
-                           
-                        }
+                    self.showAlert(title: "Publicado ✅", message: "Tu publicación se ha creado correctamente.") {
+                        self.navigationController?.popViewController(animated: true)
                     }
                 }
+
+            } catch {
+                print("❌ post news error:", error)
+                await MainActor.run {
+                    self.buttonPost.isEnabled = true
+                    self.showAlert(title: "Error", message: "No se pudo publicar. Inténtalo de nuevo.")
+                }
+            }
+        }
+    }
+
+    // ✅ helper
+    private func showAlert(title: String, message: String, onOk: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in onOk?() })
+        present(alert, animated: true)
     }
     
     @IBAction func backClicked(_ sender: Any) {

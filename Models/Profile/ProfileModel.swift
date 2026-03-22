@@ -23,6 +23,14 @@ struct ProfileModel {
     }
 }
 
+struct ProfileInsert: Encodable {
+    let id: String
+    let name: String
+    let email: String
+    let points: Int
+    let avatar_url: String?
+}
+
 enum ProfileRole {
     case user
     case worker

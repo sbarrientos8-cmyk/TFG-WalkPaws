@@ -259,6 +259,7 @@ final class DropdownFieldView: UIView {
     private let iconView = UIImageView()
     private let textField = UITextField()
     private let chevronView = UIImageView(image: UIImage(systemName: "chevron.down"))
+    private var isInteractingWithDropdown = false
 
     private let tableView = UITableView()
     private var tableHeightConstraint: NSLayoutConstraint!
@@ -363,6 +364,8 @@ final class DropdownFieldView: UIView {
 
         tableView.dataSource = self
         tableView.delegate = self
+        
+        tableView.keyboardDismissMode = .onDrag
 
         // IMPORTANTE: el dropdown NO va dentro del campo, va al superview (para que "flote")
         // Si el campo aún no tiene superview en init, lo insertamos en didMoveToSuperview.
@@ -421,9 +424,13 @@ extension DropdownFieldView: UITextFieldDelegate {
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        // Pequeño delay por si justo se está tocando una celda
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { [weak self] in
-            self?.hideDropdown()
+            guard let self else { return }
+
+            // ✅ Si el usuario está tocando/scrolleando el dropdown, NO lo escondas
+            if self.isInteractingWithDropdown { return }
+
+            self.hideDropdown()
         }
     }
 
@@ -457,5 +464,19 @@ extension DropdownFieldView: UITableViewDataSource, UITableViewDelegate {
         // cerrar
         textField.resignFirstResponder()
         hideDropdown()
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        isInteractingWithDropdown = true
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            isInteractingWithDropdown = false
+        }
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        isInteractingWithDropdown = false
     }
 }

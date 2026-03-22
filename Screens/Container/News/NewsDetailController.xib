@@ -118,14 +118,17 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ier-Gt-bVM" userLabel="View Image">
-                                    <rect key="frame" x="10" y="129.33333333333331" width="373" height="425.99999999999994"/>
+                                    <rect key="frame" x="10" y="129.33333333333331" width="373" height="338"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0aQ-6g-erV">
-                                    <rect key="frame" x="10" y="129.33333333333331" width="373" height="425.99999999999994"/>
+                                    <rect key="frame" x="10" y="129.33333333333331" width="373" height="338"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="0aQ-6g-erV" secondAttribute="height" multiplier="373:338" priority="999" id="aXK-Gh-jzt"/>
+                                    </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y8A-eo-fD4" userLabel="Label Description">
-                                    <rect key="frame" x="10" y="567.33333333333326" width="373" height="20.333333333333371"/>
+                                    <rect key="frame" x="10" y="479.33333333333331" width="373" height="20.333333333333314"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -164,20 +167,19 @@
                 </scrollView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" red="0.97647058823529409" green="0.97254901960784312" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
                 <constraint firstItem="fCL-o6-6Xe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="1KM-ET-5jf"/>
                 <constraint firstItem="lNa-xc-3zW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="34E-2e-QGO"/>
                 <constraint firstItem="fCL-o6-6Xe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="C5h-Wx-aEb"/>
                 <constraint firstAttribute="trailing" secondItem="lNa-xc-3zW" secondAttribute="trailing" id="EKZ-BF-E5Y"/>
                 <constraint firstAttribute="bottom" secondItem="lNa-xc-3zW" secondAttribute="bottom" id="GsM-vv-Om0"/>
-                <constraint firstItem="0aQ-6g-erV" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.5" id="PUB-qN-bD8"/>
                 <constraint firstItem="fCL-o6-6Xe" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.12" id="b1I-Uf-vdE"/>
                 <constraint firstItem="lNa-xc-3zW" firstAttribute="top" secondItem="fCL-o6-6Xe" secondAttribute="bottom" id="he7-eK-mP6"/>
                 <constraint firstItem="CO8-hZ-1D1" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.15" id="jxF-u9-hEq"/>
                 <constraint firstAttribute="trailing" secondItem="fCL-o6-6Xe" secondAttribute="trailing" id="pL2-6b-v8D"/>
             </constraints>
-            <point key="canvasLocation" x="138" y="119"/>
+            <point key="canvasLocation" x="136.64122137404578" y="118.30985915492958"/>
         </view>
     </objects>
     <resources>

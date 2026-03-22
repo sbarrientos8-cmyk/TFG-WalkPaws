@@ -174,3 +174,14 @@ func fetchMyPoints() async throws -> Int {
     return dto.points
 }
 
+func fetchMyProfile(email: String) async throws -> ProfileDTO? {
+        let rows: [ProfileDTO] = try await SupabaseManager.shared.client
+            .from("profiles")
+            .select("id, name, email, avatar_url, points")  // ✅ AÑADE points
+            .eq("email", value: email)
+            .limit(1)
+            .execute()
+            .value
+
+        return rows.first
+    }

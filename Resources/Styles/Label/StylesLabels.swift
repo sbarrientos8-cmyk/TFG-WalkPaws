@@ -36,5 +36,6 @@ class StylesLabel
     
     static let alertTitle = StyleLabel(font: Fonts.figtreeMedium(20), color: Colors.greenDark)
     static let alertDescription = StyleLabel(font: Fonts.figtreeRegular(14), color: Colors.main)
-                                       
+                                
+    static let donationComplete = StyleLabel(font: Fonts.plusJakartaSansExtraBold(17), color: Colors.black)
 }

@@ -125,6 +125,7 @@
                 <outlet property="labelTextShort" destination="9ax-We-0Zh" id="VC0-VA-JIH"/>
                 <outlet property="labelTime" destination="dfs-NG-mDz" id="Twy-1K-rAe"/>
                 <outlet property="viewBackground" destination="F33-0X-VpF" id="xbv-aa-f4a"/>
+                <outlet property="viewLine" destination="lyd-BZ-gd6" id="HyD-zu-JMa"/>
                 <outlet property="viewNew" destination="UjJ-m9-p1s" id="MBs-XQ-bAw"/>
             </connections>
             <point key="canvasLocation" x="316.03053435114504" y="116.19718309859155"/>

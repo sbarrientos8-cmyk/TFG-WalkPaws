@@ -25,18 +25,18 @@ class LoginController: UIViewController
     {
         super.viewDidLoad()
         
-        labelTitle.config(text: "Iniciar Sesión", style: StylesLabel.title)
+        labelTitle.config(text: String(localized: "log_in"), style: StylesLabel.title)
         
         fieldEmail.setText("sofybr29@gmail.com")
         fieldPassword.setText("holahola1")
         
-        fieldEmail.config(image: UIImage(named: "email"), placeholder: "Correo electrónico")
-        fieldPassword.config(image: UIImage(named: "lock"), placeholder: "Contraseña", isSecure: true)
-        labelForgetPassword.config(text: "He olvidado mi contraseña", style: StylesLabel.subtitle)
+        fieldEmail.config(image: UIImage(named: String(localized: "log_in")), placeholder: String(localized: "email"))
+        fieldPassword.config(image: UIImage(named: "lock"), placeholder: String(localized: "password"), isSecure: true)
+        labelForgetPassword.config(text: String(localized: "forgot_password"), style: StylesLabel.subtitle)
          
-        buttonLogin.config(text: "Iniciar Sesión", style: StylesButton.primary)
+        buttonLogin.config(text: String(localized: "log_in"), style: StylesButton.primary)
         buttonLogin.applyShadow()
-        labelRegister.config(text: "¿No tienes cuenta? Registrate", style: StylesLabel.subtitle)
+        labelRegister.config(text: String(localized: "dont_have_account_sign_up"), style: StylesLabel.subtitle)
         
         hideKeyboardWhenTappedAround()
     }

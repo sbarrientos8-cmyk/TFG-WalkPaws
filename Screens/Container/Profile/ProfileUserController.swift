@@ -130,20 +130,41 @@ class ProfileUserController: UIViewController, UITableViewDataSource, UITableVie
     }
 
     private func logout() {
-        print("✅ logout tapped")
-        Task { [weak self] in
-            guard let self else { return }
-            do {
-                try await SupabaseManager.shared.client.auth.signOut()
+        let alert = UIAlertController(
+            title: "Cerrar sesión",
+            message: "¿Seguro que quieres cerrar sesión?",
+            preferredStyle: .alert
+        )
 
-                await MainActor.run {
-                    let login = LoginController(nibName: "LoginController", bundle: nil)
-                    self.navigationController?.setViewControllers([login], animated: true)
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
+
+        alert.addAction(UIAlertAction(title: "Cerrar sesión", style: .destructive) { [weak self] _ in
+            guard let self else { return }
+
+            Task {
+                do {
+                    try await SupabaseManager.shared.client.auth.signOut()
+
+                    await MainActor.run {
+                        let login = LoginController(nibName: "LoginController", bundle: nil)
+                        self.navigationController?.setViewControllers([login], animated: true)
+                    }
+                } catch {
+                    await MainActor.run {
+                        let err = UIAlertController(
+                            title: "Error",
+                            message: "No se pudo cerrar sesión. Inténtalo de nuevo.",
+                            preferredStyle: .alert
+                        )
+                        err.addAction(UIAlertAction(title: "OK", style: .default))
+                        self.present(err, animated: true)
+                    }
+                    print("❌ logout error:", error)
                 }
-            } catch {
-                print("❌ logout error:", error)
             }
-        }
+        })
+
+        present(alert, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat

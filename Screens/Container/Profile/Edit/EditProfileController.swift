@@ -8,6 +8,7 @@
 import UIKit
 import Supabase
 import PhotosUI
+import SDWebImage
 
 final class EditProfileController: UIViewController {
     
@@ -39,20 +40,20 @@ final class EditProfileController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        labelTitleNav.config(text: "Editar Imagen", style: StylesLabel.titleNav)
+        labelTitleNav.config(text: String(localized: "edit_image"), style: StylesLabel.titleNav)
         
-        buttonSetImage.config(text: "Cambiar Imagen", style: StylesButton.secondaryGreen)
+        buttonSetImage.config(text: String(localized: "change_image"), style: StylesButton.secondaryGreen)
+
+        labelName.config(text: String(localized: "name_label"), style: StylesLabel.subtitle)
+        fieldName.config(image: UIImage(named: ""), placeholder: String(localized: "new_name"))
         
-        labelName.config(text: "Nombre:", style: StylesLabel.subtitle)
-        fieldName.config(image: UIImage(named: ""), placeholder: "Nuevo nombre")
+        labelGmail.config(text: String(localized: "email_label"), style: StylesLabel.subtitle)
+        fieldGmail.config(image: UIImage(named: ""), placeholder: String(localized: "new_email"))
         
-        labelGmail.config(text: "Gmail:", style: StylesLabel.subtitle)
-        fieldGmail.config(image: UIImage(named: ""), placeholder: "Nuevo gmail")
+        labelPassword.config(text: String(localized: "password_label"), style: StylesLabel.subtitle)
+        fieldPassword.config(image: UIImage(named: ""), placeholder: String(localized: "new_password"))
         
-        labelPassword.config(text: "Contraseña:", style: StylesLabel.subtitle)
-        fieldPassword.config(image: UIImage(named: ""), placeholder: "Nueva contraseña")
-        
-        buttonEdit.config(text: "Guardar cambios", style: StylesButton.primary)
+        buttonEdit.config(text: String(localized: "save_changes"), style: StylesButton.primary)
         
         loadProfile()
         hideKeyboardWhenTappedAround()
@@ -167,7 +168,10 @@ final class EditProfileController: UIViewController {
                 var avatarUrl: String? = currentProfile?.avatar_url
 
                 if let data = selectedAvatarData {
-                    avatarUrl = try await uploadAvatar(data: data, userId: userId)
+                    let uploaded = try await uploadAvatar(data: data, userId: userId)
+
+                    // cache-buster para que SDWebImage no use la misma cache
+                    avatarUrl = uploaded + "?v=\(Int(Date().timeIntervalSince1970))"
                 }
 
                 // Si más adelante quieres subirlo:
@@ -187,6 +191,26 @@ final class EditProfileController: UIViewController {
                     .eq("id", value: userId.uuidString)
                     .execute()
 
+                await MainActor.run {
+                    if let avatarUrl, let url = URL(string: avatarUrl) {
+                        SDImageCache.shared.removeImage(forKey: url.absoluteString, cacheType: .all)
+                        self.imageProfile.sd_setImage(
+                            with: url,
+                            placeholderImage: UIImage(systemName: "person.circle"),
+                            options: [.refreshCached]
+                        )
+                    }
+
+                    self.showAlert(
+                        title: String(localized: "saved"),
+                        message: String(localized: "changes_saved_successfully")
+                    ) {
+                        // opcional: volver atrás al perfil
+                        let vc = ProfileUserController(nibName: "ProfileUserController", bundle: nil)
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
+
                 print("✅ Perfil actualizado")
                 self.loadProfile()
 
@@ -201,7 +225,11 @@ final class EditProfileController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    
+    private func showAlert(title: String, message: String, onOk: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: String(localized: "ok"), style: .default) { _ in onOk?() })
+        present(alert, animated: true)
+    }
 }
 
 extension EditProfileController: PHPickerViewControllerDelegate {

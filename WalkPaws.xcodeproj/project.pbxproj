@@ -92,6 +92,7 @@
 		D551FDAD2F40A307003A3F76 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D551FDAC2F40A304003A3F76 /* View.swift */; };
 		D551FDE32F436702003A3F76 /* BottomBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = D551FDE22F436702003A3F76 /* BottomBar.xib */; };
 		D551FDE42F436702003A3F76 /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D551FDE12F436702003A3F76 /* BottomBar.swift */; };
+		D56F932C2F705EBF0099D8BA /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D56F932B2F705EBF0099D8BA /* Localizable.xcstrings */; };
 		D57F881B2F44BB4E008507FB /* home_icn.png in Resources */ = {isa = PBXBuildFile; fileRef = D57F881A2F44BB4E008507FB /* home_icn.png */; };
 		D57F881D2F44BB5E008507FB /* home_icn_white.png in Resources */ = {isa = PBXBuildFile; fileRef = D57F881C2F44BB5E008507FB /* home_icn_white.png */; };
 		D57F88212F44CDF3008507FB /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F881F2F44CDF3008507FB /* HomeController.swift */; };
@@ -170,6 +171,7 @@
 		D5F8F3242F5A15ED00223C5E /* footprint_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = D5F8F3232F5A15ED00223C5E /* footprint_empty.png */; };
 		D5F8F3272F5A167E00223C5E /* new_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = D5F8F3262F5A167E00223C5E /* new_empty.png */; };
 		D5F8F3292F5A1A3B00223C5E /* walking_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = D5F8F3282F5A1A3B00223C5E /* walking_empty.png */; };
+		D5F8F32C2F5A29F900223C5E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D5F8F32B2F5A29F900223C5E /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -274,6 +276,9 @@
 		D551FDAC2F40A304003A3F76 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		D551FDE12F436702003A3F76 /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
 		D551FDE22F436702003A3F76 /* BottomBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomBar.xib; sourceTree = "<group>"; };
+		D56F932B2F705EBF0099D8BA /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		D56F932D2F705FBC0099D8BA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		D56F932E2F705FBC0099D8BA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D57F881A2F44BB4E008507FB /* home_icn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icn.png; sourceTree = "<group>"; };
 		D57F881C2F44BB5E008507FB /* home_icn_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icn_white.png; sourceTree = "<group>"; };
 		D57F881F2F44CDF3008507FB /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -375,6 +380,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D57F88962F47C657008507FB /* SDWebImage in Frameworks */,
+				D5F8F32C2F5A29F900223C5E /* SnapKit in Frameworks */,
 				D542D4572F2A700B00E537AF /* Supabase in Frameworks */,
 				D5F8F3162F58E11800223C5E /* Auth in Frameworks */,
 			);
@@ -668,6 +674,14 @@
 			path = Bottom;
 			sourceTree = "<group>";
 		};
+		D56F932A2F705E990099D8BA /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				D56F932B2F705EBF0099D8BA /* Localizable.xcstrings */,
+			);
+			path = Language;
+			sourceTree = "<group>";
+		};
 		D57F88812F47A7C7008507FB /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -864,6 +878,7 @@
 		D599026C2F26872A0029FB34 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D56F932A2F705E990099D8BA /* Language */,
 				D523AB232F4F8DCB008FD8CE /* Email */,
 				D57F88922F47C542008507FB /* Image Loader */,
 				D57F88812F47A7C7008507FB /* API */,
@@ -1069,6 +1084,7 @@
 				D542D4562F2A700B00E537AF /* Supabase */,
 				D57F88952F47C657008507FB /* SDWebImage */,
 				D5F8F3152F58E11800223C5E /* Auth */,
+				D5F8F32B2F5A29F900223C5E /* SnapKit */,
 			);
 			productName = WalkPaws;
 			productReference = D59902122F2400840029FB34 /* WalkPaws.app */;
@@ -1149,12 +1165,14 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = D59902092F2400840029FB34;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				D542D4512F2A6F5900E537AF /* XCRemoteSwiftPackageReference "supabase-swift" */,
 				D57F88912F47C4EE008507FB /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				D5F8F32A2F5A29DC00223C5E /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D59902132F2400840029FB34 /* Products */;
@@ -1241,6 +1259,7 @@
 				D5F8F31D2F5A013500223C5E /* points_award.png in Resources */,
 				D599025F2F2406A80029FB34 /* logo_splash.png in Resources */,
 				D57F88222F44CDF3008507FB /* HomeController.xib in Resources */,
+				D56F932C2F705EBF0099D8BA /* Localizable.xcstrings in Resources */,
 				D542D4442F290A0100E537AF /* ModifyPasswordIntroController.xib in Resources */,
 				D5AB783C2F438D7900831D4F /* user_icn_white.png in Resources */,
 				D5D734D92F55F91C00984BC1 /* backgroundWalk.png in Resources */,
@@ -1394,6 +1413,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D599024B2F2400BB0029FB34 /* Base */,
+				D56F932E2F705FBC0099D8BA /* es */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1402,6 +1422,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D599024D2F2400BB0029FB34 /* Base */,
+				D56F932D2F705FBC0099D8BA /* es */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1474,6 +1495,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1528,6 +1550,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1537,6 +1560,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1584,6 +1608,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1714,6 +1739,14 @@
 				minimumVersion = 5.21.6;
 			};
 		};
+		D5F8F32A2F5A29DC00223C5E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1731,6 +1764,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D542D4512F2A6F5900E537AF /* XCRemoteSwiftPackageReference "supabase-swift" */;
 			productName = Auth;
+		};
+		D5F8F32B2F5A29F900223C5E /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5F8F32A2F5A29DC00223C5E /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

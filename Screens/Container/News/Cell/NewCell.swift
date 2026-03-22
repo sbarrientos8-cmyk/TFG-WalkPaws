@@ -18,7 +18,13 @@ class NewCell: UITableViewCell {
     @IBOutlet weak var viewNew: UIView!
     @IBOutlet weak var imageNews: UIImageView!
 
+    @IBOutlet weak var viewLine: UIView!
     @IBOutlet weak var buttonTrash: UIButton!
+    
+    private var lineTrailingToImageConstraint: NSLayoutConstraint?
+    private var lineTrailingToBackgroundConstraint: NSLayoutConstraint?
+    private var shortTrailingToImageConstraint: NSLayoutConstraint?
+    private var shortTrailingToBackgroundConstraint: NSLayoutConstraint?
     
     var onTrashTapped: (() -> Void)?
 
@@ -65,7 +71,9 @@ class NewCell: UITableViewCell {
         }
 
         // Imagen noticia
-        if let imageUrl = news.imageUrl, let url = URL(string: imageUrl) {
+        if let imageUrl = news.imageUrl,
+           !imageUrl.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+           let url = URL(string: imageUrl) {
 
             imageNews.isHidden = false
             imageNews.sd_setImage(
@@ -75,8 +83,79 @@ class NewCell: UITableViewCell {
             )
 
         } else {
+            imageNews.sd_cancelCurrentImageLoad()
+            imageNews.image = nil
             imageNews.isHidden = true
+            
+            setLineTrailingToBackground()
+            setShortTrailingToBackground()
         }
+    }
+    
+    private func findShortTrailingToImageConstraint() -> NSLayoutConstraint? {
+        let all = contentView.constraints + viewBackground.constraints + constraints
+
+        return all.first(where: { c in
+            guard let first = c.firstItem as? UIView,
+                  let second = c.secondItem as? UIView else { return false }
+
+            return first == labelTextShort &&
+                   c.firstAttribute == .trailing &&
+                   second == imageNews &&
+                   c.secondAttribute == .leading
+        })
+    }
+
+    private func setShortTrailingToBackground() {
+        if shortTrailingToImageConstraint == nil {
+            shortTrailingToImageConstraint = findShortTrailingToImageConstraint()
+        }
+        shortTrailingToImageConstraint?.isActive = false
+
+        if shortTrailingToBackgroundConstraint == nil {
+            shortTrailingToBackgroundConstraint = labelTextShort.trailingAnchor.constraint(
+                equalTo: viewBackground.trailingAnchor,
+                constant: -10
+            )
+        }
+        shortTrailingToBackgroundConstraint?.isActive = true
+    }
+    
+    private func findTrailingToImageConstraint() -> NSLayoutConstraint? {
+        // Busca una constraint donde:
+        // firstItem = viewLine, firstAttr = trailing
+        // secondItem = imageNews, secondAttr = leading
+        let all = contentView.constraints + viewBackground.constraints + constraints
+
+        return all.first(where: { c in
+            guard let first = c.firstItem as? UIView,
+                  let second = c.secondItem as? UIView else { return false }
+
+            return first == viewLine &&
+                   c.firstAttribute == .trailing &&
+                   second == imageNews &&
+                   c.secondAttribute == .leading
+        })
+    }
+
+    private func setLineTrailingToBackground() {
+        // 1) Apaga la constraint vieja (trailing a la imagen)
+        if lineTrailingToImageConstraint == nil {
+            lineTrailingToImageConstraint = findTrailingToImageConstraint()
+        }
+        lineTrailingToImageConstraint?.isActive = false
+
+        // 2) Crea/activa trailing a background (-10)
+        if lineTrailingToBackgroundConstraint == nil {
+            lineTrailingToBackgroundConstraint = viewLine.trailingAnchor.constraint(
+                equalTo: viewBackground.trailingAnchor,
+                constant: -10
+            )
+        }
+        lineTrailingToBackgroundConstraint?.isActive = true
+
+        setNeedsLayout()
+        layoutIfNeeded()
     }
 
     private func formattedDate(_ date: Date?) -> String {

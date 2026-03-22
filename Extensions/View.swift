@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 extension UIView {
 
@@ -39,6 +40,7 @@ extension UIView {
         }
         return nil
     }
+
 }
 
 extension UIViewController {
@@ -82,5 +84,45 @@ open class CircleImageView: UIImageView {
 
         let side = min(bounds.width, bounds.height)
         layer.cornerRadius = side / 2
+    }
+}
+
+
+extension UIView
+{
+    func findConstraint(layoutAttribute: NSLayoutConstraint.Attribute) -> NSLayoutConstraint?
+    {
+        if let constraints = superview?.constraints
+        {
+            for constraint in constraints where itemMatch(constraint: constraint, layoutAttribute: layoutAttribute)
+            {
+                return constraint
+            }
+        }
+        
+        return nil
+    }
+
+    func itemMatch(constraint: NSLayoutConstraint, layoutAttribute: NSLayoutConstraint.Attribute) -> Bool
+    {
+        let firstItemMatch = constraint.firstItem as? UIView == self && constraint.firstAttribute == layoutAttribute
+        let secondItemMatch = constraint.secondItem as? UIView == self && constraint.secondAttribute == layoutAttribute
+        
+        return firstItemMatch || secondItemMatch
+    }
+
+    
+    func removeVertical()
+    {
+        self.isHidden = true
+        self.findConstraint(layoutAttribute: .top)?.constant = 0
+        self.snp.remakeConstraints { $0.height.equalTo(0) }
+    }
+    
+    func removeHorizontal()
+    {
+        self.isHidden = true
+        self.findConstraint(layoutAttribute: .trailing)?.constant = 0
+        self.snp.remakeConstraints { $0.width.equalTo(0) }
     }
 }

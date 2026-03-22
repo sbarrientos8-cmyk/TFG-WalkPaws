@@ -104,11 +104,11 @@ class DogController: UIViewController,
                                style: StylesButton.secondaryGreen2)
 
             // Normal NO seleccionado
-            buttonNormal.config(text: buttonNormal.title(for: .normal) ?? "Normales",
+            buttonNormal.config(text: buttonNormal.title(for: .normal) ?? "Estables",
                                 style: StylesButton.secondaryWhite2)
         } else {
             // Normal seleccionado
-            buttonNormal.config(text: buttonNormal.title(for: .normal) ?? "Normales",
+            buttonNormal.config(text: buttonNormal.title(for: .normal) ?? "Estables",
                                 style: StylesButton.secondaryGreen2)
 
             // Needy NO seleccionado
