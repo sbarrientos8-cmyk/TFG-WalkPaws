@@ -24,7 +24,7 @@ class ListShelterController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchField.config(placeholder: "Buscar refugio, ciudad...")
+        searchField.config(placeholder: L10n.tr("search_shelter_city"))
         searchField.onTextChange { [weak self] text in
             self?.applyFilter(text)
         }
@@ -84,7 +84,7 @@ class ListShelterController: UIViewController, UITableViewDataSource, UITableVie
             } catch {
                 await MainActor.run {
                     self.loading.stopAnimating()
-                    self.emptyLabel.text = "Error cargando refugios."
+                    self.emptyLabel.text = L10n.tr("error_loading_shelters")
                     self.emptyLabel.isHidden = false
                 }
                 print("❌ Error cargando shelters:", error)
@@ -103,7 +103,7 @@ class ListShelterController: UIViewController, UITableViewDataSource, UITableVie
     }
 
     private func setupEmptyState() {
-        emptyLabel.text = "No hay refugios disponibles."
+        emptyLabel.text = L10n.tr("no_shelters_available")
         emptyLabel.textAlignment = .center
         emptyLabel.numberOfLines = 0
         emptyLabel.isHidden = true
@@ -131,7 +131,9 @@ class ListShelterController: UIViewController, UITableViewDataSource, UITableVie
             }
         }
         
-        emptyLabel.text = q.isEmpty ? "No hay refugios disponibles." : "No hay resultados para “\(text)”"
+        emptyLabel.text = q.isEmpty
+            ? L10n.tr("no_shelters_available")
+            : String(format: L10n.tr("no_results_for"), text)
         emptyLabel.isHidden = !shelters.isEmpty
 
         tableView.reloadData()

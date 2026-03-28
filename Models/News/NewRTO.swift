@@ -8,10 +8,8 @@
 import Foundation
 
 struct NewsRowDTO: Decodable {
-
     let id: String
     let title: String
-    let short_text: String
     let description: String
     let image_url: String?
     let author_type: String
@@ -19,8 +17,12 @@ struct NewsRowDTO: Decodable {
     let shelter_id: String?
     let created_at: String
 
+    let title_en: String?
+    let description_en: String?
+
     let profile_name: String?
     let avatar_url: String?
     let role: String?
     let shelter_name: String?
+    let shelter_photo_url: String?
 }

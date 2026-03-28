@@ -79,7 +79,7 @@ final class MyWalkCell: UITableViewCell {
         labelKm.text = String(format: "%.2f km", walk.distance_km)
 
         // Puntos
-        labelPoints.text = "\(walk.points_earned) puntos"
+        labelPoints.text = "\(walk.points_earned) \(L10n.tr("points"))"
 
         // Imagen perro
         if let dogPhotoURL, let url = URL(string: dogPhotoURL) {

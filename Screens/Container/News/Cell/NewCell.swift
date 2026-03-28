@@ -17,18 +17,19 @@ class NewCell: UITableViewCell {
     @IBOutlet weak var labelTextShort: UILabel!
     @IBOutlet weak var viewNew: UIView!
     @IBOutlet weak var imageNews: UIImageView!
-
     @IBOutlet weak var viewLine: UIView!
     @IBOutlet weak var buttonTrash: UIButton!
-    
+
     private var lineTrailingToImageConstraint: NSLayoutConstraint?
     private var lineTrailingToBackgroundConstraint: NSLayoutConstraint?
     private var shortTrailingToImageConstraint: NSLayoutConstraint?
     private var shortTrailingToBackgroundConstraint: NSLayoutConstraint?
-    
+
+    private let profileLoadingIndicator = UIActivityIndicatorView(style: .medium)
+    private let newsLoadingIndicator = UIActivityIndicatorView(style: .medium)
+
     var onTrashTapped: (() -> Void)?
 
-    
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -37,7 +38,11 @@ class NewCell: UITableViewCell {
         labelTextShort.config(text: "", style: StylesLabel.subtitleGreen)
 
         imageNews.layer.cornerRadius = 5
+        imageNews.clipsToBounds = true
+
         viewBackground.applyCardStyle()
+
+        setupLoadingIndicators()
     }
 
     override func prepareForReuse() {
@@ -46,52 +51,104 @@ class NewCell: UITableViewCell {
         imageProfile.sd_cancelCurrentImageLoad()
         imageNews.sd_cancelCurrentImageLoad()
 
-        imageProfile.image = UIImage(systemName: "person.circle")
+        imageProfile.image = nil
         imageNews.image = nil
+
+        profileLoadingIndicator.stopAnimating()
+        newsLoadingIndicator.stopAnimating()
+
         imageNews.isHidden = false
         buttonTrash.isHidden = true
         onTrashTapped = nil
+
+        shortTrailingToBackgroundConstraint?.isActive = false
+        lineTrailingToBackgroundConstraint?.isActive = false
+        shortTrailingToImageConstraint?.isActive = true
+        lineTrailingToImageConstraint?.isActive = true
+    }
+
+    private func setupLoadingIndicators() {
+        profileLoadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        profileLoadingIndicator.hidesWhenStopped = true
+        imageProfile.addSubview(profileLoadingIndicator)
+
+        newsLoadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        newsLoadingIndicator.hidesWhenStopped = true
+        imageNews.addSubview(newsLoadingIndicator)
+
+        NSLayoutConstraint.activate([
+            profileLoadingIndicator.centerXAnchor.constraint(equalTo: imageProfile.centerXAnchor),
+            profileLoadingIndicator.centerYAnchor.constraint(equalTo: imageProfile.centerYAnchor),
+
+            newsLoadingIndicator.centerXAnchor.constraint(equalTo: imageNews.centerXAnchor),
+            newsLoadingIndicator.centerYAnchor.constraint(equalTo: imageNews.centerYAnchor)
+        ])
     }
 
     func config(with news: NewsModel) {
-
         labelName.text = news.authorName
-        labelTextShort.text = news.shortText
+        labelTextShort.text = news.displayTitle
         labelTime.text = formattedDate(news.createdAt)
 
-        // Imagen perfil
-        if let avatarUrl = news.authorAvatarUrl, let url = URL(string: avatarUrl) {
+        if let avatarUrl = news.authorAvatarUrl,
+           let url = URL(string: avatarUrl) {
+
+            imageProfile.image = nil
+            profileLoadingIndicator.startAnimating()
+
             imageProfile.sd_setImage(
                 with: url,
-                placeholderImage: UIImage(systemName: "person.circle"),
+                placeholderImage: nil,
                 options: [.continueInBackground, .retryFailed, .scaleDownLargeImages]
-            )
+            ) { [weak self] _, _, _, _ in
+                self?.profileLoadingIndicator.stopAnimating()
+            }
+
         } else {
-            imageProfile.image = UIImage(systemName: "person.circle")
+            imageProfile.image = nil
+            profileLoadingIndicator.stopAnimating()
         }
 
-        // Imagen noticia
         if let imageUrl = news.imageUrl,
            !imageUrl.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
            let url = URL(string: imageUrl) {
 
             imageNews.isHidden = false
+            imageNews.image = nil
+            newsLoadingIndicator.startAnimating()
+
+            shortTrailingToBackgroundConstraint?.isActive = false
+            lineTrailingToBackgroundConstraint?.isActive = false
+
+            if shortTrailingToImageConstraint == nil {
+                shortTrailingToImageConstraint = findShortTrailingToImageConstraint()
+            }
+            if lineTrailingToImageConstraint == nil {
+                lineTrailingToImageConstraint = findTrailingToImageConstraint()
+            }
+
+            shortTrailingToImageConstraint?.isActive = true
+            lineTrailingToImageConstraint?.isActive = true
+
             imageNews.sd_setImage(
                 with: url,
-                placeholderImage: UIImage(systemName: "photo"),
+                placeholderImage: nil,
                 options: [.continueInBackground, .retryFailed, .scaleDownLargeImages]
-            )
+            ) { [weak self] _, _, _, _ in
+                self?.newsLoadingIndicator.stopAnimating()
+            }
 
         } else {
             imageNews.sd_cancelCurrentImageLoad()
             imageNews.image = nil
             imageNews.isHidden = true
-            
+            newsLoadingIndicator.stopAnimating()
+
             setLineTrailingToBackground()
             setShortTrailingToBackground()
         }
     }
-    
+
     private func findShortTrailingToImageConstraint() -> NSLayoutConstraint? {
         let all = contentView.constraints + viewBackground.constraints + constraints
 
@@ -120,11 +177,8 @@ class NewCell: UITableViewCell {
         }
         shortTrailingToBackgroundConstraint?.isActive = true
     }
-    
+
     private func findTrailingToImageConstraint() -> NSLayoutConstraint? {
-        // Busca una constraint donde:
-        // firstItem = viewLine, firstAttr = trailing
-        // secondItem = imageNews, secondAttr = leading
         let all = contentView.constraints + viewBackground.constraints + constraints
 
         return all.first(where: { c in
@@ -139,13 +193,11 @@ class NewCell: UITableViewCell {
     }
 
     private func setLineTrailingToBackground() {
-        // 1) Apaga la constraint vieja (trailing a la imagen)
         if lineTrailingToImageConstraint == nil {
             lineTrailingToImageConstraint = findTrailingToImageConstraint()
         }
         lineTrailingToImageConstraint?.isActive = false
 
-        // 2) Crea/activa trailing a background (-10)
         if lineTrailingToBackgroundConstraint == nil {
             lineTrailingToBackgroundConstraint = viewLine.trailingAnchor.constraint(
                 equalTo: viewBackground.trailingAnchor,
@@ -163,27 +215,27 @@ class NewCell: UITableViewCell {
 
         let now = Date()
         let seconds = now.timeIntervalSince(date)
-        if seconds < 0 { return "ahora" }
+        if seconds < 0 { return L10n.tr("now") }
 
         let oneWeek: TimeInterval = 7 * 24 * 60 * 60
         if seconds >= oneWeek {
             let df = DateFormatter()
-            df.locale = Locale(identifier: "es_ES")
+            df.locale = Locale.current
             df.timeZone = .current
             df.dateFormat = "dd/MM/yyyy"
             return df.string(from: date)
         } else {
             let formatter = RelativeDateTimeFormatter()
-            formatter.locale = Locale(identifier: "es_ES")
+            formatter.locale = Locale.current
             formatter.unitsStyle = .short
             return formatter.localizedString(for: date, relativeTo: now)
         }
     }
-    
+
     func setTrashVisible(_ visible: Bool) {
         buttonTrash.isHidden = !visible
     }
-    
+
     @IBAction func trashClicked(_ sender: Any) {
         onTrashTapped?()
     }

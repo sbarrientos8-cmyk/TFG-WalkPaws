@@ -18,51 +18,65 @@ class DogController: UIViewController,
     @IBOutlet weak var buttonNormal: UIButton!
     @IBOutlet weak var buttonNeedy: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
-
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var viewEmpty: EmptyView!
-    
+
     var shelterId: UUID!
 
     private var allDogs: [DogModel] = []
     private var filteredDogs: [DogModel] = []
-    private var showingNeedy = false   // false = normales (por defecto)
+    private var showingNeedy = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        labelTitleNav.config(text: "Perros", style: StylesLabel.titleNav)
-        searchField.config(placeholder: "Buscar perros")
+        labelTitleNav.config(text: L10n.tr("dogs"), style: StylesLabel.titleNav)
+        searchField.config(placeholder: L10n.tr("search_dogs"))
         searchField.onTextChange { [weak self] text in
             self?.applyFilter(text)
         }
 
-        // Collection setup
         collectionView.dataSource = self
         collectionView.delegate = self
 
         let nib = UINib(nibName: "DogCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: "DogCell")
-        
+
         viewButtons.applyCardStyle(cornerRadius: 20)
-        
         viewEmpty.backgroundColor = Colors.background
 
-        loadDogs()
+        loadingIndicator.hidesWhenStopped = true
+
         showingNeedy = false
         updateTabStyles()
+        loadDogs()
+    }
+
+    private func showLoading() {
+        loadingIndicator.startAnimating()
+        collectionView.isHidden = true
+        viewEmpty.isHidden = true
+    }
+
+    private func hideLoading() {
+        loadingIndicator.stopAnimating()
     }
 
     private func loadDogs() {
         guard let shelterId = shelterId else { return }
 
+        showLoading()
+
         fetchDogsByShelter(shelterId: shelterId.uuidString) { [weak self] models in
             DispatchQueue.main.async {
-                self?.allDogs = models
-                self?.applyFilter()
+                guard let self = self else { return }
+                self.hideLoading()
+                self.allDogs = models
+                self.applyFilter()
             }
         }
     }
-    
+
     private func updateEmptyState() {
         let isEmpty = filteredDogs.isEmpty
 
@@ -73,80 +87,20 @@ class DogController: UIViewController,
             if showingNeedy {
                 viewEmpty.config(
                     image: UIImage(named: "footprint_empty"),
-                    title: "No hay perros que necesiten apoyo",
-                    description: "Ahora mismo no hay perros con necesidades especiales en este refugio."
+                    title: L10n.tr("no_needy_dogs"),
+                    description: L10n.tr( "no_special_needs_dogs_in_shelter")
                 )
-            }else {
+            } else {
                 viewEmpty.config(
                     image: UIImage(named: "footprint_empty"),
-                    title: "No hay perros que necesiten apoyo",
-                    description: "Ahora mismo no hay perros con necesidades especiales en este refugio."
+                    title: L10n.tr("no_stable_dogs"),
+                    description: L10n.tr("no_dogs_available_in_category")
                 )
             }
         }
     }
 
-    private func applyFilter() {
-        if showingNeedy {
-            filteredDogs = allDogs.filter { $0.isDisabled == true }
-        } else {
-            filteredDogs = allDogs.filter { $0.isDisabled == false }
-        }
-        
-        collectionView.reloadData()
-        updateEmptyState()
-    }
-    
-    private func updateTabStyles() {
-        if showingNeedy {
-            // Needy seleccionado
-            buttonNeedy.config(text: buttonNeedy.title(for: .normal) ?? "Necesitan apoyo",
-                               style: StylesButton.secondaryGreen2)
-
-            // Normal NO seleccionado
-            buttonNormal.config(text: buttonNormal.title(for: .normal) ?? "Estables",
-                                style: StylesButton.secondaryWhite2)
-        } else {
-            // Normal seleccionado
-            buttonNormal.config(text: buttonNormal.title(for: .normal) ?? "Estables",
-                                style: StylesButton.secondaryGreen2)
-
-            // Needy NO seleccionado
-            buttonNeedy.config(text: buttonNeedy.title(for: .normal) ?? "Necesitan apoyo",
-                               style: StylesButton.secondaryWhite2)
-        }
-    }
-
-    // MARK: - Buttons
-    @IBAction func dogNormalClicked(_ sender: Any) {
-        showingNeedy = false
-        updateTabStyles()
-        applyFilter(searchField.getText()) // o applyFilter()
-    }
-
-    @IBAction func dogNeedyClicked(_ sender: Any) {
-        showingNeedy = true
-        updateTabStyles()
-        applyFilter(searchField.getText()) // o applyFilter()
-    }
-    
-    private func setSelectedTab(isNeedy: Bool) {
-        if isNeedy {
-            buttonNeedy.isSelected = true
-            buttonNormal.isSelected = false
-        } else {
-            buttonNeedy.isSelected = false
-            buttonNormal.isSelected = true
-        }
-
-        // Si no usas estilos con isSelected, hazlo a mano:
-        buttonNormal.alpha = isNeedy ? 0.5 : 1.0
-        buttonNeedy.alpha = isNeedy ? 1.0 : 0.5
-    }
-    
     private func applyFilter(_ searchText: String? = nil) {
-
-        // 1️⃣ Filtrado por estado (normal / necesitado)
         var baseDogs: [DogModel]
 
         if showingNeedy {
@@ -155,10 +109,10 @@ class DogController: UIViewController,
             baseDogs = allDogs.filter { !$0.isDisabled }
         }
 
-        // 2️⃣ Filtrado por búsqueda
         guard let text = searchText?.trimmingCharacters(in: .whitespacesAndNewlines),
               !text.isEmpty else {
             filteredDogs = baseDogs
+            updateEmptyState()
             collectionView.reloadData()
             return
         }
@@ -175,10 +129,44 @@ class DogController: UIViewController,
         collectionView.reloadData()
     }
 
-    // MARK: - Collection
+    private func updateTabStyles() {
+        if showingNeedy {
+            buttonNeedy.config(
+                text: buttonNeedy.title(for: .normal) ?? L10n.tr( "need_support"),
+                style: StylesButton.secondaryGreen2
+            )
+
+            buttonNormal.config(
+                text: buttonNormal.title(for: .normal) ?? L10n.tr( "stable"),
+                style: StylesButton.secondaryWhite2
+            )
+        } else {
+            buttonNormal.config(
+                text: buttonNormal.title(for: .normal) ?? L10n.tr( "stable"),
+                style: StylesButton.secondaryGreen2
+            )
+
+            buttonNeedy.config(
+                text: buttonNeedy.title(for: .normal) ?? L10n.tr( "need_support"),
+                style: StylesButton.secondaryWhite2
+            )
+        }
+    }
+
+    @IBAction func dogNormalClicked(_ sender: Any) {
+        showingNeedy = false
+        updateTabStyles()
+        applyFilter(searchField.getText())
+    }
+
+    @IBAction func dogNeedyClicked(_ sender: Any) {
+        showingNeedy = true
+        updateTabStyles()
+        applyFilter(searchField.getText())
+    }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return filteredDogs.count
+        filteredDogs.count
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -187,11 +175,11 @@ class DogController: UIViewController,
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: "DogCell",
             for: indexPath
-        ) as? DogCell else { return UICollectionViewCell() }
+        ) as? DogCell else {
+            return UICollectionViewCell()
+        }
 
         let dog = filteredDogs[indexPath.item]
-
-        // En esta pantalla puedes mostrar edad o ciudad, como prefieras:
         cell.config(with: dog, subtitle: .age)
 
         return cell
@@ -211,11 +199,16 @@ class DogController: UIViewController,
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
-                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat { 12 }
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        12
+    }
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat { 12 }
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        12
+    }
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let dog = filteredDogs[indexPath.item]
 
@@ -229,7 +222,7 @@ class DogController: UIViewController,
             navigationController?.pushViewController(normalVC, animated: true)
         }
     }
-    
+
     @IBAction func backClicked(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }

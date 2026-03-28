@@ -24,7 +24,12 @@ struct DogModel {
 
     let donationGoalEur: Double?
     let donationRaisedEur: Double
-    let disability_diagnosis: String?
+    let disabilityDiagnosis: String?
+
+    let breedEn: String?
+    let descriptionEn: String?
+    let storyEn: String?
+    let disabilityDiagnosisEn: String?
 
     init(dto: DogRowDTO) {
         self.id = dto.id
@@ -39,19 +44,59 @@ struct DogModel {
         self.sex = dto.sex
         self.story = dto.story
         self.isWalkable = dto.isWalkable
-        
 
         self.donationGoalEur = dto.donation_goal_eur
         self.donationRaisedEur = dto.donation_raised_eur ?? 0
-        self.disability_diagnosis = dto.disability_diagnosis
+        self.disabilityDiagnosis = dto.disability_diagnosis
+
+        self.breedEn = dto.breed_en
+        self.descriptionEn = dto.description_en
+        self.storyEn = dto.story_en
+        self.disabilityDiagnosisEn = dto.disability_diagnosis_en
+    }
+
+    var displayBreed: String {
+        if AppLanguage.current == .en,
+           let value = breedEn?.trimmingCharacters(in: .whitespacesAndNewlines),
+           !value.isEmpty {
+            return value
+        }
+        return breed
+    }
+
+    var displayDescription: String? {
+        if AppLanguage.current == .en,
+           let value = descriptionEn?.trimmingCharacters(in: .whitespacesAndNewlines),
+           !value.isEmpty {
+            return value
+        }
+        return description
+    }
+
+    var displayStory: String? {
+        if AppLanguage.current == .en,
+           let value = storyEn?.trimmingCharacters(in: .whitespacesAndNewlines),
+           !value.isEmpty {
+            return value
+        }
+        return story
+    }
+
+    var displayDisabilityDiagnosis: String? {
+        if AppLanguage.current == .en,
+           let value = disabilityDiagnosisEn?.trimmingCharacters(in: .whitespacesAndNewlines),
+           !value.isEmpty {
+            return value
+        }
+        return disabilityDiagnosis
     }
 
     var sexDisplayText: String {
         switch sex?.lowercased() {
-        case "male": return "Macho"
-        case "female": return "Hembra"
-        case "unknown": return "Desconocido"
-        default: return "No especificado"
+        case "male": return L10n.tr("male")
+        case "female": return L10n.tr("female")
+        case "unknown": return L10n.tr("unknown")
+        default: return L10n.tr("not_specified")
         }
     }
 }

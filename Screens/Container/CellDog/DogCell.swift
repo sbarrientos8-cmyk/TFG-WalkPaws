@@ -2,8 +2,9 @@
 //  DogCell.swift
 //  WalkPaws
 //
-//  Created by Sofia Barrientos Raszkowska on 19/2/26.
+//  Created by Sofia Barrientos Raszkowska on 27/1/26.
 //
+
 
 import UIKit
 import SDWebImage
@@ -21,6 +22,8 @@ class DogCell: UICollectionViewCell {
     @IBOutlet weak var labelDescription: UILabel!
     @IBOutlet weak var labelBreed: UILabel!
 
+    private let imageLoadingIndicator = UIActivityIndicatorView(style: .medium)
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -31,24 +34,38 @@ class DogCell: UICollectionViewCell {
         ImageDog.contentMode = .scaleAspectFill
         ImageDog.clipsToBounds = true
         ImageDog.layer.cornerRadius = 10
-        
+
         viewBackground.layer.cornerRadius = 12
-        
+
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.1
         layer.shadowOffset = CGSize(width: 0, height: 4)
         layer.shadowRadius = 8
         layer.masksToBounds = false
+
+        setupLoadingIndicator()
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
         ImageDog.sd_cancelCurrentImageLoad()
-        ImageDog.image = UIImage(systemName: "dog")
+        ImageDog.image = nil
+        imageLoadingIndicator.stopAnimating()
+    }
+
+    private func setupLoadingIndicator() {
+        imageLoadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        imageLoadingIndicator.hidesWhenStopped = true
+
+        ImageDog.addSubview(imageLoadingIndicator)
+
+        NSLayoutConstraint.activate([
+            imageLoadingIndicator.centerXAnchor.constraint(equalTo: ImageDog.centerXAnchor),
+            imageLoadingIndicator.centerYAnchor.constraint(equalTo: ImageDog.centerYAnchor)
+        ])
     }
 
     func config(with dog: DogModel, subtitle: DogCellSubtitle) {
-
         labelName.text = dog.name
         labelBreed.text = dog.breed
 
@@ -56,11 +73,11 @@ class DogCell: UICollectionViewCell {
         case .age:
             if let age = dog.age {
                 labelDescription.text = String(
-                    format: String(localized: "dog_age_years"),
+                    format: L10n.tr("dog_age_years"),
                     String(age)
                 )
             } else {
-                labelDescription.text = String(localized: "unknown_age")
+                labelDescription.text = L10n.tr("unknown_age")
             }
 
         case .city:
@@ -70,14 +87,20 @@ class DogCell: UICollectionViewCell {
         if let urlString = dog.photoURL,
            let url = URL(string: urlString) {
 
+            ImageDog.image = nil
+            imageLoadingIndicator.startAnimating()
+
             ImageDog.sd_setImage(
                 with: url,
-                placeholderImage: UIImage(systemName: "dog"),
+                placeholderImage: nil,
                 options: [.continueInBackground, .retryFailed, .scaleDownLargeImages]
-            )
+            ) { [weak self] _, _, _, _ in
+                self?.imageLoadingIndicator.stopAnimating()
+            }
+
         } else {
-            ImageDog.image = UIImage(systemName: "dog")
+            ImageDog.image = nil
+            imageLoadingIndicator.stopAnimating()
         }
     }
-    
 }

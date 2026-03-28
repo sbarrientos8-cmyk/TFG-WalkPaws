@@ -51,9 +51,52 @@ struct WalkRowDTO: Decodable {
 
 struct RouteSimplifiedDTO: Decodable {
     let type: String
-    let coords: [[Double]]   // [[lon, lat], ...]
+    let coords: [[Double]]
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+
+        if let coordsArray = try? container.decode([[Double]].self) {
+            self.type = "LineString"
+            self.coords = coordsArray
+            return
+        }
+
+        let object = try decoder.container(keyedBy: CodingKeys.self)
+        self.type = try object.decodeIfPresent(String.self, forKey: .type) ?? "LineString"
+
+        if let coords = try? object.decode([[Double]].self, forKey: .coords) {
+            self.coords = coords
+            return
+        }
+
+        if let pointObjects = try? object.decode([RoutePointDTO].self, forKey: .coords) {
+            self.coords = pointObjects.map { [$0.lonValue, $0.lat] }
+            return
+        }
+
+        throw DecodingError.dataCorruptedError(
+            forKey: .coords,
+            in: object,
+            debugDescription: "Formato inválido para coords"
+        )
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case type
+        case coords
+    }
 }
 
+struct RoutePointDTO: Decodable {
+    let lat: Double
+    let lon: Double?
+    let lng: Double?
+
+    var lonValue: Double {
+        lon ?? lng ?? 0
+    }
+}
 struct WalkListRowDTO: Decodable {
     let id: UUID
     let started_at: String

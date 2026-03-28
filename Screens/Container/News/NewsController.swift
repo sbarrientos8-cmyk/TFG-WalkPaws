@@ -78,8 +78,8 @@ class NewsController: UIViewController, UITableViewDataSource, UITableViewDelega
             if isEmpty {
                 viewEmpty.config(
                     image: UIImage(named: "new_empty"),
-                    title: "No hay publicaciones",
-                    description: "Cuando haya noticias aparecerán aquí."
+                    title: L10n.tr("no_posts"),
+                    description: L10n.tr("news_will_appear_here")
                 )
             }
         }

@@ -46,7 +46,7 @@ class ProfileShelterController: UIViewController
     {
         super.viewDidLoad()
         
-        labelTitle.config(text: "Refugio", style: StylesLabel.titleNav)
+        labelTitle.config(text: L10n.tr("shelter"), style: StylesLabel.titleNav)
         
         viewProfile.applyCardStyle(cornerRadius: 10, shadowOpacity: 0.12, shadowOffset: CGSize(width: 0, height: 8), shadowRadius: 16)
         imageProfile.layer.cornerRadius = 10
@@ -57,9 +57,9 @@ class ProfileShelterController: UIViewController
         labelDescription.config(text: "", style: StylesLabel.subtitle)
         labelUbication.config(text: "", style: StylesLabel.subtitleGray)
         
-        buttonSeeMap.configWithIcon(text: "Ver mapa", image: UIImage(named: "ubication"), style: StylesButton.secondaryGreen, withShadow: true)
-        buttonSeeDogs.configWithIcon(text: "Ver perros", image: UIImage(named: "footprint"), style: StylesButton.secondaryWhite, withShadow: true)
-        buttonContact.configWithIcon(text: "Contactar", image: UIImage(named: "contact"), style: StylesButton.secondaryWhite, withShadow: true)
+        buttonSeeMap.configWithIcon(text: L10n.tr("view_map"), image: UIImage(named: "ubication"), style: StylesButton.secondaryGreen, withShadow: true)
+        buttonSeeDogs.configWithIcon(text: L10n.tr("view_dogs"), image: UIImage(named: "footprint"), style: StylesButton.secondaryWhite, withShadow: true)
+        buttonContact.configWithIcon(text: L10n.tr("contact"), image: UIImage(named: "contact"), style: StylesButton.secondaryWhite, withShadow: true)
         
         viewMapShadow.applyCardStyle(cornerRadius: 10, shadowOpacity: 0.12, shadowOffset: CGSize(width: 0, height: 8), shadowRadius: 16)
         viewMap.layer.cornerRadius = 10
@@ -100,7 +100,7 @@ class ProfileShelterController: UIViewController
         if let coordinate = shelter.coordinate {
             labelCoordinates.text = "Lat: \(coordinate.latitude), Lon: \(coordinate.longitude)"
         } else {
-            labelCoordinates.text = "Sin ubicación"
+            labelCoordinates.text = L10n.tr("no_location")
         }
         labelDirection.text = shelter.formattedAddress
         labelPhone.text = shelter.phone

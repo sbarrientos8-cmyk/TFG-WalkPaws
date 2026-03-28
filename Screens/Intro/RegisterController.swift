@@ -29,14 +29,14 @@ class RegisterController: UIViewController
     {
         super.viewDidLoad()
 
-        labelTitle.config(text: String(localized: "sign_up"), style: StylesLabel.title)
+        labelTitle.config(text: L10n.tr("sign_up"), style: StylesLabel.title)
         
-        fieldEmail.config(image: UIImage(named: "email"), placeholder: String(localized: "email"))
-        fieldName.config(image: UIImage(named: "user"), placeholder: String(localized: "full_name"))
-        fieldPassword.config(image: UIImage(named: "lock"), placeholder: String(localized: "password"))
-        fieldPasswordConfirm.config(image: UIImage(named: "lock"), placeholder: String(localized: "confirm_password"))
+        fieldEmail.config(image: UIImage(named: "email"), placeholder: L10n.tr("email"))
+        fieldName.config(image: UIImage(named: "user"), placeholder: L10n.tr("full_name"))
+        fieldPassword.config(image: UIImage(named: "lock"), placeholder: L10n.tr("password"))
+        fieldPasswordConfirm.config(image: UIImage(named: "lock"), placeholder: L10n.tr("confirm_password"))
         
-        buttonRegister.config(text: String(localized: "sign_up"), style: StylesButton.primary)
+        buttonRegister.config(text: L10n.tr("sign_up"), style: StylesButton.primary)
         buttonRegister.applyShadow()
         
         hideKeyboardWhenTappedAround()
@@ -45,7 +45,7 @@ class RegisterController: UIViewController
     func showAlert(title: String, message: String, onOk: (() -> Void)? = nil)
     {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: String(localized: "ok"), style: .default) { _ in onOk?() })
+        alert.addAction(UIAlertAction(title: L10n.tr("ok"), style: .default) { _ in onOk?() })
         present(alert, animated: true)
     }
     
@@ -64,19 +64,19 @@ class RegisterController: UIViewController
 
         guard !email.isEmpty, !name.isEmpty, !password.isEmpty, !confirm.isEmpty else
         {
-            showAlert(title: String(localized: "error"), message: String(localized: "fill_all_fields"))
+            showAlert(title: L10n.tr("error"), message: L10n.tr( "fill_all_fields"))
             return
         }
 
         guard password == confirm else
         {
-            showAlert(title: String(localized: "error"), message: String(localized: "passwords_do_not_match"))
+            showAlert(title: L10n.tr("error"), message: L10n.tr( "passwords_do_not_match"))
             return
         }
 
         guard password.count >= 6 else
         {
-            showAlert(title: String(localized: "error"), message: String(localized: "password_min_6_characters"))
+            showAlert(title: L10n.tr("error"), message: L10n.tr( "password_min_6_characters"))
             return
         }
 
@@ -108,7 +108,7 @@ class RegisterController: UIViewController
 
             } catch {
                 await MainActor.run {
-                    self.showAlert(title: String(localized: "error"), message: error.localizedDescription)
+                    self.showAlert(title: L10n.tr("error"), message: error.localizedDescription)
                 }
             }
         }

@@ -12,45 +12,50 @@ struct ProfileSection
     let title: String
     let image: String
     let goSection: () -> UIViewController
-    
-    static let myWalks = ProfileSection(
-            title: "Mis paseos",
+
+    static var myWalks: ProfileSection {
+        ProfileSection(
+            title: L10n.tr("my_walks"),
             image: "footprint1",
             goSection: {
-                return MyWalksController()
+                MyWalksController()
             }
         )
+    }
 
-        static let myPosts = ProfileSection(
-            title: "Mis publicaciones",
+    static var myPosts: ProfileSection {
+        ProfileSection(
+            title: L10n.tr("my_posts"),
             image: "news_icn",
             goSection: {
-                return MyNewsController()
+                MyNewsController()
             }
         )
+    }
 
-        static let changeLanguage = ProfileSection(
-            title: "Cambiar idioma",
+    static var changeLanguage: ProfileSection {
+        ProfileSection(
+            title: L10n.tr("change_language"),
             image: "language",
             goSection: {
-                return HomeController()
+                ChangeLanguageController(nibName: "ChangeLanguageController", bundle: nil)
             }
         )
+    }
 
-    static let contact = ProfileSection(
-        title: "Contactar con nosotros",
-        image: "contact1",
-        goSection: {
-            let vc = ContactShelterController(nibName: "ContactShelterController", bundle: nil)
-
-            // “refugio” fijo = WalkPaws
-            vc.shelter = ShelterContactInfo(
-                name: "WalkPaws",
-                email: "walkpaws@gmail.com",
-                photoURL: nil // usaremos logo local
-            )
-
-            return vc
-        }
-    )
+    static var contact: ProfileSection {
+        ProfileSection(
+            title: L10n.tr("contact_us"),
+            image: "contact1",
+            goSection: {
+                let vc = ContactShelterController(nibName: "ContactShelterController", bundle: nil)
+                vc.shelter = ShelterContactInfo(
+                    name: "WalkPaws",
+                    email: "walkpaws@gmail.com",
+                    photoURL: nil
+                )
+                return vc
+            }
+        )
+    }
 }

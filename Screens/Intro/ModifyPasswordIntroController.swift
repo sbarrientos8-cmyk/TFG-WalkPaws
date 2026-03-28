@@ -34,13 +34,13 @@ class ModifyPasswordIntroController: UIViewController
     {
         super.viewDidLoad()
 
-        labelTitle.config(text: String(localized: "new_password"), style: StylesLabel.title)
-        fieldCode.config(image: UIImage(named: "code"), placeholder: String(localized: "verification_code"))
-        fieldPassword.config(image: UIImage(named: "lock"), placeholder: String(localized: "new_password"))
-        fieldNewPassword.config(image: UIImage(named: "lock"), placeholder: String(localized: "confirm_password"))
-        buttonSave.config(text: String(localized: "save"), style: StylesButton.primary)
+        labelTitle.config(text: L10n.tr("new_password"), style: StylesLabel.title)
+        fieldCode.config(image: UIImage(named: "code"), placeholder: L10n.tr("verification_code"))
+        fieldPassword.config(image: UIImage(named: "lock"), placeholder: L10n.tr("new_password"))
+        fieldNewPassword.config(image: UIImage(named: "lock"), placeholder: L10n.tr( "confirm_password"))
+        buttonSave.config(text: L10n.tr("save"), style: StylesButton.primary)
         
-        labelResendCode.config(text: String(localized: "didnt_receive_code_resend_code"), style: StylesLabel.subtitle)
+        labelResendCode.config(text: L10n.tr( "didnt_receive_code_resend_code"), style: StylesLabel.subtitle)
         
         viewModify.isHidden = true
         labelState.text = ""
@@ -88,7 +88,7 @@ class ModifyPasswordIntroController: UIViewController
                 await MainActor.run {
                     self.otpVerified = false
                     self.viewModify.isHidden = true
-                    self.showMessage(String(localized: "incorrect_verification_code"))
+                    self.showMessage(L10n.tr( "incorrect_verification_code"))
                 }
             }
         }
@@ -100,18 +100,18 @@ class ModifyPasswordIntroController: UIViewController
 
         otpVerified = false
         viewModify.isHidden = true
-        showMessage(String(localized: "sending_code"))
+        showMessage(L10n.tr("sending_code"))
 
         Task {
             do {
                 try await SupabaseManager.shared.client.auth.signInWithOTP(email: email)
 
                 await MainActor.run {
-                    self.showMessage(String(localized: "code_resent_check_email"))
+                    self.showMessage(L10n.tr("code_resent_check_email"))
                 }
             } catch {
                 await MainActor.run {
-                    self.showMessage(String(localized: "could_not_resend_code"))
+                    self.showMessage(L10n.tr("could_not_resend_code"))
                 }
             }
         }
@@ -119,7 +119,7 @@ class ModifyPasswordIntroController: UIViewController
     
     @IBAction func saveClicked(_ sender: Any) {
         guard otpVerified else {
-            showMessage(String(localized: "enter_valid_code_first"))
+            showMessage(L10n.tr("enter_valid_code_first"))
             return
         }
 
@@ -127,23 +127,23 @@ class ModifyPasswordIntroController: UIViewController
         let pass2 = fieldNewPassword.getText().trimmingCharacters(in: .whitespacesAndNewlines)
 
         guard !pass1.isEmpty, !pass2.isEmpty else {
-            showMessage(String(localized: "fill_both_passwords"))
+            showMessage(L10n.tr("fill_both_passwords"))
             return
         }
 
         guard pass1 == pass2 else {
-            showMessage(String(localized: "passwords_do_not_match"))
+            showMessage(L10n.tr("passwords_do_not_match"))
             return
         }
 
         // (Opcional) regla mínima
         guard pass1.count >= 6 else {
-            showMessage(String(localized: "password_min_6_characters"))
+            showMessage(L10n.tr("password_min_6_characters"))
             return
         }
 
         buttonSave.isEnabled = false
-        showMessage(String(localized: "saving"))
+        showMessage(L10n.tr("saving"))
 
         Task {
             do {
@@ -155,12 +155,12 @@ class ModifyPasswordIntroController: UIViewController
                     self.buttonSave.isEnabled = true
                     
                     let alert = UIAlertController(
-                        title: String(localized: "password_changed"),
-                        message: String(localized: "password_updated_successfully"),
+                        title: L10n.tr("password_changed"),
+                        message: L10n.tr("password_updated_successfully"),
                         preferredStyle: .alert
                     )
 
-                    alert.addAction(UIAlertAction(title: String(localized: "accept"), style: .default) { [weak self] _ in
+                    alert.addAction(UIAlertAction(title: L10n.tr( "accept"), style: .default) { [weak self] _ in
                         guard let self else { return }
                         let login = LoginController(nibName: "LoginController", bundle: nil)
                         self.navigationController?.setViewControllers([login], animated: true)
@@ -172,7 +172,7 @@ class ModifyPasswordIntroController: UIViewController
             } catch {
                 await MainActor.run {
                     self.buttonSave.isEnabled = true
-                    self.showMessage(String(localized: "could_not_update_password"))
+                    self.showMessage(L10n.tr("could_not_update_password"))
                 }
             }
         }

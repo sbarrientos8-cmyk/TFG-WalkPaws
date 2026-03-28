@@ -69,11 +69,11 @@ final class WalkingController: UIViewController {
         viewContent.applyCardStyle()
         viewContent.alpha = 0.75
         
-        labelShelterT.config(text: "\(String(localized: "shelter")): ", style: StylesLabel.titleBlack)
+        labelShelterT.config(text: "\(L10n.tr("shelter")): ", style: StylesLabel.titleBlack)
 
         labelShelterD.config(text: "", style: StylesLabel.subtitleBlack)
         
-        labelDogT.config(text: "\(String(localized: "dog")): ", style: StylesLabel.titleBlack)
+        labelDogT.config(text: "\(L10n.tr( "dog")): ", style: StylesLabel.titleBlack)
 
         labelDogD.config(text: "", style: StylesLabel.subtitleBlack)
         
@@ -81,7 +81,7 @@ final class WalkingController: UIViewController {
         labelKm.config(text: "", style: StylesLabel.titleBlack)
         
         viewCenter.alpha = 0.75
-        buttonFinished.config(text: String(localized: "finish_walk"), style: StylesButton.primary)
+        buttonFinished.config(text: L10n.tr("finish_walk"), style: StylesButton.primary)
 
         startedAt = Date()
 
@@ -289,14 +289,14 @@ final class WalkingController: UIViewController {
             stopTracking()
 
             let alert = UIAlertController(
-                title: String(localized: "walk_too_short"),
+                title:L10n.tr("walk_too_short"),
                 message: String(
-                    format: String(localized: "walk_not_saved_min_distance"),
+                    format: L10n.tr("walk_not_saved_min_distance"),
                     formattedDistance
                 ),
                 preferredStyle: .alert
             )
-            alert.addAction(UIAlertAction(title: String(localized: "ok"), style: .default) { [weak self] _ in
+            alert.addAction(UIAlertAction(title: L10n.tr("ok"), style: .default) { [weak self] _ in
                 WalkSession.shared.end()
                 self?.navigationController?.popViewController(animated: true)
             })
@@ -307,11 +307,11 @@ final class WalkingController: UIViewController {
         // 2) Necesitamos coords para validar “cerca del refugio”
         guard let shelterLoc = shelterLocation, let userLoc = lastLocation else {
             let alert = UIAlertController(
-                title: String(localized: "could_not_check_location"),
-                message: String(localized: "could_not_finish_location_not_verified"),
+                title: L10n.tr("could_not_check_location"),
+                message: L10n.tr( "could_not_finish_location_not_verified"),
                 preferredStyle: .alert
             )
-            alert.addAction(UIAlertAction(title: String(localized: "ok"), style: .default))
+            alert.addAction(UIAlertAction(title: L10n.tr("ok"), style: .default))
             present(alert, animated: true)
             return
         }
@@ -321,11 +321,11 @@ final class WalkingController: UIViewController {
         if distanceToShelter > maxDistanceToFinishMeters {
             let kmAway = distanceToShelter / 1000.0
             let alert = UIAlertController(
-                title: String(localized: "still_far_from_shelter"),
-                message: String(format: String(localized: "must_be_closer_to_finish_walk"), kmAway),
+                title: L10n.tr("still_far_from_shelter"),
+                message: String(format: L10n.tr( "must_be_closer_to_finish_walk"), kmAway),
                 preferredStyle: .alert
             )
-            alert.addAction(UIAlertAction(title: String(localized: "ok"), style: .default))
+            alert.addAction(UIAlertAction(title: L10n.tr("ok"), style: .default))
             present(alert, animated: true)
 
             // ✅ IMPORTANTE: NO stopTracking() aquí
@@ -338,7 +338,7 @@ final class WalkingController: UIViewController {
         let formattedTime = String(format: "%02d:%02d", minutes, seconds)
 
         let message = String(
-            format: String(localized: "walk_summary_message"),
+            format: L10n.tr("walk_summary_message"),
             selectedShelterName,
             selectedDogName,
             formattedTime,
@@ -347,12 +347,12 @@ final class WalkingController: UIViewController {
         )
 
         let alert = UIAlertController(
-            title: String(localized: "walk_summary"),
+            title: L10n.tr("walk_summary"),
             message: message,
             preferredStyle: .alert
         )
 
-        alert.addAction(UIAlertAction(title: String(localized: "save"), style: .default) { [weak self] _ in
+        alert.addAction(UIAlertAction(title: L10n.tr("save"), style: .default) { [weak self] _ in
             guard let self else { return }
             self.stopTracking()
             Task {
@@ -364,7 +364,7 @@ final class WalkingController: UIViewController {
             }
         })
 
-        alert.addAction(UIAlertAction(title: String(localized: "cancel"), style: .cancel))
+        alert.addAction(UIAlertAction(title: L10n.tr("cancel"), style: .cancel))
         present(alert, animated: true)
     }
 

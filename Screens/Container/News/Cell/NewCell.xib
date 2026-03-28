@@ -91,7 +91,7 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qSV-Jj-BNa" userLabel="Button Trash">
-                        <rect key="frame" x="502.66666666666669" y="7" width="38.333333333333314" height="38.333333333333336"/>
+                        <rect key="frame" x="494.66666666666669" y="10" width="38.333333333333314" height="38.333333333333336"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="qSV-Jj-BNa" secondAttribute="height" multiplier="1:1" priority="999" id="D6q-zt-TV7"/>
                         </constraints>
@@ -105,9 +105,9 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="F33-0X-VpF" secondAttribute="bottom" constant="5" id="0L7-Xd-ByN"/>
-                    <constraint firstAttribute="trailing" secondItem="qSV-Jj-BNa" secondAttribute="trailing" constant="7" id="8A1-vH-byf"/>
+                    <constraint firstAttribute="trailing" secondItem="qSV-Jj-BNa" secondAttribute="trailing" constant="15" id="8A1-vH-byf"/>
                     <constraint firstItem="F33-0X-VpF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="N8c-XI-nMW"/>
-                    <constraint firstItem="qSV-Jj-BNa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="l1U-JC-BFd"/>
+                    <constraint firstItem="qSV-Jj-BNa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="l1U-JC-BFd"/>
                     <constraint firstItem="F33-0X-VpF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="om8-pY-Wcb"/>
                     <constraint firstAttribute="trailing" secondItem="F33-0X-VpF" secondAttribute="trailing" constant="10" id="uwd-Rm-wGk"/>
                 </constraints>

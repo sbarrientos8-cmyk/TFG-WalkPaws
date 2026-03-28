@@ -58,6 +58,7 @@ class DogDetailNeedyController: UIViewController {
     private let locationManager = CLLocationManager()
     private var lastLocation: CLLocation?
     private let maxDistanceMeters: Double = 1000
+    private let imageLoadingIndicator = UIActivityIndicatorView(style: .large)
     
     override func viewWillAppear(_ animated: Bool)
     {
@@ -68,15 +69,15 @@ class DogDetailNeedyController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        labelTitleNav.config(text: "Detalle del Perro", style: StylesLabel.titleNav)
+        labelTitleNav.config(text: L10n.tr("dog_detail"), style: StylesLabel.titleNav)
         
         viewDonateComplete.applyCardStyle()
         viewDonateComplete.backgroundColor = Colors.yellow.withAlphaComponent(0.6)
-        labelDonateComplete.config(text: "Se ha completado la donación!!!", style: StylesLabel.donationComplete)
+        labelDonateComplete.config(text: L10n.tr( "donation_completed_banner"), style: StylesLabel.donationComplete)
         
         viewNeedy.layer.cornerRadius = 20
         viewNeedy.backgroundColor = Colors.flesh
-        labelTitleNeedy.config(text: "Necesita apoyo", style: StylesLabel.descriptionBrown)
+        labelTitleNeedy.config(text: L10n.tr("needs_support"), style: StylesLabel.descriptionBrown)
         
         labelName.config(text: "", style: StylesLabel.title)
         labelCharacter.config(text: "", style: StylesLabel.subtitle)
@@ -92,11 +93,11 @@ class DogDetailNeedyController: UIViewController {
         labelRest.alpha = 0.6
         
         viewDescription.applyCardStyle()
-        labelDescriptionT.config(text: "Descripción", style: StylesLabel.titleNav)
+        labelDescriptionT.config(text:L10n.tr("description"), style: StylesLabel.titleNav)
         labelDescriptionD.config(text: "", style: StylesLabel.description)
         
         viewStory.applyCardStyle()
-        labelStoryT.config(text: "Historia", style: StylesLabel.titleNav)
+        labelStoryT.config(text: L10n.tr( "story"), style: StylesLabel.titleNav)
         labelStoryD.config(text: "", style: StylesLabel.description)
 
         viewBreed.applyCardStyle()
@@ -108,18 +109,31 @@ class DogDetailNeedyController: UIViewController {
         viewSex.applyCardStyle()
         labelSex.config(text: "", style: StylesLabel.title1)
 
-        buttonDonate.config(text: "Donar", style: StylesButton.secondaryDonate)
+        buttonDonate.config(text: L10n.tr("donate"), style: StylesButton.secondaryDonate)
         buttonDonate.applyShadow()
-        buttonWalk.config(text: "Pasear", style: StylesButton.primary)
+        buttonWalk.config(text: L10n.tr("walk"), style: StylesButton.primary)
         buttonWalk.applyShadow()
 
         imageDog.contentMode = .scaleAspectFill
         imageDog.layer.cornerRadius = 12
         imageDog.clipsToBounds = true
         
+        setupImageLoadingIndicator()
         hideKeyboardWhenTappedAround()
         fillUI()
         setupLocation()
+    }
+    
+    private func setupImageLoadingIndicator() {
+        imageLoadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        imageLoadingIndicator.hidesWhenStopped = true
+
+        imageDog.addSubview(imageLoadingIndicator)
+
+        NSLayoutConstraint.activate([
+            imageLoadingIndicator.centerXAnchor.constraint(equalTo: imageDog.centerXAnchor),
+            imageLoadingIndicator.centerYAnchor.constraint(equalTo: imageDog.centerYAnchor)
+        ])
     }
     
     private func setupLocation() {
@@ -131,7 +145,7 @@ class DogDetailNeedyController: UIViewController {
     
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: L10n.tr("ok"), style: .default))
         present(alert, animated: true)
     }
     
@@ -165,13 +179,15 @@ class DogDetailNeedyController: UIViewController {
 
         labelName.text = dog.name
 
-        let ageText = dog.age != nil ? "\(dog.age!) años" : "Edad desconocida"
-        labelCharacter.text = "\(dog.breed) · \(ageText)"
+        let ageText = dog.age != nil
+            ? String(format: L10n.tr("dog_age_years"), String(dog.age!))
+            : L10n.tr("unknown_age")
 
-        labelDescriptionD.text = dog.description ?? "Sin descripción"
+        labelCharacter.text = "\(dog.displayBreed) · \(ageText)"
+        labelDescriptionD.text = dog.displayDescription ?? L10n.tr("no_description")
 
-        labelBreed.text = "\(dog.breed)"
-        labelAge.text = "\(ageText)"
+        labelBreed.text = dog.displayBreed
+        labelAge.text = ageText
         
         buttonWalk.isHidden = !dog.isWalkable
         buttonWalk.isEnabled = dog.isWalkable
@@ -190,12 +206,15 @@ class DogDetailNeedyController: UIViewController {
         }
 
         if let urlString = dog.photoURL, let url = URL(string: urlString) {
+            imageDog.image = nil
+            imageLoadingIndicator.startAnimating()
             loadImage(from: url)
         } else {
-            imageDog.image = UIImage(systemName: "dog")
+            imageLoadingIndicator.stopAnimating()
+            imageDog.image = nil
         }
         
-        labelStoryD.text = dog.story
+        labelStoryD.text = dog.displayStory
         
         let goal = dog.donationGoalEur ?? 0
         let raised = dog.donationRaisedEur
@@ -216,17 +235,25 @@ class DogDetailNeedyController: UIViewController {
         let raisedText = String(format: "%.0f€", raised)
         let restText = String(format: "%.0f€", rest)
 
-        labelNeeds.text = (dog.disability_diagnosis?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false)
-        ? dog.disability_diagnosis
-        : "Sin diagnóstico"
-        labelCollected.text = "Recaudado: \(raisedText)"
-        labelRest.text = "Faltan: \(restText)"
+        labelNeeds.text = (dog.displayDisabilityDiagnosis?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty == false)
+            ? dog.displayDisabilityDiagnosis
+            : L10n.tr("no_diagnosis")
+
+        labelCollected.text = String(format: L10n.tr("raised_amount"), raisedText)
+        labelRest.text = String(format: L10n.tr("remaining_amount"), restText)
         
     }
 
     private func loadImage(from url: URL) {
         URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
-            guard let self, let data, let image = UIImage(data: data) else { return }
+            guard let self = self else { return }
+
+            DispatchQueue.main.async {
+                self.imageLoadingIndicator.stopAnimating()
+            }
+
+            guard let data = data, let image = UIImage(data: data) else { return }
+
             DispatchQueue.main.async {
                 self.imageDog.image = image
             }
@@ -246,11 +273,11 @@ class DogDetailNeedyController: UIViewController {
         // ✅ si ya no queda nada, no abrir
         guard rest > 0.0001 else {
             let alert = UIAlertController(
-                title: "Donación completada",
-                message: "Este perro ya ha alcanzado su objetivo. ¡Gracias!",
+                title: L10n.tr("donation_completed"),
+                message: L10n.tr("dog_goal_already_reached"),
                 preferredStyle: .alert
             )
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            alert.addAction(UIAlertAction(title: L10n.tr("ok"), style: .default))
             present(alert, animated: true)
             return
         }
@@ -291,11 +318,11 @@ class DogDetailNeedyController: UIViewController {
         // ✅ BLOQUEO: si ya hay paseo activo, no permitir otro
         if WalkSession.shared.isActive {
             let alert = UIAlertController(
-                title: "Ya tienes un paseo en curso",
-                message: "No puedes empezar otro paseo hasta que termines el actual.",
+                title: L10n.tr("walk_already_in_progress"),
+                message: L10n.tr("finish_current_walk_first"),
                 preferredStyle: .alert
             )
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            alert.addAction(UIAlertAction(title: L10n.tr("ok"), style: .default))
             present(alert, animated: true)
             return
         }
@@ -307,8 +334,8 @@ class DogDetailNeedyController: UIViewController {
             guard let userLoc = self.lastLocation else {
                 await MainActor.run {
                     self.showAlert(
-                        title: "Ubicación no disponible",
-                        message: "Activa la ubicación para empezar el paseo."
+                        title: L10n.tr("location_not_available"),
+                        message: L10n.tr("enable_location_to_start_walk")
                     )
                 }
                 return
@@ -333,8 +360,8 @@ class DogDetailNeedyController: UIViewController {
                 guard let lat = shelter.latitude, let lon = shelter.longitude else {
                     await MainActor.run {
                         self.showAlert(
-                            title: "Refugio sin ubicación",
-                            message: "Este refugio no tiene coordenadas guardadas."
+                            title: L10n.tr("shelter_without_location"),
+                            message: L10n.tr( "shelter_without_saved_coordinates")
                         )
                     }
                     return
@@ -349,15 +376,15 @@ class DogDetailNeedyController: UIViewController {
                     let km = distance / 1000.0
                     await MainActor.run {
                         self.showAlert(
-                            title: "No estás cerca del refugio",
-                            message: String(format: "Estás a %.2f km. Acércate un poco más (≈ 1 km) para empezar el paseo.", km)
+                            title: L10n.tr("not_near_shelter"),
+                            message: String(format:L10n.tr( "distance_too_far_to_start_walk"), km)
                         )
                     }
                     return
                 }
 
                 // 5) OK -> abrir WalkingController + activar sesión
-                let shelterName = shelter.name ?? "Refugio"
+                let shelterName = shelter.name ?? L10n.tr("shelter")
 
                 await MainActor.run {
                     WalkSession.shared.start(
@@ -378,7 +405,10 @@ class DogDetailNeedyController: UIViewController {
             } catch {
                 print("❌ check distance / fetch shelter error:", error)
                 await MainActor.run {
-                    self.showAlert(title: "Error", message: "No se pudo comprobar la ubicación del refugio.")
+                    self.showAlert(
+                        title: L10n.tr("error"),
+                        message: L10n.tr( "could_not_check_shelter_location")
+                    )
                 }
             }
         }

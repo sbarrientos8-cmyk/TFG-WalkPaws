@@ -40,20 +40,20 @@ final class EditProfileController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        labelTitleNav.config(text: String(localized: "edit_image"), style: StylesLabel.titleNav)
+        labelTitleNav.config(text: L10n.tr("edit_image"), style: StylesLabel.titleNav)
         
-        buttonSetImage.config(text: String(localized: "change_image"), style: StylesButton.secondaryGreen)
+        buttonSetImage.config(text: L10n.tr("change_image"), style: StylesButton.secondaryGreen)
 
-        labelName.config(text: String(localized: "name_label"), style: StylesLabel.subtitle)
-        fieldName.config(image: UIImage(named: ""), placeholder: String(localized: "new_name"))
+        labelName.config(text: L10n.tr("name_label"), style: StylesLabel.subtitle)
+        fieldName.config(image: UIImage(named: ""), placeholder: L10n.tr( "new_name"))
         
-        labelGmail.config(text: String(localized: "email_label"), style: StylesLabel.subtitle)
-        fieldGmail.config(image: UIImage(named: ""), placeholder: String(localized: "new_email"))
+        labelGmail.config(text: L10n.tr("email_label"), style: StylesLabel.subtitle)
+        fieldGmail.config(image: UIImage(named: ""), placeholder: L10n.tr( "new_email"))
         
-        labelPassword.config(text: String(localized: "password_label"), style: StylesLabel.subtitle)
-        fieldPassword.config(image: UIImage(named: ""), placeholder: String(localized: "new_password"))
+        labelPassword.config(text: L10n.tr("password_label"), style: StylesLabel.subtitle)
+        fieldPassword.config(image: UIImage(named: ""), placeholder: L10n.tr("new_password"))
         
-        buttonEdit.config(text: String(localized: "save_changes"), style: StylesButton.primary)
+        buttonEdit.config(text: L10n.tr("save_changes"), style: StylesButton.primary)
         
         loadProfile()
         hideKeyboardWhenTappedAround()
@@ -202,8 +202,8 @@ final class EditProfileController: UIViewController {
                     }
 
                     self.showAlert(
-                        title: String(localized: "saved"),
-                        message: String(localized: "changes_saved_successfully")
+                        title: L10n.tr("saved"),
+                        message: L10n.tr("changes_saved_successfully")
                     ) {
                         // opcional: volver atrás al perfil
                         let vc = ProfileUserController(nibName: "ProfileUserController", bundle: nil)
@@ -227,7 +227,7 @@ final class EditProfileController: UIViewController {
     
     private func showAlert(title: String, message: String, onOk: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: String(localized: "ok"), style: .default) { _ in onOk?() })
+        alert.addAction(UIAlertAction(title: L10n.tr("ok"), style: .default) { _ in onOk?() })
         present(alert, animated: true)
     }
 }

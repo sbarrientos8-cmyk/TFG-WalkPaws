@@ -31,7 +31,7 @@ class NewsDetailController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        labelTitleNav.config(text: "Detalle de la Publicación", style: StylesLabel.titleNav)
+        labelTitleNav.config(text: L10n.tr("post_detail"), style: StylesLabel.titleNav)
 
         labelName.config(text: "", style: StylesLabel.title2Name)
         labelTime.config(text: "", style: StylesLabel.subtitleGray2)
@@ -53,8 +53,8 @@ class NewsDetailController: UIViewController {
         guard let news else { return }
             
         labelName.text = news.authorName
-        labelTextShort.text = news.shortText
-        labelDescription.text = news.description
+        labelTextShort.text = news.displayTitle
+        labelDescription.text = news.displayDescription
         labelTime.text = formattedDate(news.createdAt)
 
         // Imagen perfil
@@ -88,18 +88,18 @@ class NewsDetailController: UIViewController {
         let now = Date()
         let seconds = now.timeIntervalSince(date)
 
-        if seconds < 0 { return "ahora" }
+        if seconds < 0 { return L10n.tr("now") }
         
         let oneWeek: TimeInterval = 7 * 24 * 60 * 60
         if seconds >= oneWeek {
             let df = DateFormatter()
-            df.locale = Locale(identifier: "es_ES")
+            df.locale = Locale.current
             df.timeZone = .current
             df.dateFormat = "dd/MM/yyyy"
             return df.string(from: date)
         } else {
             let formatter = RelativeDateTimeFormatter()
-            formatter.locale = Locale(identifier: "es_ES")
+            formatter.locale = Locale.current
             formatter.unitsStyle = .short
             return formatter.localizedString(for: date, relativeTo: now)
         }

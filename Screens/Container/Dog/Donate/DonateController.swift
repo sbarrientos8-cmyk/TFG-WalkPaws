@@ -36,9 +36,9 @@ class DonateController: UIViewController
         super.viewDidLoad()
 
         // Aquí pon tus estilos si quieres (no te los toco)
-        labelTitle.config(text: "Realizar donación", style: StylesLabel.titleHi)
-        
-        labelTitle1.config(text: "Donar con puntos", style: StylesLabel.titleMap)
+        labelTitle.config(text: L10n.tr("make_donation"), style: StylesLabel.titleHi)
+        labelTitle1.config(text: L10n.tr("donate_with_points"), style: StylesLabel.titleMap)
+
         
         Task { [weak self] in
             guard let self else { return }
@@ -55,13 +55,24 @@ class DonateController: UIViewController
                 var extraLine = ""
                 if restEur > 0 {
                     if points >= pointsToComplete {
-                        extraLine = "\nSi quieres completar la donación, dona \(pointsToComplete) puntos."
+                        extraLine = "\n" + String(
+                            format: L10n.tr("donate_points_to_complete"),
+                            pointsToComplete
+                        )
                     } else {
-                        extraLine = "\nPara completar la donación te faltan \(pointsToComplete - points) puntos."
+                        extraLine = "\n" + String(
+                            format: L10n.tr( "points_missing_to_complete_donation"),
+                            pointsToComplete - points
+                        )
                     }
                 }
 
-                let text = "Tienes \(points) puntos (≈ \(String(format: "%.2f", euros))€)." + extraLine
+                let euroText = String(format: "%.2f", euros)
+                let text = String(
+                    format: L10n.tr("you_have_points_equivalent_eur"),
+                    points,
+                    euroText
+                ) + extraLine
 
                 await MainActor.run {
                     self.labelDescription1.config(text: text, style: StylesLabel.description)
@@ -71,20 +82,21 @@ class DonateController: UIViewController
             }
         }
         
-        buttonDonatePoints.config(text: "Donar", style: StylesButton.secondaryGreen2)
+        buttonDonatePoints.config(text: L10n.tr("donate"), style: StylesButton.secondaryGreen2)
         buttonDonatePoints.applyShadow(cornerRadius: 20)
         
-        labelTitle2.config(text: "Donar con tarjeta", style: StylesLabel.titleMap)
-        labelDescription2.config(text: "Añadir los datos de tu tarjeta y el importe que quieres donar", style: StylesLabel.description)
-        buttonDonateMoney.config(text: "Donar", style: StylesButton.secondaryGreen2)
+        labelTitle2.config(text: L10n.tr("donate_with_card"), style: StylesLabel.titleMap)
+        labelDescription2.config(text: L10n.tr("enter_card_details_and_amount"), style: StylesLabel.description)
+        buttonDonateMoney.config(text: L10n.tr("donate"), style: StylesButton.secondaryGreen2)
         buttonDonateMoney.applyShadow(cornerRadius: 20)
 
         // Placeholder
-        fieldPoints.config(image: nil, placeholder: "Puntos")
-        fieldMoney.config(image: nil, placeholder: "Euros")
-        fieldNumber.config(image: nil, placeholder: "Número tarjeta")
-        fieldName.config(image: nil, placeholder: "Nombre titular")
-        fieldDate.config(image: nil, placeholder: "MM/AA")
+        fieldPoints.config(image: nil, placeholder: L10n.tr( "points_placeholder"))
+        fieldMoney.config(image: nil, placeholder: L10n.tr("euros"))
+        fieldNumber.config(image: nil, placeholder: L10n.tr( "card_number"))
+        fieldName.config(image: nil, placeholder: L10n.tr( "cardholder_name"))
+        fieldDate.config(image: nil, placeholder: L10n.tr("mm_yy"))
+        fieldCVC.config(image: nil, placeholder: L10n.tr("cvc"))
         fieldDate.onTextChange { [weak self] text in
             guard let self else { return }
 
@@ -115,7 +127,7 @@ class DonateController: UIViewController
     @IBAction func donatePointsClicked(_ sender: Any) {
         guard let points = validatePointsDonation() else { return }
         guard let dogUUID = UUID(uuidString: dogId) else {
-            showError("DogId inválido.")
+            showError(L10n.tr("invalid_dog_id"))
             return
         }
 
@@ -125,7 +137,7 @@ class DonateController: UIViewController
                 let totalPoints = try await fetchMyPoints()
                 if points > totalPoints {
                     await MainActor.run {
-                        self.showError("No tienes suficientes puntos. Tienes \(totalPoints).")
+                        self.showError(String(format: L10n.tr( "not_enough_points_you_have"), totalPoints))
                     }
                     return
                 }
@@ -140,7 +152,7 @@ class DonateController: UIViewController
                     self.dismiss(animated: true)
                 }
             } catch {
-                await MainActor.run { self.showError("Error al donar puntos. Inténtalo de nuevo.") }
+                await MainActor.run { self.showError(L10n.tr( "error_donating_points_try_again")) }
                 print("❌ donate_points error:", error)
             }
         }
@@ -150,7 +162,7 @@ class DonateController: UIViewController
     @IBAction func donateMoneyClicked(_ sender: Any) {
         guard let result = validateMoneyDonation() else { return }
         guard let dogUUID = UUID(uuidString: dogId) else {
-            showError("DogId inválido.")
+            showError(L10n.tr("invalid_dog_id"))
             return
         }
 
@@ -171,7 +183,7 @@ class DonateController: UIViewController
                     self.dismiss(animated: true)
                 }
             } catch {
-                await MainActor.run { self.showError("Error al donar con tarjeta. Inténtalo de nuevo.") }
+                await MainActor.run { self.showError(L10n.tr( "error_donating_by_card_try_again")) }
                 print("❌ donate_money error:", error)
             }
         }
@@ -187,17 +199,17 @@ class DonateController: UIViewController
         // euros
         let moneyText = fieldMoney.getText()
         if moneyText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            showError("Introduce el importe en euros.")
+            showError(L10n.tr("enter_amount_in_euros"))
             return nil
         }
 
         guard let eur = parseEur(moneyText), eur > 0 else {
-            showError("El importe debe ser un número válido mayor que 0.")
+            showError(L10n.tr("amount_must_be_valid_greater_than_zero"))
             return nil
         }
 
         if maxDonationEur > 0, eur > maxDonationEur + 0.0001 {
-            showError("No puedes donar más de \(String(format: "%.2f", maxDonationEur))€.")
+            showError(String(format: L10n.tr( "cannot_donate_more_than_eur"), maxDonationEur))
             return nil
         }
 
@@ -206,43 +218,43 @@ class DonateController: UIViewController
         let number = digitsOnly(numberRaw)
 
         if number.isEmpty {
-            showError("Introduce el número de tarjeta.")
+            showError(L10n.tr("enter_card_number"))
             return nil
         }
 
         if !isValidCardNumber(number) {
-            showError("Número de tarjeta no válido.")
+            showError(L10n.tr("invalid_card_number"))
             return nil
         }
 
         // nombre
         let name = fieldName.getText().trimmingCharacters(in: .whitespacesAndNewlines)
         if name.isEmpty {
-            showError("Introduce el nombre del titular.")
+            showError(L10n.tr("enter_cardholder_name"))
             return nil
         }
 
         // fecha MMYY -> MM/YY
         let dateRaw = fieldDate.getText().trimmingCharacters(in: .whitespacesAndNewlines)
         if dateRaw.isEmpty {
-            showError("Introduce la fecha de caducidad.")
+            showError(L10n.tr("enter_expiration_date"))
             return nil
         }
 
         guard let _ = formatMMYY(dateRaw) else {
-            showError("Fecha no válida. Usa formato MMYY (ej: 0728).")
+            showError(L10n.tr("invalid_date_use_mmyy"))
             return nil
         }
 
         // cvc
         let cvcRaw = fieldCVC.getText()
         if cvcRaw.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            showError("Introduce el CVC.")
+            showError(L10n.tr("enter_cvc"))
             return nil
         }
 
         if !isValidCVC(cvcRaw) {
-            showError("CVC no válido. Debe tener 3 o 4 dígitos.")
+            showError(L10n.tr("invalid_cvc"))
             return nil
         }
 
@@ -253,12 +265,12 @@ class DonateController: UIViewController
         let raw = fieldPoints.getText().trimmingCharacters(in: .whitespacesAndNewlines)
 
         if raw.isEmpty {
-            showError("Introduce los puntos que quieres donar.")
+            showError(L10n.tr("enter_points_to_donate"))
             return nil
         }
 
         guard let points = Int(raw), points > 0 else {
-            showError("Los puntos deben ser un número mayor que 0.")
+            showError(L10n.tr("points_must_be_greater_than_zero"))
             return nil
         }
 
@@ -267,7 +279,7 @@ class DonateController: UIViewController
         if maxDonationEur > 0 {
             let maxPoints = Int(ceil(maxDonationEur * 10.0))   // redondeo hacia arriba
             if points > maxPoints {
-                showError("No puedes donar más de \(maxPoints) puntos.")
+                showError(String(format: L10n.tr( "cannot_donate_more_than_points"), maxPoints))
                 return nil
             }
         }
@@ -276,8 +288,8 @@ class DonateController: UIViewController
     }
     
     private func showError(_ message: String) {
-        let alert = UIAlertController(title: "Revisa los datos", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        let alert = UIAlertController(title: L10n.tr("check_your_data"), message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: L10n.tr("ok"), style: .default))
         present(alert, animated: true)
     }
 

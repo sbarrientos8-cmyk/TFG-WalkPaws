@@ -2,6 +2,7 @@
   "sourceLanguage" : "en",
   "strings" : {
     "accept" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -13,6 +14,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aceptar"
+          }
+        }
+      }
+    },
+    "add_image" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add image"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir imagen"
+          }
+        }
+      }
+    },
+    "amount_must_be_valid_greater_than_zero" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The amount must be a valid number greater than 0."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El importe debe ser un número válido mayor que 0."
           }
         }
       }
@@ -34,6 +69,74 @@
         }
       }
     },
+    "cannot_donate_more_than_eur" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You cannot donate more than %.2f€."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No puedes donar más de %.2f€."
+          }
+        }
+      }
+    },
+    "cannot_donate_more_than_points" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You cannot donate more than %d points."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No puedes donar más de %d puntos."
+          }
+        }
+      }
+    },
+    "card_number" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Card number"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Número de tarjta"
+          }
+        }
+      }
+    },
+    "cardholder_name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cardholder name"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre titular"
+          }
+        }
+      }
+    },
     "change_image" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -51,6 +154,23 @@
         }
       }
     },
+    "change_language" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change language"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambiar idioma"
+          }
+        }
+      }
+    },
     "changes_saved_successfully" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -64,6 +184,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Los cambios se han guardado correctamente."
+          }
+        }
+      }
+    },
+    "check_your_data" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check your data"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revisa tus datos"
           }
         }
       }
@@ -93,6 +230,29 @@
             "state" : "translated",
             "value" : "Are you sure you want to delete this post?"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Estás seguro que quieres eliminar esta publicación?"
+          }
+        }
+      }
+    },
+    "confirm_log_out" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure you want to log out?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Seguro que quieres cerrar sesión?"
+          }
         }
       }
     },
@@ -109,6 +269,74 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Confirmar contraseña"
+          }
+        }
+      }
+    },
+    "contact" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contact"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contactar"
+          }
+        }
+      }
+    },
+    "contact_email_body" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New message for the shelter: %@\n\nUser: %@\nEmail: %@\n\nReason:\n%@\n\nMessage:\n%@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuevo mensaje para el refugio: %@\n\nUsuario: %@\nEmail: %@\n\nMotivo:\n%@\n\nMensaje:\n%@"
+          }
+        }
+      }
+    },
+    "contact_email_subject" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WalkPaws - %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WalkPaws - %@"
+          }
+        }
+      }
+    },
+    "contact_us" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contact us"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contactar con nosotros"
           }
         }
       }
@@ -181,6 +409,74 @@
         }
       }
     },
+    "could_not_get_profile" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your profile could not be retrieved."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo obtener tu perfil."
+          }
+        }
+      }
+    },
+    "could_not_get_session_log_in_again" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your session could not be retrieved. Please log in again."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo obtener tu sesión. Vuelve a iniciar sesión."
+          }
+        }
+      }
+    },
+    "could_not_log_out_try_again" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Could not log out. Please try again."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo cerrar sesión. Inténtalo de nuevo."
+          }
+        }
+      }
+    },
+    "could_not_publish_try_again" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The post could not be published. Please try again."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo publicar. Inténtalo de nuevo."
+          }
+        }
+      }
+    },
     "could_not_resend_code" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -232,6 +528,23 @@
         }
       }
     },
+    "cvc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CVC"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CVC"
+          }
+        }
+      }
+    },
     "delete" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -239,6 +552,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Delete"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar"
           }
         }
       }
@@ -250,6 +569,46 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Delete post"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar publicación"
+          }
+        }
+      }
+    },
+    "description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descripción"
+          }
+        }
+      }
+    },
+    "description_label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descripción:"
           }
         }
       }
@@ -322,6 +681,57 @@
         }
       }
     },
+    "dog_detail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dog detail"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detalle del perro"
+          }
+        }
+      }
+    },
+    "dog_goal_already_reached" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This dog has already reached its goal. Thank you!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este perro ya ha alcanzado su objetivo. ¡Gracias!"
+          }
+        }
+      }
+    },
+    "dogs" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dogs"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perros"
+          }
+        }
+      }
+    },
     "dogs_available_for_walks" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -356,6 +766,108 @@
         }
       }
     },
+    "donate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Donate"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Donar"
+          }
+        }
+      }
+    },
+    "donate_points_to_complete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you want to complete the donation, donate %d points."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si quieres completar la donación, dona %d puntos."
+          }
+        }
+      }
+    },
+    "donate_with_card" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Donate with card"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Donar con tarjeta"
+          }
+        }
+      }
+    },
+    "donate_with_points" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Donate with points"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Donar con puntos"
+          }
+        }
+      }
+    },
+    "donation_completed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Donation completed"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Donación completada"
+          }
+        }
+      }
+    },
+    "donation_completed_banner" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The donation has been completed!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡La donación se ha completado!"
+          }
+        }
+      }
+    },
     "dont_have_account_sign_up" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -386,6 +898,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Editar imagen"
+          }
+        }
+      }
+    },
+    "edit_profile" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit profile"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar perfil"
           }
         }
       }
@@ -437,6 +966,142 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Activa la ubicación para empezar el paseo."
+          }
+        }
+      }
+    },
+    "english" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "English"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inglés"
+          }
+        }
+      }
+    },
+    "enter_amount_in_euros" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter the amount in euros."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introduce el importe en euros."
+          }
+        }
+      }
+    },
+    "enter_card_details_and_amount" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter your card details and the amount you want to donate"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir los datos de tu tarjeta y el importe que quieres donar"
+          }
+        }
+      }
+    },
+    "enter_card_number" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter the card number."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introduce el número de tarjeta."
+          }
+        }
+      }
+    },
+    "enter_cardholder_name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter the cardholder name."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introduce el nombre del titular."
+          }
+        }
+      }
+    },
+    "enter_cvc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter the CVC."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introduce el CVC."
+          }
+        }
+      }
+    },
+    "enter_expiration_date" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter the expiration date."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introduce la fecha de caducidad."
+          }
+        }
+      }
+    },
+    "enter_points_to_donate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter the points you want to donate."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introduce los puntos que quieres donar."
           }
         }
       }
@@ -509,6 +1174,91 @@
         }
       }
     },
+    "error_donating_by_card_try_again" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error donating by card. Please try again."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al donar con tarjeta. Inténtalo de nuevo."
+          }
+        }
+      }
+    },
+    "error_donating_points_try_again" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Error donating points. Please try again."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al donar puntos. Inténtalo de nuevo."
+          }
+        }
+      }
+    },
+    "error_loading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error loading"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al cargar"
+          }
+        }
+      }
+    },
+    "error_loading_shelters" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error loading shelters."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error cargando refugios."
+          }
+        }
+      }
+    },
+    "euros" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Euros"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Euros"
+          }
+        }
+      }
+    },
     "explore_dog_shelters_in_your_area" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -577,6 +1327,23 @@
         }
       }
     },
+    "finish_current_walk_first" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You cannot start another walk until you finish the current one."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No puedes empezar otro paseo hasta que termines el actual."
+          }
+        }
+      }
+    },
     "finish_walk" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -590,6 +1357,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Terminar paseo"
+          }
+        }
+      }
+    },
+    "first_walk_will_appear_here" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take your first walk and you will see it here."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haz tu primer paseo y lo verás aquí."
           }
         }
       }
@@ -645,6 +1429,40 @@
         }
       }
     },
+    "image_label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Image:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagen:"
+          }
+        }
+      }
+    },
+    "image_selected" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Image selected ✅"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagen seleccionada ✅"
+          }
+        }
+      }
+    },
     "incorrect_verification_code" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -662,6 +1480,74 @@
         }
       }
     },
+    "invalid_card_number" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid card number."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Número de tarjeta no válido."
+          }
+        }
+      }
+    },
+    "invalid_cvc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid CVC. It must have 3 or 4 digits."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CVC no válido. Debe tener 3 o 4 dígitos."
+          }
+        }
+      }
+    },
+    "invalid_date_use_mmyy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid date. Use MMYY format (e.g. 0728)."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fecha no válida. Usa formato MMYY (ej: 0728)."
+          }
+        }
+      }
+    },
+    "invalid_dog_id" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid dog ID."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DogId inválido."
+          }
+        }
+      }
+    },
     "invalid_email" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -675,6 +1561,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Email inválido"
+          }
+        }
+      }
+    },
+    "loading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading…"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cargando…"
           }
         }
       }
@@ -713,19 +1616,70 @@
         }
       }
     },
+    "log_out" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log out"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrar sesión"
+          }
+        }
+      }
+    },
     "make_a_shelter_dog_happy" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Make a shelter dog\\nhappy"
+            "value" : "Make a shelter dog\nhappy"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Haz feliz a un perro\\nrefugiado"
+            "value" : "Haz feliz a un perro\nrefugiado"
+          }
+        }
+      }
+    },
+    "make_donation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Make a donation"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Realizar donación"
+          }
+        }
+      }
+    },
+    "message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Message"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mensaje"
           }
         }
       }
@@ -764,6 +1718,23 @@
         }
       }
     },
+    "mm_yy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MM/YY"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MM/AA"
+          }
+        }
+      }
+    },
     "must_be_closer_to_finish_walk" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -789,6 +1760,29 @@
             "state" : "translated",
             "value" : "My posts"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mis publicaciones"
+          }
+        }
+      }
+    },
+    "my_walks" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My walks"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mis paseos"
+          }
         }
       }
     },
@@ -805,6 +1799,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nombre:"
+          }
+        }
+      }
+    },
+    "need_support" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Need support"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Necesitan apoyo"
+          }
+        }
+      }
+    },
+    "needs_support" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Needs support"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Necesita apoyo"
           }
         }
       }
@@ -860,6 +1888,142 @@
         }
       }
     },
+    "new_post" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New post"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir publicación"
+          }
+        }
+      }
+    },
+    "news_will_appear_here" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When there are news posts, they will appear here."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuando haya noticias aparecerán aquí."
+          }
+        }
+      }
+    },
+    "no_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No description"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin descripción"
+          }
+        }
+      }
+    },
+    "no_diagnosis" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No diagnosis"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin diagnóstico"
+          }
+        }
+      }
+    },
+    "no_dogs_available_in_category" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There are currently no dogs available in this category."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ahora mismo no hay perros disponibles en esta categoría."
+          }
+        }
+      }
+    },
+    "no_location" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No location"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin ubicación"
+          }
+        }
+      }
+    },
+    "no_needy_dogs" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There are no dogs needing support"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay perros que necesiten apoyo"
+          }
+        }
+      }
+    },
+    "no_posts" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No posts"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay publicaciones"
+          }
+        }
+      }
+    },
     "no_posts_yet" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -867,6 +2031,114 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "You have no posts yet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No tienes publicaciones aún"
+          }
+        }
+      }
+    },
+    "no_results_for" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No results for “%@”"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay resultados para “%@”"
+          }
+        }
+      }
+    },
+    "no_shelters_available" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No shelters available."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay refugios disponibles"
+          }
+        }
+      }
+    },
+    "no_special_needs_dogs_in_shelter" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There are currently no dogs with special needs in this shelter."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ahora mismo no hay perros con necesidades especiales en este refugio"
+          }
+        }
+      }
+    },
+    "no_stable_dogs" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There are no stable dogs"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay perros estables"
+          }
+        }
+      }
+    },
+    "no_walks_yet" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No walks yet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay paseos aún"
+          }
+        }
+      }
+    },
+    "not_enough_points_you_have" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You do not have enough points. You have %d."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No tienes suficientes puntos. Tienes %d."
           }
         }
       }
@@ -884,6 +2156,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No estás cerca del refugio"
+          }
+        }
+      }
+    },
+    "now" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Now"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ahora"
           }
         }
       }
@@ -1007,6 +2296,108 @@
         }
       }
     },
+    "points" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Points"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puntos"
+          }
+        }
+      }
+    },
+    "points_missing_to_complete_donation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You need %d more points to complete the donation."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para completar la donación te faltan %d puntos."
+          }
+        }
+      }
+    },
+    "points_must_be_greater_than_zero" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Points must be a number greater than 0."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los puntos deben ser un número mayor que 0."
+          }
+        }
+      }
+    },
+    "points_placeholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Points"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puntos"
+          }
+        }
+      }
+    },
+    "post_created_successfully" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your post has been created successfully."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu publicación se ha creado correctamente."
+          }
+        }
+      }
+    },
+    "post_detail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post detail"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detalle de la publicación"
+          }
+        }
+      }
+    },
     "posts_will_appear_here" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1014,6 +2405,63 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "When you create a post, it will appear here."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuando crees una publicación, aparecerá aquí."
+          }
+        }
+      }
+    },
+    "publish" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publish"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publicar"
+          }
+        }
+      }
+    },
+    "published_success" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Published ✅"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publicado ✅"
+          }
+        }
+      }
+    },
+    "raised_amount" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raised: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recaudado: %@"
           }
         }
       }
@@ -1024,13 +2472,30 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ready to\\ngo for a walk?"
+            "value" : "Ready to\ngo for a walk?"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "¿Listo para\\npasear?"
+            "value" : "¿Listo para\npasear?"
+          }
+        }
+      }
+    },
+    "reason" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reason"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Motivo"
           }
         }
       }
@@ -1048,6 +2513,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Recuperar Contraseña"
+          }
+        }
+      }
+    },
+    "remaining_amount" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remaining: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faltan: %@"
           }
         }
       }
@@ -1086,6 +2568,23 @@
         }
       }
     },
+    "saved" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saved"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardado"
+          }
+        }
+      }
+    },
     "saving" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1103,7 +2602,42 @@
         }
       }
     },
+    "search_dogs" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search dogs"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar perros"
+          }
+        }
+      }
+    },
+    "search_shelter_city" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search shelter, city..."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar refugio, ciudad..."
+          }
+        }
+      }
+    },
     "select_dog" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1149,6 +2683,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Selecciona un refugio y un perro"
+          }
+        }
+      }
+    },
+    "send" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar"
           }
         }
       }
@@ -1255,6 +2806,40 @@
         }
       }
     },
+    "spanish" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spanish"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Español"
+          }
+        }
+      }
+    },
+    "stable" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stable"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estables"
+          }
+        }
+      }
+    },
     "start_walk" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1285,6 +2870,57 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aún estás lejos del refugio"
+          }
+        }
+      }
+    },
+    "story" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Story"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Historia"
+          }
+        }
+      }
+    },
+    "title_and_description_required" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You must write at least a title and a description."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debes escribir al menos un título y una descripción."
+          }
+        }
+      }
+    },
+    "title_label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Title:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Título:"
           }
         }
       }
@@ -1340,6 +2976,40 @@
         }
       }
     },
+    "view_dogs" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View dogs"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver perros"
+          }
+        }
+      }
+    },
+    "view_map" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View map"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver mapa"
+          }
+        }
+      }
+    },
     "view_news" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1391,6 +3061,23 @@
         }
       }
     },
+    "walk_already_in_progress" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You already have a walk in progress"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ya tienes un paseo en curso"
+          }
+        }
+      }
+    },
     "walk_details_title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1414,13 +3101,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The walk will not be saved because you have not walked at least 0.3 km.\\n\\nDistance: %@"
+            "value" : "The walk will not be saved because you have not walked at least 0.3 km.\n\nDistance: %@"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No se guardará el paseo porque no has recorrido al menos 0,3 km.\\n\\nDistancia: %@"
+            "value" : "No se guardará el paseo porque no has recorrido al menos 0,3 km.\n\nDistancia: %@"
           }
         }
       }
@@ -1448,13 +3135,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@\\nDog: %@\\n\\n⏱ Time: %@\\n📏 Distance: %@\\n🧭 Recorded points: %d"
+            "value" : "%@\nDog: %@\n\n⏱ Time: %@\n📏 Distance: %@\n🧭 Recorded points: %d"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Refugio: %@\\nPerro: %@\\n\\n⏱ Tiempo: %@\\n📏 Distancia: %@\\n🧭 Puntos registrados: %d"
+            "value" : "Refugio: %@\nPerro: %@\n\n⏱ Tiempo: %@\n📏 Distancia: %@\n🧭 Puntos registrados: %d"
           }
         }
       }
@@ -1489,6 +3176,91 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Te enviaremos un código para restablecer tu contraseña"
+          }
+        }
+      }
+    },
+    "write_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Write the description..."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escribe la descripción…"
+          }
+        }
+      }
+    },
+    "write_reason" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Write the reason"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escribe el motivo"
+          }
+        }
+      }
+    },
+    "write_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Write the title"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escribe el título"
+          }
+        }
+      }
+    },
+    "write_your_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Write your message..."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escribe tu mensaje…"
+          }
+        }
+      }
+    },
+    "you_have_points_equivalent_eur" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have %d points (≈ %@€)."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tienes %d puntos (≈ %@€)."
           }
         }
       }

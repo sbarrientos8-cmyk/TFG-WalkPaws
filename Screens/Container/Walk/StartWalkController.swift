@@ -66,10 +66,10 @@ class StartWalkController: UIViewController {
         viewForm.layer.cornerRadius = 12
         viewForm.applyCardStyle()
         
-        labelTitle.config(text: String(localized: "walk_details_title"), style: StylesLabel.title2Name)
-        labelShelter.config(text: String(localized: "shelter"), style: StylesLabel.subtitle)
-        labelDog.config(text: String(localized: "dog"), style: StylesLabel.subtitle)
-        buttonWalk.config(text: String(localized: "start_walk"), style: StylesButton.primary)
+        labelTitle.config(text: L10n.tr("walk_details_title"), style: StylesLabel.title2Name)
+        labelShelter.config(text: L10n.tr("shelter"), style: StylesLabel.subtitle)
+        labelDog.config(text: L10n.tr("dog"), style: StylesLabel.subtitle)
+        buttonWalk.config(text: L10n.tr("start_walk"), style: StylesButton.primary)
         
         //blurImageView(imageBackground, radius: 15.0) // menos blur
         let darkOverlay = UIView(frame: imageBackground.bounds)
@@ -78,8 +78,8 @@ class StartWalkController: UIViewController {
         imageBackground.addSubview(darkOverlay)
         
         
-        fieldShelter.config(imageName: "shelter_icn", placeholder: String(localized: "select_shelter"))
-        fieldDog.config(imageName: "footprint1", placeholder: String(localized: "select_dog"))
+        fieldShelter.config(imageName: "shelter_icn", placeholder: L10n.tr( "select_shelter"))
+        fieldDog.config(imageName: "footprint1", placeholder: L10n.tr( "select_dog"))
 
         fieldDog.setItems([])
 
@@ -130,8 +130,8 @@ class StartWalkController: UIViewController {
               !shelterName.isEmpty,
               !dogName.isEmpty else {
             showAlert(
-                title: String(localized: "missing_data"),
-                message: String(localized: "select_shelter_and_dog")
+                title: L10n.tr("missing_data"),
+                message: L10n.tr("select_shelter_and_dog")
             )
             return
         }
@@ -143,8 +143,8 @@ class StartWalkController: UIViewController {
             guard let userLoc = self.lastLocation else {
                 await MainActor.run {
                     self.showAlert(
-                        title: String(localized: "location_not_available"),
-                        message: String(localized: "enable_location_to_start_walk")
+                        title: L10n.tr("location_not_available"),
+                        message: L10n.tr("enable_location_to_start_walk")
                     )
                 }
                 return
@@ -168,8 +168,8 @@ class StartWalkController: UIViewController {
                 guard let lat = shelter.latitude, let lon = shelter.longitude else {
                     await MainActor.run {
                         self.showAlert(
-                            title: String(localized: "shelter_without_location"),
-                            message: String(localized: "shelter_without_saved_coordinates")
+                            title: L10n.tr("shelter_without_location"),
+                            message: L10n.tr( "shelter_without_saved_coordinates")
                         )
                     }
                     return
@@ -184,8 +184,8 @@ class StartWalkController: UIViewController {
                     let km = distance / 1000.0
                     await MainActor.run {
                         self.showAlert(
-                            title: String(localized: "not_near_shelter"),
-                            message: String(format: String(localized: "distance_too_far_to_start_walk"), km)
+                            title: L10n.tr("not_near_shelter"),
+                            message: String(format: L10n.tr( "distance_too_far_to_start_walk"), km)
                         )
                     }
                     return
@@ -213,8 +213,8 @@ class StartWalkController: UIViewController {
                 print("❌ fetch shelter coords error:", error)
                 await MainActor.run {
                     self.showAlert(
-                        title: String(localized: "error"),
-                        message: String(localized: "could_not_check_shelter_location")
+                        title: L10n.tr("error"),
+                        message: L10n.tr( "could_not_check_shelter_location")
                     )
                 }
             }
@@ -223,7 +223,7 @@ class StartWalkController: UIViewController {
     
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: String(localized: "ok"), style: .default))
+        alert.addAction(UIAlertAction(title: L10n.tr("ok"), style: .default))
         present(alert, animated: true)
     }
     
@@ -255,7 +255,7 @@ class StartWalkController: UIViewController {
                 var dict: [String: String] = [:] // shelter_id -> shelter_name
                 for d in models {
                     if let sid = d.shelterId, !sid.isEmpty {
-                        dict[sid] = d.city.isEmpty ? (rows.first(where: { $0.shelter_id == sid })?.shelter_name ?? String(localized: "shelter")) : (rows.first(where: { $0.shelter_id == sid })?.shelter_name ?? String(localized: "shelter"))
+                        dict[sid] = d.city.isEmpty ? (rows.first(where: { $0.shelter_id == sid })?.shelter_name ?? L10n.tr("shelter")) : (rows.first(where: { $0.shelter_id == sid })?.shelter_name ?? L10n.tr("shelter"))
                         // Realmente lo importante es shelter_name:
                         // pero DogModel no guarda shelter_name, solo city.
                     }
@@ -264,7 +264,7 @@ class StartWalkController: UIViewController {
                 // Mejor: sacarlo directamente de los DTO
                 var dict2: [String: String] = [:]
                 for r in rows {
-                    dict2[r.shelter_id] = r.shelter_name ?? String(localized: "shelter")
+                    dict2[r.shelter_id] = r.shelter_name ?? L10n.tr( "shelter")
                 }
 
                 let list = dict2.map { (id: $0.key, name: $0.value) }

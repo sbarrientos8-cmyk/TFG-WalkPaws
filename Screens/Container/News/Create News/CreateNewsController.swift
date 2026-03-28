@@ -29,16 +29,16 @@ class CreateNewsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        labelTitleNav.config(text: "Nueva Publicación", style: StylesLabel.titleNav)
-        labelTitle.config(text: "Título:", style: StylesLabel.titleHi)
-        labelDescription.config(text: "Descripción:", style: StylesLabel.titleHi)
-        labelImage.config(text: "Imagen:", style: StylesLabel.titleHi)
+        labelTitleNav.config(text: L10n.tr("new_post"), style: StylesLabel.titleNav)
+        labelTitle.config(text: L10n.tr("title_label"), style: StylesLabel.titleHi)
+        labelDescription.config(text: L10n.tr("description_label"), style: StylesLabel.titleHi)
+        labelImage.config(text: L10n.tr("image_label"), style: StylesLabel.titleHi)
         
-        fieldTitle.config(image: UIImage(named: ""), placeholder: "Escribe el titulo")
-        fieldDescription.config(placeholder: "Escribe la descripción...")
-        labelFieldImage.config(text: "Añadir image", style: StylesLabel.subtitleGray)
+        fieldTitle.config(image: UIImage(named: ""), placeholder: L10n.tr( "write_title"))
+        fieldDescription.config(placeholder: L10n.tr("write_description"))
+        labelFieldImage.config(text: L10n.tr("add_image"), style: StylesLabel.subtitleGray)
         
-        buttonPost.config(text: "Publicar", style: StylesButton.primary)
+        buttonPost.config(text: L10n.tr("publish"), style: StylesButton.primary)
         
         setupImageTap()
         hideKeyboardWhenTappedAround()
@@ -94,7 +94,10 @@ class CreateNewsController: UIViewController {
 
         // ✅ Validación
         if title.isEmpty || description.isEmpty {
-            showAlert(title: "Faltan datos", message: "Debes escribir al menos un título y una descripción.")
+            showAlert(
+                title: L10n.tr("missing_data"),
+                message: L10n.tr("title_and_description_required")
+            )
             return
         }
 
@@ -110,7 +113,10 @@ class CreateNewsController: UIViewController {
                 if email.isEmpty {
                     await MainActor.run {
                         self.buttonPost.isEnabled = true
-                        self.showAlert(title: "Error", message: "No se pudo obtener tu sesión. Vuelve a iniciar sesión.")
+                        self.showAlert(
+                            title: L10n.tr("error"),
+                            message: L10n.tr( "could_not_get_session_log_in_again")
+                        )
                     }
                     return
                 }
@@ -120,7 +126,10 @@ class CreateNewsController: UIViewController {
                       let profileId = dto.id else {
                     await MainActor.run {
                         self.buttonPost.isEnabled = true
-                        self.showAlert(title: "Error", message: "No se pudo obtener tu perfil.")
+                        self.showAlert(
+                            title: L10n.tr("error"),
+                            message: L10n.tr("could_not_get_profile")
+                        )
                     }
                     return
                 }
@@ -134,7 +143,6 @@ class CreateNewsController: UIViewController {
                 // 4) Insert
                 let row = NewsInsert(
                     title: title,
-                    short_text: title,
                     description: description,
                     image_url: imageUrl,
                     author_type: "user",
@@ -151,7 +159,10 @@ class CreateNewsController: UIViewController {
                 await MainActor.run {
                     self.buttonPost.isEnabled = true
 
-                    self.showAlert(title: "Publicado ✅", message: "Tu publicación se ha creado correctamente.") {
+                    self.showAlert(
+                        title: L10n.tr("published_success"),
+                        message: L10n.tr("post_created_successfully")
+                    ) {
                         self.navigationController?.popViewController(animated: true)
                     }
                 }
@@ -160,7 +171,10 @@ class CreateNewsController: UIViewController {
                 print("❌ post news error:", error)
                 await MainActor.run {
                     self.buttonPost.isEnabled = true
-                    self.showAlert(title: "Error", message: "No se pudo publicar. Inténtalo de nuevo.")
+                    self.showAlert(
+                        title: L10n.tr("error"),
+                        message: L10n.tr("could_not_publish_try_again")
+                    )
                 }
             }
         }
@@ -169,7 +183,7 @@ class CreateNewsController: UIViewController {
     // ✅ helper
     private func showAlert(title: String, message: String, onOk: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in onOk?() })
+        alert.addAction(UIAlertAction(title: L10n.tr("ok"), style: .default) { _ in onOk?() })
         present(alert, animated: true)
     }
     
@@ -193,7 +207,7 @@ extension CreateNewsController: PHPickerViewControllerDelegate {
             DispatchQueue.main.async {
                 self.imagePreview.image = image
                 self.selectedImageData = data
-                self.labelFieldImage.text = "Imagen seleccionada ✅"
+                self.labelFieldImage.text = L10n.tr("image_selected")
             }
         }
     }

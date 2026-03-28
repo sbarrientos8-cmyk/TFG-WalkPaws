@@ -160,6 +160,9 @@
 		D5BDB3922F2E743D001E8B1B /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BDB3912F2E743B001E8B1B /* SearchField.swift */; };
 		D5D734D92F55F91C00984BC1 /* backgroundWalk.png in Resources */ = {isa = PBXBuildFile; fileRef = D5D734D82F55F91C00984BC1 /* backgroundWalk.png */; };
 		D5D734DB2F56054500984BC1 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = D5D734DA2F56054500984BC1 /* location.png */; };
+		D5DFC1E82F780A7B002EC95E /* ChangeLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DFC1E62F780A7B002EC95E /* ChangeLanguageController.swift */; };
+		D5DFC1E92F780A7B002EC95E /* ChangeLanguageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DFC1E72F780A7B002EC95E /* ChangeLanguageController.xib */; };
+		D5E8FDDE2F780FC400A84131 /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E8FDDD2F780FC400A84131 /* AppLanguage.swift */; };
 		D5F8F3112F58B89900223C5E /* DonateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F8F3102F58B89900223C5E /* DonateModel.swift */; };
 		D5F8F3142F58DD0900223C5E /* RouterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F8F3132F58DD0900223C5E /* RouterController.swift */; };
 		D5F8F3162F58E11800223C5E /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = D5F8F3152F58E11800223C5E /* Auth */; };
@@ -349,6 +352,9 @@
 		D5BDB3912F2E743B001E8B1B /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
 		D5D734D82F55F91C00984BC1 /* backgroundWalk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundWalk.png; sourceTree = "<group>"; };
 		D5D734DA2F56054500984BC1 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
+		D5DFC1E62F780A7B002EC95E /* ChangeLanguageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLanguageController.swift; sourceTree = "<group>"; };
+		D5DFC1E72F780A7B002EC95E /* ChangeLanguageController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeLanguageController.xib; sourceTree = "<group>"; };
+		D5E8FDDD2F780FC400A84131 /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
 		D5F8F3102F58B89900223C5E /* DonateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateModel.swift; sourceTree = "<group>"; };
 		D5F8F3132F58DD0900223C5E /* RouterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterController.swift; sourceTree = "<group>"; };
 		D5F8F3182F599DCA00223C5E /* DonateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateController.swift; sourceTree = "<group>"; };
@@ -843,6 +849,7 @@
 				D599024E2F2400BB0029FB34 /* Main.storyboard */,
 				D599024F2F2400BB0029FB34 /* SceneDelegate.swift */,
 				D59902502F2400BB0029FB34 /* ViewController.swift */,
+				D5E8FDDD2F780FC400A84131 /* AppLanguage.swift */,
 			);
 			path = WalkPaws;
 			sourceTree = "<group>";
@@ -976,6 +983,7 @@
 		D5B0BC662F33CEDE00822E3F /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				D5DFC1E52F780A60002EC95E /* Language */,
 				D5B0BC6B2F33D32100822E3F /* Cell */,
 				D523AB3E2F50CF7B008FD8CE /* Edit */,
 				D523AB372F50C78C008FD8CE /* MyNews */,
@@ -1018,6 +1026,15 @@
 				D5B0BC4C2F31035000822E3F /* AlertView.xib */,
 			);
 			path = Alert;
+			sourceTree = "<group>";
+		};
+		D5DFC1E52F780A60002EC95E /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				D5DFC1E62F780A7B002EC95E /* ChangeLanguageController.swift */,
+				D5DFC1E72F780A7B002EC95E /* ChangeLanguageController.xib */,
+			);
+			path = Language;
 			sourceTree = "<group>";
 		};
 		D5F8F30F2F58B88B00223C5E /* Donate */ = {
@@ -1284,6 +1301,7 @@
 				D551FDA92F3FAA75003A3F76 /* phone.png in Resources */,
 				D5F8F3292F5A1A3B00223C5E /* walking_empty.png in Resources */,
 				D542D42F2F27E9BC00E537AF /* email.png in Resources */,
+				D5DFC1E92F780A7B002EC95E /* ChangeLanguageController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1346,6 +1364,7 @@
 				D5B0BC4A2F30FB6D00822E3F /* AlertModel.swift in Sources */,
 				D523AB212F4F8831008FD8CE /* ContactShelterController.swift in Sources */,
 				D59902582F2400BB0029FB34 /* ViewController.swift in Sources */,
+				D5DFC1E82F780A7B002EC95E /* ChangeLanguageController.swift in Sources */,
 				D57F888D2F47AEAC008507FB /* DogDTO.swift in Sources */,
 				D523AB342F50AEBC008FD8CE /* CreateNewsController.swift in Sources */,
 				D523AB1D2F4F85F3008FD8CE /* Image.swift in Sources */,
@@ -1354,6 +1373,7 @@
 				D51754692F54DD34005424AD /* WalkService.swift in Sources */,
 				D52C364A2F4A577D00CC6AFE /* DogDetailNormalController.swift in Sources */,
 				D5F8F3142F58DD0900223C5E /* RouterController.swift in Sources */,
+				D5E8FDDE2F780FC400A84131 /* AppLanguage.swift in Sources */,
 				D5879F782F26B38400E0C9C8 /* Button.swift in Sources */,
 				D599027D2F2690750029FB34 /* Fonts.swift in Sources */,
 				D57F88832F47A7D2008507FB /* ConnectApi.swift in Sources */,
@@ -1438,9 +1458,11 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 67RPMDNR52;
+				DEVELOPMENT_TEAM = 2F8HH35QL4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WalkPaws/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Necesitamos acceso continuo a tu ubicación para registrar correctamente el paseo.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Necesitamos tu ubicación para registrar el recorrido del paseo y calcular la distancia recorrida.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1451,7 +1473,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = TFG.WalkPaws;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sofiabarrientos.walkpaws;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1468,9 +1490,11 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 67RPMDNR52;
+				DEVELOPMENT_TEAM = 2F8HH35QL4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WalkPaws/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Necesitamos acceso continuo a tu ubicación para registrar correctamente el paseo.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Necesitamos tu ubicación para registrar el recorrido del paseo y calcular la distancia recorrida.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1481,7 +1505,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = TFG.WalkPaws;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sofiabarrientos.walkpaws;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1622,7 +1646,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = TFG.WalkPawsTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sofiabarrientos.walkpawsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1640,7 +1664,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = TFG.WalkPawsTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sofiabarrientos.walkpawsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1656,7 +1680,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = TFG.WalkPawsUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sofiabarrientos.walkpawsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1672,7 +1696,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = TFG.WalkPawsUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sofiabarrientos.walkpawsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;

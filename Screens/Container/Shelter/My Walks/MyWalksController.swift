@@ -15,6 +15,7 @@ class MyWalksController: UIViewController, UITableViewDataSource, UITableViewDel
     
     private let service = WalksService()
     private var walks: [WalkListRowDTO] = []
+    private let loadingIndicator = UIActivityIndicatorView(style: .large)
     
     override func viewWillAppear(_ animated: Bool)
     {
@@ -25,22 +26,44 @@ class MyWalksController: UIViewController, UITableViewDataSource, UITableViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        labelTitleNav.config(text: "Mis Paseos", style: StylesLabel.titleNav)
+        labelTitleNav.config(text: L10n.tr("my_walks"), style: StylesLabel.titleNav)
         
         tableView.dataSource = self
         tableView.delegate = self
-
         tableView.rowHeight = UITableView.automaticDimension
         tableView.showsVerticalScrollIndicator = false
         tableView.backgroundColor = .clear
-        
         tableView.register(UINib(nibName: "MyWalkCell", bundle: nil), forCellReuseIdentifier: "MyWalkCell")
 
         emptyView.backgroundColor = Colors.background
         emptyView.isHidden = true
         
+        setupLoadingIndicator()
+        
         hideKeyboardWhenTappedAround()
         loadMyWalks()
+    }
+    
+    private func setupLoadingIndicator() {
+        loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        loadingIndicator.hidesWhenStopped = true
+        
+        view.addSubview(loadingIndicator)
+        
+        NSLayoutConstraint.activate([
+            loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
+    
+    private func showLoading() {
+        loadingIndicator.startAnimating()
+        tableView.isHidden = true
+        emptyView.isHidden = true
+    }
+    
+    private func hideLoading() {
+        loadingIndicator.stopAnimating()
     }
     
     private func updateEmptyState() {
@@ -51,9 +74,9 @@ class MyWalksController: UIViewController, UITableViewDataSource, UITableViewDel
 
         if isEmpty {
             emptyView.config(
-                image: UIImage(named: "walking_empty"), // o tu imagen "empty_walks"
-                title: "Aún no hay paseos",
-                description: "Haz tu primer paseo y lo verás aquí."
+                image: UIImage(named: "walking_empty"),
+                title: L10n.tr("no_walks_yet"),
+                description: L10n.tr("first_walk_will_appear_here")
             )
         }
     }
@@ -61,6 +84,10 @@ class MyWalksController: UIViewController, UITableViewDataSource, UITableViewDel
     private func loadMyWalks() {
         Task { [weak self] in
             guard let self else { return }
+            
+            await MainActor.run {
+                self.showLoading()
+            }
 
             do {
                 let session = try await SupabaseManager.shared.client.auth.session
@@ -69,6 +96,7 @@ class MyWalksController: UIViewController, UITableViewDataSource, UITableViewDel
                 let rows = try await service.fetchMyWalks(profileId: profileId)
 
                 await MainActor.run {
+                    self.hideLoading()
                     self.walks = rows
                     self.tableView.reloadData()
                     self.updateEmptyState()
@@ -76,6 +104,12 @@ class MyWalksController: UIViewController, UITableViewDataSource, UITableViewDel
                 }
 
             } catch {
+                await MainActor.run {
+                    self.hideLoading()
+                    self.walks = []
+                    self.tableView.reloadData()
+                    self.updateEmptyState()
+                }
                 print("❌ loadMyWalks error:", error)
             }
         }
@@ -93,6 +127,7 @@ class MyWalksController: UIViewController, UITableViewDataSource, UITableViewDel
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyWalkCell", for: indexPath) as? MyWalkCell else {
             return UITableViewCell()
         }
+        
         let w = walks[indexPath.row]
 
         cell.config(

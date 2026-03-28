@@ -14,6 +14,7 @@
                 <outlet property="buttonNormal" destination="7MY-2z-3OQ" id="YsF-hV-oqs"/>
                 <outlet property="collectionView" destination="fPb-M3-n9U" id="nU9-8C-MsR"/>
                 <outlet property="labelTitleNav" destination="shm-xm-Cnq" id="im4-Yu-A5B"/>
+                <outlet property="loadingIndicator" destination="53c-NL-1jF" id="iFi-De-JBr"/>
                 <outlet property="searchField" destination="Ubx-y4-P4U" id="i7K-Tv-fRL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewButtons" destination="7jW-Jt-pjh" id="VAF-If-8Kp"/>
@@ -119,6 +120,9 @@
                     <rect key="frame" x="0.0" y="102.33333333333331" width="393" height="749.66666666666674"/>
                     <color key="backgroundColor" red="0.97647058823529409" green="0.97254901960784312" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="53c-NL-1jF">
+                    <rect key="frame" x="186.66666666666666" y="416" width="20" height="20"/>
+                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="0.97647058823529409" green="0.97254901960784312" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -129,6 +133,8 @@
                 <constraint firstItem="Gck-uO-lfX" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.07" id="Ca7-oC-jp9"/>
                 <constraint firstItem="fPb-M3-n9U" firstAttribute="top" secondItem="7jW-Jt-pjh" secondAttribute="bottom" constant="10" id="EGg-Yl-ZiV"/>
                 <constraint firstItem="AvI-VT-Ftp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="EeR-pw-OMS"/>
+                <constraint firstItem="53c-NL-1jF" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="IUJ-FH-1xV"/>
+                <constraint firstItem="53c-NL-1jF" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="KKM-yc-Oji"/>
                 <constraint firstAttribute="bottom" secondItem="fPb-M3-n9U" secondAttribute="bottom" id="KQ2-Vp-E1u"/>
                 <constraint firstItem="Gck-uO-lfX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="M6e-ea-ETW"/>
                 <constraint firstItem="7jW-Jt-pjh" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.05" id="Q9Z-Cb-863"/>

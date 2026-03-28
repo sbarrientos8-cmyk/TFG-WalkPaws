@@ -20,12 +20,17 @@ class ProfileUserController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var tableWidgets: UITableView!
     @IBOutlet weak var bottomBar: BottomBar!
     
-    private let sections: [ProfileSection] = [
-        .myWalks,
-        .myPosts,
-        .changeLanguage,
-        .contact
-    ]
+    private var sections: [ProfileSection] {
+        [
+            .myWalks,
+            .myPosts,
+            .changeLanguage,
+            .contact
+        ]
+    }
+    
+    private let profileService = ProfileService()
+    private let profileLoadingIndicator = UIActivityIndicatorView(style: .medium)
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -44,16 +49,13 @@ class ProfileUserController: UIViewController, UITableViewDataSource, UITableVie
         )
         
         viewProfile.layer.cornerRadius = 15
-        
-        // Añadir sombra
         viewProfile.applyCardStyle()
-        
         tableWidgets.applyCardStyle()
 
         labelName.font = Fonts.figtreeRegular(17)
         labelGmail.font = Fonts.figtreeLight(15)
         viewLine.backgroundColor = Colors.grayLight
-        buttonEdit.config(text: "Editar Perfil", style: StylesButton.edit)
+        buttonEdit.config(text: L10n.tr("edit_profile"), style: StylesButton.edit)
         labelPoints.config(text: "", style: StylesLabel.subtitleGray)
         
         tableWidgets.dataSource = self
@@ -64,23 +66,57 @@ class ProfileUserController: UIViewController, UITableViewDataSource, UITableVie
         
         bottomBar.selectSection(.user)
 
-        setupDefaultAvatar()
+        setupAvatarView()
+        setupProfileLoadingIndicator()
+        setLoadingTexts()
         loadUserProfile()
         
         navigationItem.hidesBackButton = true
         hideKeyboardWhenTappedAround()
     }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
 
-    private func setupDefaultAvatar() {
-        imageProfile.image = UIImage(systemName: "person.circle.fill") // default
+        buttonEdit.config(text: L10n.tr("edit_profile"), style: StylesButton.edit)
+        tableWidgets.reloadData()
+        loadUserProfile()
+    }
+
+    private func setupAvatarView() {
+        imageProfile.image = nil
         imageProfile.contentMode = .scaleAspectFill
         imageProfile.clipsToBounds = true
     }
-
-    private let profileService = ProfileService()
+    
+    private func setupProfileLoadingIndicator() {
+        profileLoadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        profileLoadingIndicator.hidesWhenStopped = true
+        
+        imageProfile.addSubview(profileLoadingIndicator)
+        
+        NSLayoutConstraint.activate([
+            profileLoadingIndicator.centerXAnchor.constraint(equalTo: imageProfile.centerXAnchor),
+            profileLoadingIndicator.centerYAnchor.constraint(equalTo: imageProfile.centerYAnchor)
+        ])
+    }
+    
+    private func setLoadingTexts() {
+        labelName.text = L10n.tr("loading")
+        labelGmail.text = L10n.tr("loading")
+        labelPoints.text = L10n.tr("loading")
+    }
 
     private func loadUserProfile() {
         Task {
+            await MainActor.run {
+                self.imageProfile.image = nil
+                self.profileLoadingIndicator.startAnimating()
+                self.setLoadingTexts()
+            }
+            
             do {
                 let session = try await SupabaseManager.shared.client.auth.session
                 let email = session.user.email ?? ""
@@ -91,7 +127,10 @@ class ProfileUserController: UIViewController, UITableViewDataSource, UITableVie
 
                 guard let dto = try await profileService.fetchMyProfile(email: email) else {
                     await MainActor.run {
-                        self.labelName.text = email.components(separatedBy: "@").first ?? "Usuario"
+                        self.labelName.text = email.components(separatedBy: "@").first ?? L10n.tr("user")
+                        self.labelGmail.text = email
+                        self.labelPoints.text = "0 \(L10n.tr("points"))"
+                        self.profileLoadingIndicator.stopAnimating()
                     }
                     return
                 }
@@ -99,46 +138,61 @@ class ProfileUserController: UIViewController, UITableViewDataSource, UITableVie
                 let profile = ProfileModel(dto: dto)
 
                 await MainActor.run {
-                    self.labelName.text = profile.name
+                    self.labelName.text = profile.name.isEmpty ? (email.components(separatedBy: "@").first ?? L10n.tr("user")) : profile.name
                     self.labelGmail.text = profile.email.isEmpty ? email : profile.email
-                    self.labelPoints.text = "\(profile.points ?? 0) puntos"
+                    self.labelPoints.text = "\(profile.points ?? 0) \(L10n.tr("points"))"
                 }
-                
 
-                if let urlString = profile.avatarURL, let url = URL(string: urlString) {
-                    self.loadImage(from: url)
+                if let urlString = profile.avatarURL,
+                   let url = URL(string: urlString) {
+                    await self.loadImage(from: url)
+                } else {
+                    await MainActor.run {
+                        self.profileLoadingIndicator.stopAnimating()
+                        self.imageProfile.image = nil
+                    }
                 }
 
             } catch {
+                await MainActor.run {
+                    self.profileLoadingIndicator.stopAnimating()
+                    self.labelName.text = L10n.tr("error_loading")
+                    self.labelGmail.text = L10n.tr("error_loading")
+                    self.labelPoints.text = L10n.tr("error_loading")
+                }
                 print("Error loading profile:", error)
             }
         }
     }
 
-    private func loadImage(from url: URL) {
-        Task {
-            do {
-                let (data, _) = try await URLSession.shared.data(from: url)
-                let img = UIImage(data: data)
-                await MainActor.run {
-                    if let img { self.imageProfile.image = img }
-                }
-            } catch {
-                print("Error loading avatar:", error)
+    private func loadImage(from url: URL) async {
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            let img = UIImage(data: data)
+            
+            await MainActor.run {
+                self.profileLoadingIndicator.stopAnimating()
+                self.imageProfile.image = img
             }
+        } catch {
+            await MainActor.run {
+                self.profileLoadingIndicator.stopAnimating()
+                self.imageProfile.image = nil
+            }
+            print("Error loading avatar:", error)
         }
     }
 
     private func logout() {
         let alert = UIAlertController(
-            title: "Cerrar sesión",
-            message: "¿Seguro que quieres cerrar sesión?",
+            title: L10n.tr("log_out"),
+            message: L10n.tr("confirm_log_out"),
             preferredStyle: .alert
         )
 
-        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
+        alert.addAction(UIAlertAction(title: L10n.tr("cancel"), style: .cancel))
 
-        alert.addAction(UIAlertAction(title: "Cerrar sesión", style: .destructive) { [weak self] _ in
+        alert.addAction(UIAlertAction(title: L10n.tr("log_out"), style: .destructive) { [weak self] _ in
             guard let self else { return }
 
             Task {
@@ -152,11 +206,11 @@ class ProfileUserController: UIViewController, UITableViewDataSource, UITableVie
                 } catch {
                     await MainActor.run {
                         let err = UIAlertController(
-                            title: "Error",
-                            message: "No se pudo cerrar sesión. Inténtalo de nuevo.",
+                            title: L10n.tr("error"),
+                            message: L10n.tr( "could_not_log_out_try_again"),
                             preferredStyle: .alert
                         )
-                        err.addAction(UIAlertAction(title: "OK", style: .default))
+                        err.addAction(UIAlertAction(title: L10n.tr("ok"), style: .default))
                         self.present(err, animated: true)
                     }
                     print("❌ logout error:", error)
@@ -179,7 +233,6 @@ class ProfileUserController: UIViewController, UITableViewDataSource, UITableVie
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SectionProfileCell", for: indexPath) as? SectionProfileCell else {
             return UITableViewCell()
         }
@@ -191,7 +244,6 @@ class ProfileUserController: UIViewController, UITableViewDataSource, UITableVie
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-
         let section = sections[indexPath.row]
         let vc = section.goSection()
         navigationController?.pushViewController(vc, animated: true)

@@ -16,7 +16,7 @@ struct DogRowDTO: Decodable {
     let shelter_city: String?
     let shelter_name: String?
     let is_disabled: Bool
-    let isWalkable: Bool      // ✅ camelCase
+    let isWalkable: Bool
     let sex: String?
     let story: String?
 
@@ -24,10 +24,16 @@ struct DogRowDTO: Decodable {
     let donation_raised_eur: Double?
     let disability_diagnosis: String?
 
+    let breed_en: String?
+    let description_en: String?
+    let story_en: String?
+    let disability_diagnosis_en: String?
+
     enum CodingKeys: String, CodingKey {
         case id, shelter_id, name, breed, age_years, description, photo_url
         case shelter_city, shelter_name, is_disabled, sex, story
         case donation_goal_eur, donation_raised_eur, disability_diagnosis
-        case isWalkable = "is_walkable"   // ✅ clave real del JSON
+        case breed_en, description_en, story_en, disability_diagnosis_en
+        case isWalkable = "is_walkable"
     }
 }

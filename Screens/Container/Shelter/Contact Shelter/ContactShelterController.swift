@@ -29,7 +29,7 @@ class ContactShelterController: UIViewController {
 
     private let profileService = ProfileService()
 
-    private var userName: String = "Usuario"
+    private var userName: String = L10n.tr( "user")
     private var userEmail: String = ""
     
     override func viewWillAppear(_ animated: Bool)
@@ -42,20 +42,20 @@ class ContactShelterController: UIViewController {
     {
         super.viewDidLoad()
         
-        labelTitleNav.config(text: "Contactar", style: StylesLabel.titleNav)
+        labelTitleNav.config(text: L10n.tr("contact"), style: StylesLabel.titleNav)
+
         
         viewInfoShelter.applyCardStyle()
         labelName.config(text: "", style: StylesLabel.titleHi)
         labelGmail.config(text: "", style: StylesLabel.subtitleGray2)
         
-        labelReason.config(text: "Motivo", style: StylesLabel.title2)
-        fieldReason.config(image: UIImage(named: ""), placeholder: "Escribe el motivo")
+        labelReason.config(text: L10n.tr("reason"), style: StylesLabel.title2)
+        fieldReason.config(image: UIImage(named: ""), placeholder: L10n.tr("write_reason"))
         
-        labelMessage.config(text: "Mensaje", style: StylesLabel.title2)
-        fieldMessage.config(placeholder: "Escribe tu mensaje...")
+        labelMessage.config(text: L10n.tr("message"), style: StylesLabel.title2)
+        fieldMessage.config(placeholder: L10n.tr("write_your_message"))
         
-        buttonSend.config(text: "Enviar", style: StylesButton.primary)
-
+        buttonSend.config(text: L10n.tr("send"), style: StylesButton.primary)
         
         configureShelterUI()
         loadMyProfile()
@@ -94,15 +94,15 @@ class ContactShelterController: UIViewController {
 
                 // Si quieres name real desde profiles:
                 if let dto = try await profileService.fetchMyProfile(email: email) {
-                    let fullName = dto.name ?? "Usuario"
+                    let fullName = dto.name ?? L10n.tr("user")
                         self.userName = fullName
                 } else {
-                    self.userName = email.components(separatedBy: "@").first ?? "Usuario"
+                    self.userName = email.components(separatedBy: "@").first ?? L10n.tr("user")
                 }
 
             } catch {
                 print("❌ loadMyProfile error:", error)
-                self.userName = "Usuario"
+                self.userName = L10n.tr("user")
             }
         }
     }
@@ -114,20 +114,16 @@ class ContactShelterController: UIViewController {
         let reason = fieldReason.getText().trimmingCharacters(in: .whitespacesAndNewlines)
         let message = fieldMessage.getText().trimmingCharacters(in: .whitespacesAndNewlines)
 
-        let subject = "WalkPaws - \(reason)"
-        let body =
-    """
-    Nuevo mensaje para el refugio: \(shelter.name)
+        let subject = String(format: L10n.tr("contact_email_subject"), reason)
 
-    Usuario: \(userName)
-    Email: \(userEmail)
-
-    Motivo:
-    \(reason)
-
-    Mensaje:
-    \(message)
-    """
+        let body = String(
+            format: L10n.tr("contact_email_body"),
+            shelter.name,
+            userName,
+            userEmail,
+            reason,
+            message
+        )
 
         openSupportEmail(to: shelter.email, subject: subject, body: body)
     }
