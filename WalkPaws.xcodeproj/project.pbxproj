@@ -586,12 +586,15 @@
 			path = Button;
 			sourceTree = "<group>";
 		};
-		D542D4522F2A6F7100E537AF /* Manager */ = {
+		D542D4522F2A6F7100E537AF /* App */ = {
 			isa = PBXGroup;
 			children = (
+				D59902482F2400BB0029FB34 /* AppDelegate.swift */,
+				D5E8FDDD2F780FC400A84131 /* AppLanguage.swift */,
 				D542D4532F2A6F8200E537AF /* SupabaseManager.swift */,
+				D599024F2F2400BB0029FB34 /* SceneDelegate.swift */,
 			);
-			path = Manager;
+			path = App;
 			sourceTree = "<group>";
 		};
 		D542D4552F2A6FFD00E537AF /* Frameworks */ = {
@@ -787,7 +790,7 @@
 			children = (
 				D59902512F2400BB0029FB34 /* WalkPaws */,
 				D57F88892F47AE55008507FB /* Models */,
-				D59902462F2400930029FB34 /* Screens */,
+				D59902462F2400930029FB34 /* Controllers */,
 				D53582132F3E5E3800C75131 /* Types */,
 				D599026C2F26872A0029FB34 /* Resources */,
 				D599027E2F26922D0029FB34 /* Extensions */,
@@ -808,7 +811,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D59902462F2400930029FB34 /* Screens */ = {
+		D59902462F2400930029FB34 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				D5F8F31E2F5A07E900223C5E /* EmptyView */,
@@ -819,8 +822,10 @@
 				D519049E2F2E44A70074866F /* Navigation Bar */,
 				D59902472F2400A70029FB34 /* Intro */,
 				D519048E2F2E3F820074866F /* Container */,
+				D599024E2F2400BB0029FB34 /* Main.storyboard */,
+				D59902502F2400BB0029FB34 /* ViewController.swift */,
 			);
-			path = Screens;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		D59902472F2400A70029FB34 /* Intro */ = {
@@ -842,14 +847,8 @@
 		D59902512F2400BB0029FB34 /* WalkPaws */ = {
 			isa = PBXGroup;
 			children = (
-				D542D4522F2A6F7100E537AF /* Manager */,
-				D59902482F2400BB0029FB34 /* AppDelegate.swift */,
-				D59902492F2400BB0029FB34 /* Assets.xcassets */,
 				D599024A2F2400BB0029FB34 /* Info.plist */,
-				D599024E2F2400BB0029FB34 /* Main.storyboard */,
-				D599024F2F2400BB0029FB34 /* SceneDelegate.swift */,
-				D59902502F2400BB0029FB34 /* ViewController.swift */,
-				D5E8FDDD2F780FC400A84131 /* AppLanguage.swift */,
+				D542D4522F2A6F7100E537AF /* App */,
 			);
 			path = WalkPaws;
 			sourceTree = "<group>";
@@ -891,6 +890,7 @@
 				D57F88812F47A7C7008507FB /* API */,
 				D599026D2F2687410029FB34 /* Styles */,
 				D599025B2F2402EA0029FB34 /* Images */,
+				D59902492F2400BB0029FB34 /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1458,7 +1458,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2F8HH35QL4;
+				DEVELOPMENT_TEAM = 67RPMDNR52;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WalkPaws/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Necesitamos acceso continuo a tu ubicación para registrar correctamente el paseo.";
@@ -1490,7 +1490,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2F8HH35QL4;
+				DEVELOPMENT_TEAM = 67RPMDNR52;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WalkPaws/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Necesitamos acceso continuo a tu ubicación para registrar correctamente el paseo.";

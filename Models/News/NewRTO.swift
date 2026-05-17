@@ -22,7 +22,6 @@ struct NewsRowDTO: Decodable {
 
     let profile_name: String?
     let avatar_url: String?
-    let role: String?
     let shelter_name: String?
     let shelter_photo_url: String?
 }
